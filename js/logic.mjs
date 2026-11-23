@@ -1,0 +1,671 @@
+// 小小百科探险家 · 共享数据与纯逻辑
+// 页面与冒烟测试复用本模块；不包含 DOM 操作。
+
+export const THEME_ORDER = [
+  "animals", "ocean", "dino", "insect", "bird", "plant",
+  "body", "science", "space", "weather", "season",
+  "life", "vehicle", "number", "color",
+  "culture", "china", "festival", "music", "safety"
+];
+
+export const THEMES = {
+  animals: {
+    id: "animals",
+    name: "自然与动物",
+    emoji: "🦁",
+    image: "assets/theme-animals.jpg",
+    badgeName: "动物小博士",
+    hotspots: [
+      { id: "h1", x: 22, y: 40, title: "大象", emoji: "🐘", fact: "大象用长鼻子喝水、卷食物，还会用鼻子跟朋友打招呼呢。大象的耳朵像大扇子，热了就扇一扇凉快凉快。" },
+      { id: "h2", x: 52, y: 28, title: "长颈鹿", emoji: "🦒", fact: "长颈鹿的脖子长长的，能吃到高高的树叶。它的舌头有半个胳膊那么长，还是蓝紫色的哦！" },
+      { id: "h3", x: 72, y: 55, title: "狮子", emoji: "🦁", fact: "狮子被称为草原之王。雄狮有蓬松的大鬃毛，看起来威风极了。狮子喜欢和家人一起生活。" },
+      { id: "h4", x: 40, y: 68, title: "小猴子", emoji: "🐒", fact: "小猴子喜欢在树上荡来荡去，尾巴能帮忙保持平衡。它们还会互相捉虱子，这是在表达友好呢。" }
+    ],
+    quiz: [
+      { q: "哪种动物用长鼻子喝水？", options: [{ emoji: "🐘", text: "大象", correct: true }, { emoji: "🐒", text: "猴子", correct: false }, { emoji: "🦁", text: "狮子", correct: false }] },
+      { q: "谁的脖子最长，能吃到高高的树叶？", options: [{ emoji: "🐯", text: "老虎", correct: false }, { emoji: "🦒", text: "长颈鹿", correct: true }, { emoji: "🐷", text: "小猪", correct: false }] },
+      { q: "被称为「草原之王」的是谁？", options: [{ emoji: "🐰", text: "兔子", correct: false }, { emoji: "🐢", text: "乌龟", correct: false }, { emoji: "🦁", text: "狮子", correct: true }] }
+    ],
+    match: [
+      { id: "banana", card: "🐒 小猴子", target: "🍌 香蕉" },
+      { id: "leaf", card: "🦒 长颈鹿", target: "🌿 树叶" },
+      { id: "meat", card: "🦁 狮子", target: "🍖 肉肉" },
+      { id: "peanut", card: "🐘 大象", target: "🥜 花生" }
+    ],
+    story: [
+      { emoji: "🐣", text: "小鸭子嘎嘎破壳啦！它睁开眼睛，看到的第一个就是鸭妈妈，把妈妈当成了最亲的人。" },
+      { emoji: "🌊", text: "鸭妈妈带着嘎嘎来到小河边。嘎嘎扑通跳下水，咦？它天生就会游泳，脚丫像小桨一样划呀划。" },
+      { emoji: "🦆", text: "日子一天天过去，嘎嘎长出了漂亮的羽毛。它跟着妈妈学会了捉小鱼，变成了一只真正的大鸭子！" }
+    ]
+  },
+  body: {
+    id: "body",
+    name: "人体与健康",
+    emoji: "💪",
+    image: "assets/theme-body.jpg",
+    badgeName: "健康小卫士",
+    hotspots: [
+      { id: "h1", x: 30, y: 35, title: "心脏", emoji: "❤️", fact: "心脏像一个勤劳的小水泵，每天扑通扑通跳个不停，把血液送到全身每一个角落。" },
+      { id: "h2", x: 58, y: 30, title: "牙齿", emoji: "🦷", fact: "牙齿帮我们咬碎食物。早晚刷牙、少吃糖，牙齿才不会长虫牙。乳牙掉了还会长出恒牙哦。" },
+      { id: "h3", x: 70, y: 58, title: "眼睛", emoji: "👀", fact: "眼睛是心灵的窗户。看书写字要坐端正，看一会儿远处让眼睛休息，少看发光的屏幕。" },
+      { id: "h4", x: 40, y: 65, title: "小手", emoji: "🖐️", fact: "小手能做很多事情：画画、写字、搭积木。饭前便后要洗手，把细菌小怪兽冲走！" }
+    ],
+    quiz: [
+      { q: "哪个器官像小水泵一样不停跳动？", options: [{ emoji: "🧠", text: "大脑", correct: false }, { emoji: "❤️", text: "心脏", correct: true }, { emoji: "🦴", text: "骨头", correct: false }] },
+      { q: "怎样保护牙齿？", options: [{ emoji: "🪥", text: "早晚刷牙", correct: true }, { emoji: "🍬", text: "多吃糖果", correct: false }, { emoji: "🥤", text: "多喝汽水", correct: false }] },
+      { q: "饭前便后要做什么？", options: [{ emoji: "📺", text: "看电视", correct: false }, { emoji: "🧼", text: "认真洗手", correct: true }, { emoji: "😴", text: "睡大觉", correct: false }] }
+    ],
+    match: [
+      { id: "eye", card: "👀 眼睛", target: "📖 看书看世界" },
+      { id: "ear", card: "👂 耳朵", target: "🎵 听声音" },
+      { id: "nose", card: "👃 鼻子", target: "🌸 闻花香" },
+      { id: "mouth", card: "👄 嘴巴", target: "🍎 尝味道" }
+    ],
+    story: [
+      { emoji: "🦠", text: "细菌小怪兽偷偷爬上了小明的小手，想跟着面包溜进肚子里捣乱。" },
+      { emoji: "🧼", text: "吃饭前，妈妈提醒小明洗手。肥皂泡泡搓呀搓，冲走了细菌小怪兽，小手变得干干净净。" },
+      { emoji: "💪", text: "小明每天都认真洗手、刷牙、早睡早起。身体棒棒的他，成了真正的健康小卫士！" }
+    ]
+  },
+  science: {
+    id: "science",
+    name: "科学现象",
+    emoji: "🌈",
+    image: "assets/theme-science.jpg",
+    badgeName: "科学小达人",
+    hotspots: [
+      { id: "h1", x: 25, y: 35, title: "彩虹", emoji: "🌈", fact: "下过雨出太阳的时候，阳光穿过小水滴，就会变成七种颜色的彩虹，像天空的滑梯。" },
+      { id: "h2", x: 55, y: 25, title: "闪电", emoji: "⚡", fact: "雷雨云里藏着好多电荷，电荷跑来跑去就会放出闪电。先看到闪电，后听到雷声，因为光比声音跑得快！" },
+      { id: "h3", x: 75, y: 50, title: "磁铁", emoji: "🧲", fact: "磁铁有看不见的魔力，能吸住铁做的东西。两块磁铁有时候抱抱，有时候互相推开，真有趣。" },
+      { id: "h4", x: 42, y: 62, title: "太阳", emoji: "☀️", fact: "太阳是一颗好大好大的恒星，给我们带来光和温暖。没有太阳，地球就会又黑又冷。" }
+    ],
+    quiz: [
+      { q: "什么时候最容易看到彩虹？", options: [{ emoji: "❄️", text: "下雪天", correct: false }, { emoji: "🌦️", text: "雨后出太阳", correct: true }, { emoji: "🌙", text: "半夜", correct: false }] },
+      { q: "打雷时我们先看到什么？", options: [{ emoji: "⚡", text: "闪电", correct: true }, { emoji: "🔊", text: "先听到雷声", correct: false }, { emoji: "🌧️", text: "大雨", correct: false }] },
+      { q: "磁铁能吸住什么？", options: [{ emoji: "🧸", text: "布娃娃", correct: false }, { emoji: "📄", text: "纸", correct: false }, { emoji: "🔩", text: "铁钉", correct: true }] }
+    ],
+    match: [
+      { id: "rainbow", card: "🌈 彩虹", target: "🌦️ 雨后阳光" },
+      { id: "lightning", card: "⚡ 闪电", target: "⛈️ 雷雨云" },
+      { id: "magnet", card: "🧲 磁铁", target: "🔩 铁钉" },
+      { id: "sun", card: "☀️ 太阳", target: "🌻 向日葵" }
+    ],
+    story: [
+      { emoji: "💧", text: "小水滴住在小河里。太阳晒呀晒，它变得轻飘飘的，变成水汽飞上了天。" },
+      { emoji: "☁️", text: "天上好冷呀，小水滴和好多小伙伴抱在一起，变成了一朵白白胖胖的云。" },
+      { emoji: "🌧️", text: "云越来越重，小水滴变成雨点落回大地，流进小河，又开始了新的旅行。这就是水循环！" }
+    ]
+  },
+  life: {
+    id: "life",
+    name: "日常生活",
+    emoji: "🏠",
+    image: "assets/theme-life.jpg",
+    badgeName: "生活小能手",
+    hotspots: [
+      { id: "h1", x: 28, y: 38, title: "时钟", emoji: "🕐", fact: "时钟有时针和分针，短短的时针走得慢，长长的分针走得快。认识时钟，就不会迟到啦。" },
+      { id: "h2", x: 55, y: 30, title: "书包", emoji: "🎒", fact: "书包是上学的好伙伴，里面装着课本、铅笔盒和水壶。每天自己整理书包，是个好习惯。" },
+      { id: "h3", x: 72, y: 55, title: "红绿灯", emoji: "🚦", fact: "红灯停，绿灯行，黄灯亮了等一等。过马路要走斑马线，牵好大人的手。" },
+      { id: "h4", x: 42, y: 65, title: "小厨房", emoji: "🍳", fact: "厨房里能做出香喷喷的饭菜。但是炉火和刀子很危险，小朋友不能自己碰哦。" }
+    ],
+    quiz: [
+      { q: "过马路时红灯亮了怎么办？", options: [{ emoji: "🏃", text: "快点跑过去", correct: false }, { emoji: "✋", text: "停下来等一等", correct: true }, { emoji: "🙈", text: "闭着眼走", correct: false }] },
+      { q: "上学前要整理什么？", options: [{ emoji: "🎒", text: "小书包", correct: true }, { emoji: "📺", text: "电视机", correct: false }, { emoji: "🛏️", text: "大棉被", correct: false }] },
+      { q: "厨房里什么东西小朋友不能碰？", options: [{ emoji: "🍎", text: "苹果", correct: false }, { emoji: "🔪", text: "刀子", correct: true }, { emoji: "🥣", text: "小碗", correct: false }] }
+    ],
+    match: [
+      { id: "clock", card: "🕐 时钟", target: "⏰ 看时间" },
+      { id: "bag", card: "🎒 书包", target: "📚 装课本" },
+      { id: "light", card: "🚦 红绿灯", target: "🚸 过马路" },
+      { id: "brush", card: "🪥 牙刷", target: "🦷 刷牙齿" }
+    ],
+    story: [
+      { emoji: "🌅", text: "太阳公公出来啦！朵朵自己穿衣服、叠被子，虽然叠得像个小花卷，妈妈还是夸了她。" },
+      { emoji: "🪥", text: "朵朵挤上牙膏，上刷刷、下刷刷，刷够三分钟。镜子里的小白牙亮晶晶！" },
+      { emoji: "🎒", text: "出门前，朵朵自己检查书包：课本、水壶、铅笔盒，一样都不少。她真是生活小能手！" }
+    ]
+  },
+  culture: {
+    id: "culture",
+    name: "社会人文",
+    emoji: "🏮",
+    image: "assets/theme-culture.jpg",
+    badgeName: "文化小使者",
+    hotspots: [
+      { id: "h1", x: 26, y: 40, title: "医生", emoji: "👨‍⚕️", fact: "医生帮我们看病，让身体快快好起来。打针有一点点疼，但是能打败病毒小怪兽。" },
+      { id: "h2", x: 52, y: 28, title: "消防员", emoji: "🧑‍🚒", fact: "消防员叔叔最勇敢，哪里有火灾就冲向哪里。着火要打 119，还要用湿毛巾捂住口鼻。" },
+      { id: "h3", x: 74, y: 52, title: "春节", emoji: "🏮", fact: "春节是中国的传统新年，家家户户贴春联、挂灯笼、吃饺子，小朋友还能收到压岁钱。" },
+      { id: "h4", x: 42, y: 66, title: "地球村", emoji: "🌍", fact: "地球上住着好多国家的人，说着不同的语言，有不同的节日和美食。世界真大真有趣！" }
+    ],
+    quiz: [
+      { q: "着火了要打什么电话？", options: [{ emoji: "📞", text: "119", correct: true }, { emoji: "📞", text: "110", correct: false }, { emoji: "📞", text: "120", correct: false }] },
+      { q: "谁帮我们看病，让身体好起来？", options: [{ emoji: "👨‍🍳", text: "厨师", correct: false }, { emoji: "👨‍⚕️", text: "医生", correct: true }, { emoji: "👨‍🏫", text: "老师", correct: false }] },
+      { q: "春节的时候大家会做什么？", options: [{ emoji: "🎃", text: "做南瓜灯", correct: false }, { emoji: "🥚", text: "找彩蛋", correct: false }, { emoji: "🏮", text: "挂灯笼贴春联", correct: true }] }
+    ],
+    match: [
+      { id: "doctor", card: "👨‍⚕️ 医生", target: "💊 治病救人" },
+      { id: "fireman", card: "🧑‍🚒 消防员", target: "🚒 灭火救援" },
+      { id: "teacher", card: "👨‍🏫 老师", target: "📖 教知识" },
+      { id: "cook", card: "👨‍🍳 厨师", target: "🍜 做美食" }
+    ],
+    story: [
+      { emoji: "🏮", text: "快过年啦！奶奶带着圆圆贴春联，红红的纸上写着祝福的话，门口一下子变得喜气洋洋。" },
+      { emoji: "🥟", text: "除夕夜，全家人围在一起包饺子。圆圆包的饺子歪歪扭扭，像个睡着的小元宝，大家都笑了。" },
+      { emoji: "🧧", text: "新年钟声敲响，圆圆给爷爷奶奶拜年，收到了大红包。她知道了：团圆就是春节最好的礼物。" }
+    ]
+  },
+  ocean: {
+    id: "ocean",
+    name: "海洋世界",
+    emoji: "🐋",
+    image: "assets/theme-ocean.jpg",
+    badgeName: "海洋小船长",
+    hotspots: [
+      { id: "h1", x: 24, y: 42, title: "鲸鱼", emoji: "🐋", fact: "鲸鱼住在海里，但它不是鱼哦。它用肺呼吸，要浮到水面喷出水柱换气，宝宝也是喝妈妈的奶长大的。" },
+      { id: "h2", x: 52, y: 30, title: "章鱼", emoji: "🐙", fact: "章鱼有八条软软的腕，每条腕上都有一排吸盘。遇到危险时它会喷出黑黑的墨汁，趁乱赶紧逃走。" },
+      { id: "h3", x: 74, y: 54, title: "海龟", emoji: "🐢", fact: "海龟在海里游得又稳又慢，却能游很远很远。海龟妈妈会爬回沙滩，把蛋埋在沙子里，让太阳帮忙孵宝宝。" },
+      { id: "h4", x: 40, y: 70, title: "珊瑚", emoji: "🪸", fact: "珊瑚看起来像彩色的树枝，其实它是好多好多小动物住在一起。小鱼小虾把珊瑚当成家，在里头躲猫猫。" }
+    ],
+    quiz: [
+      { q: "鲸鱼用什么呼吸？", options: [{ emoji: "🫧", text: "用肺呼吸", correct: true }, { emoji: "🐟", text: "用鳃呼吸", correct: false }, { emoji: "🌿", text: "用皮肤呼吸", correct: false }] },
+      { q: "章鱼遇到危险会做什么？", options: [{ emoji: "🖤", text: "喷出墨汁", correct: true }, { emoji: "🎵", text: "唱歌", correct: false }, { emoji: "😴", text: "装睡", correct: false }] },
+      { q: "海龟妈妈把蛋埋在哪里？", options: [{ emoji: "🌊", text: "海底石缝", correct: false }, { emoji: "🏖️", text: "沙滩里", correct: true }, { emoji: "🌳", text: "大树上", correct: false }] }
+    ],
+    match: [
+      { id: "whale", card: "🐋 鲸鱼", target: "🫧 水面喷气" },
+      { id: "octopus", card: "🐙 章鱼", target: "🖤 喷墨逃生" },
+      { id: "turtle", card: "🐢 海龟", target: "🏖️ 沙滩孵蛋" },
+      { id: "coral", card: "🪸 珊瑚", target: "🐠 小鱼的家" }
+    ],
+    story: [
+      { emoji: "🐋", text: "小鲸鱼刚出生，妈妈就把它顶到水面上，让它吸到第一口空气。原来鲸鱼宝宝要学着自己呼吸呀。" },
+      { emoji: "🌊", text: "小鲸鱼跟着妈妈游了好远好远，一路上它听见轮船的声音、雨点打在海面的声音，还听见妈妈在唱歌。" },
+      { emoji: "🫧", text: "小鲸鱼长大了，也能喷出高高的水柱。它把学到的歌教给小伙伴，大海里到处是它们的歌声。" }
+    ]
+  },
+  dino: {
+    id: "dino",
+    name: "恐龙时代",
+    emoji: "🦖",
+    image: "assets/theme-dino.jpg",
+    badgeName: "恐龙小考古家",
+    hotspots: [
+      { id: "h1", x: 26, y: 44, title: "霸王龙", emoji: "🦖", fact: "霸王龙有大大的脑袋和尖尖的牙齿，是最有名的肉食恐龙。它的前爪却又短又小，跑起来靠两条粗壮的后腿。" },
+      { id: "h2", x: 54, y: 30, title: "三角龙", emoji: "🦕", fact: "三角龙头上有三个尖角，脖子后面还有一圈骨头做的大盾牌。它吃植物，用角保护自己和孩子。" },
+      { id: "h3", x: 74, y: 56, title: "恐龙蛋", emoji: "🥚", fact: "科学家挖到了恐龙蛋的化石，蛋壳上有小气孔。恐龙妈妈会把蛋放在窝里，用身体和沙子保暖。" },
+      { id: "h4", x: 40, y: 70, title: "化石", emoji: "🦴", fact: "恐龙早就消失了，但它的骨头埋在泥土里，过了好久好久变成石头，这就是化石。科学家靠化石认识恐龙。" }
+    ],
+    quiz: [
+      { q: "霸王龙主要吃什么？", options: [{ emoji: "🍖", text: "吃肉", correct: true }, { emoji: "🌿", text: "吃草", correct: false }, { emoji: "🍎", text: "只吃果子", correct: false }] },
+      { q: "三角龙头上有几个角？", options: [{ emoji: "1️⃣", text: "一个", correct: false }, { emoji: "3️⃣", text: "三个", correct: true }, { emoji: "5️⃣", text: "五个", correct: false }] },
+      { q: "科学家靠什么认识恐龙？", options: [{ emoji: "📷", text: "给恐龙拍照", correct: false }, { emoji: "🦴", text: "研究化石", correct: true }, { emoji: "📖", text: "听故事", correct: false }] }
+    ],
+    match: [
+      { id: "trex", card: "🦖 霸王龙", target: "🍖 尖牙吃肉" },
+      { id: "triceratops", card: "🦕 三角龙", target: "🌿 吃植物" },
+      { id: "eggs", card: "🥚 恐龙蛋", target: "🪺 恐龙窝" },
+      { id: "fossil", card: "🦴 化石", target: "⛏️ 挖出来研究" }
+    ],
+    story: [
+      { emoji: "🥚", text: "沙沙沙，蛋壳裂开一条缝！一只小三角龙钻了出来，它第一眼看到的就是妈妈头上的三个角。" },
+      { emoji: "🌿", text: "妈妈带小三角龙去吃嫩嫩的树叶。小三角龙学着用嘴巴咬，可是叶子太韧了，它嚼得满脸都是口水。" },
+      { emoji: "🛡️", text: "一只霸王龙靠近了！小三角龙躲到妈妈身后，妈妈低下头、竖起角，霸王龙看了看，转身走开了。" }
+    ]
+  },
+  insect: {
+    id: "insect",
+    name: "昆虫朋友",
+    emoji: "🐝",
+    image: "assets/theme-insect.jpg",
+    badgeName: "昆虫小观察家",
+    hotspots: [
+      { id: "h1", x: 24, y: 40, title: "蝴蝶", emoji: "🦋", fact: "蝴蝶小时候是毛毛虫，吃好多好多叶子。它吐丝把自己包起来，过些天钻出来，就变成长翅膀的蝴蝶啦。" },
+      { id: "h2", x: 52, y: 30, title: "蚂蚁", emoji: "🐜", fact: "蚂蚁个子小小的，力气却很大，能搬起比自己重好多倍的东西。它们排着队走，用触角互相打招呼。" },
+      { id: "h3", x: 74, y: 54, title: "蜜蜂", emoji: "🐝", fact: "蜜蜂采花蜜，还会在花丛里帮忙传粉。找到好花时，它会跳一种摆尾舞，告诉伙伴花在哪里。" },
+      { id: "h4", x: 40, y: 70, title: "瓢虫", emoji: "🐞", fact: "瓢虫圆圆的身子像小红扣，背上有黑点点。它是菜园的小卫士，最爱吃啃叶子的蚜虫。" }
+    ],
+    quiz: [
+      { q: "蝴蝶小时候是什么样子？", options: [{ emoji: "🐛", text: "毛毛虫", correct: true }, { emoji: "🐟", text: "小鱼", correct: false }, { emoji: "🐸", text: "蝌蚪", correct: false }] },
+      { q: "蚂蚁用什么互相打招呼？", options: [{ emoji: "👂", text: "触角", correct: true }, { emoji: "🦵", text: "后腿", correct: false }, { emoji: "🪽", text: "翅膀", correct: false }] },
+      { q: "瓢虫最爱吃什么？", options: [{ emoji: "🍬", text: "糖果", correct: false }, { emoji: "🐛", text: "蚜虫", correct: true }, { emoji: "🌰", text: "坚果", correct: false }] }
+    ],
+    match: [
+      { id: "butterfly", card: "🦋 蝴蝶", target: "🐛 毛毛虫变身" },
+      { id: "ant", card: "🐜 蚂蚁", target: "🍞 搬食物" },
+      { id: "bee", card: "🐝 蜜蜂", target: "🍯 采花蜜" },
+      { id: "ladybug", card: "🐞 瓢虫", target: "🌿 吃蚜虫" }
+    ],
+    story: [
+      { emoji: "🐛", text: "一条小毛毛虫饿了，它咔嚓咔嚓吃了一片叶子，又吃了一片，肚子圆鼓鼓的，长得胖胖的。" },
+      { emoji: "🕸️", text: "小毛毛虫爬到树枝下，吐出细细的丝，把自己牢牢挂住。它不动也不吃，安安静静地等着变化。" },
+      { emoji: "🦋", text: "壳裂开了！钻出来的不再是毛毛虫，而是一只湿湿的蝴蝶。太阳晒干翅膀，它扑扇扑扇飞向了花丛。" }
+    ]
+  },
+  bird: {
+    id: "bird",
+    name: "鸟类家族",
+    emoji: "🦉",
+    image: "assets/theme-bird.jpg",
+    badgeName: "飞羽小专家",
+    hotspots: [
+      { id: "h1", x: 26, y: 42, title: "企鹅", emoji: "🐧", fact: "企鹅有翅膀却不会飞，但它游泳特别厉害，像穿着礼服的小潜水员。企鹅爸爸会把蛋放在脚背上孵。" },
+      { id: "h2", x: 54, y: 30, title: "猫头鹰", emoji: "🦉", fact: "猫头鹰白天睡觉，晚上出来捕食。它的眼睛不能转圈，但脖子能转好大一半，看得很清楚。" },
+      { id: "h3", x: 74, y: 56, title: "蜂鸟", emoji: "🐦", fact: "蜂鸟是世界上最小的鸟，只有蜜蜂那么大。它的翅膀扇得特别快，能停在空中吸花蜜。" },
+      { id: "h4", x: 40, y: 70, title: "鸟窝", emoji: "🪺", fact: "小鸟会用树枝、干草、泥巴搭窝。窝里铺得软软的，鸟妈妈就在里面孵蛋、喂小鸟。" }
+    ],
+    quiz: [
+      { q: "企鹅会做什么？", options: [{ emoji: "🕊️", text: "飞得很高", correct: false }, { emoji: "🏊", text: "游得很快", correct: true }, { emoji: "🌳", text: "爬树", correct: false }] },
+      { q: "猫头鹰什么时候出来活动？", options: [{ emoji: "🌙", text: "晚上", correct: true }, { emoji: "☀️", text: "中午", correct: false }, { emoji: "🌅", text: "只在清晨", correct: false }] },
+      { q: "世界上最小的鸟是谁？", options: [{ emoji: "🦅", text: "老鹰", correct: false }, { emoji: "🐦", text: "蜂鸟", correct: true }, { emoji: "🦢", text: "天鹅", correct: false }] }
+    ],
+    match: [
+      { id: "penguin", card: "🐧 企鹅", target: "🏊 游泳健将" },
+      { id: "owl", card: "🦉 猫头鹰", target: "🌙 夜里捕食" },
+      { id: "hummingbird", card: "🐦 蜂鸟", target: "🌺 空中吸蜜" },
+      { id: "nest", card: "🪺 鸟窝", target: "🥚 孵小鸟" }
+    ],
+    story: [
+      { emoji: "🥚", text: "企鹅爸爸站在风雪里，把蛋小心地放在脚背上，用肚子上的暖毛盖住。它一站就是好多天，什么也不吃。" },
+      { emoji: "🐧", text: "蛋里的小企鹅啄开壳啦！企鹅爸爸低下头，第一次看见自己的孩子，轻轻叫了一声。" },
+      { emoji: "🏊", text: "小企鹅长出厚厚的羽毛，跟着爸爸跳进海里。它一开始扑腾得东倒西歪，后来游得比爸爸还快。" }
+    ]
+  },
+  plant: {
+    id: "plant",
+    name: "植物王国",
+    emoji: "🌻",
+    image: "assets/theme-plant.jpg",
+    badgeName: "植物小园丁",
+    hotspots: [
+      { id: "h1", x: 24, y: 44, title: "向日葵", emoji: "🌻", fact: "向日葵的大花盘会慢慢跟着太阳转，所以叫向日葵。花盘里藏着好多瓜子，就是它的种子。" },
+      { id: "h2", x: 52, y: 30, title: "蒲公英", emoji: "🌾", fact: "蒲公英的种子带着白白的小伞，风一吹就飞走了。种子落在哪里，明年就在哪里长出新蒲公英。" },
+      { id: "h3", x: 74, y: 54, title: "仙人掌", emoji: "🌵", fact: "仙人掌身上尖尖的刺，其实是它的叶子。刺又小又少，水分跑得慢，所以它很久不浇水也不怕。" },
+      { id: "h4", x: 40, y: 70, title: "大树年轮", emoji: "🌳", fact: "把树干切开能看到一圈一圈的纹路，叫年轮。数一数大概有几圈，就知道这棵树长了几岁。" }
+    ],
+    quiz: [
+      { q: "向日葵的花盘会跟着谁转？", options: [{ emoji: "☀️", text: "太阳", correct: true }, { emoji: "🌙", text: "月亮", correct: false }, { emoji: "⭐", text: "星星", correct: false }] },
+      { q: "蒲公英的种子靠什么飞走？", options: [{ emoji: "💧", text: "雨水冲走", correct: false }, { emoji: "🌬️", text: "风吹走", correct: true }, { emoji: "🐜", text: "蚂蚁搬走", correct: false }] },
+      { q: "仙人掌的刺原来是什么？", options: [{ emoji: "🌿", text: "叶子", correct: true }, { emoji: "🌸", text: "花瓣", correct: false }, { emoji: "🌰", text: "种子", correct: false }] }
+    ],
+    match: [
+      { id: "sunflower", card: "🌻 向日葵", target: "☀️ 跟着太阳" },
+      { id: "dandelion", card: "🌾 蒲公英", target: "🌬️ 小伞飞走" },
+      { id: "cactus", card: "🌵 仙人掌", target: "🏜️ 沙漠存水" },
+      { id: "treering", card: "🌳 年轮", target: "🔢 数一数年岁" }
+    ],
+    story: [
+      { emoji: "🌱", text: "一颗小种子躺在土里，喝饱了雨水，偷偷冒出一根白色的小芽，顶开了头顶的土块。" },
+      { emoji: "🌿", text: "小芽长出了两片叶子，天天向着太阳伸懒腰。它的根在土里越扎越深，找水喝。" },
+      { emoji: "🌻", text: "夏天到了，它开出一朵大大的黄花，花盘里装满了瓜子。小蜜蜂飞来做客，帮它传播花粉。" }
+    ]
+  },
+  space: {
+    id: "space",
+    name: "太空宇宙",
+    emoji: "🚀",
+    image: "assets/theme-space.jpg",
+    badgeName: "太空小宇航员",
+    hotspots: [
+      { id: "h1", x: 24, y: 42, title: "月亮", emoji: "🌙", fact: "月亮是地球的好朋友，它自己不会发光，是太阳照亮了它。月亮绕着地球转，所以我们看到的形状会变。" },
+      { id: "h2", x: 52, y: 30, title: "太阳系", emoji: "🪐", fact: "太阳是中心，八颗行星围着它转。地球排第三，离太阳不远也不近，正好不冷不热。" },
+      { id: "h3", x: 74, y: 54, title: "火箭", emoji: "🚀", fact: "火箭要飞得特别快才能离开地球。它往后喷出火焰，就往前冲，这个道理叫反作用力。" },
+      { id: "h4", x: 40, y: 70, title: "宇航员", emoji: "👨‍🚀", fact: "太空里没有空气，宇航员要穿厚厚的宇航服，背着氧气。在太空里人会飘起来，像在游泳。" }
+    ],
+    quiz: [
+      { q: "月亮为什么会亮？", options: [{ emoji: "☀️", text: "太阳照亮的", correct: true }, { emoji: "💡", text: "自己会发光", correct: false }, { emoji: "🔦", text: "有人打灯", correct: false }] },
+      { q: "地球是离太阳第几近的行星？", options: [{ emoji: "1️⃣", text: "第一", correct: false }, { emoji: "3️⃣", text: "第三", correct: true }, { emoji: "8️⃣", text: "第八", correct: false }] },
+      { q: "宇航员在太空要背什么？", options: [{ emoji: "🎒", text: "氧气", correct: true }, { emoji: "🪣", text: "一桶水", correct: false }, { emoji: "🍱", text: "饭盒", correct: false }] }
+    ],
+    match: [
+      { id: "moon", card: "🌙 月亮", target: "🌍 绕着地球转" },
+      { id: "planet", card: "🪐 行星", target: "☀️ 围着太阳转" },
+      { id: "rocket", card: "🚀 火箭", target: "🔥 喷火上天" },
+      { id: "astronaut", card: "👨‍🚀 宇航员", target: "🪐 太空飘浮" }
+    ],
+    story: [
+      { emoji: "🚀", text: "倒计时三、二、一，点火！火箭轰隆隆地往天上冲，小宇航员被压在座位上，动也动不了。" },
+      { emoji: "🌍", text: "飞到太空啦！从窗户往外看，地球是一个蓝蓝的圆球，上面飘着白色的云，漂亮得像宝石。" },
+      { emoji: "🪐", text: "小宇航员松开手，身体慢慢飘了起来。他把笔一放，笔就在空中转圈圈，大家都笑个不停。" }
+    ]
+  },
+  weather: {
+    id: "weather",
+    name: "天气变化",
+    emoji: "🌦️",
+    image: "assets/theme-weather.jpg",
+    badgeName: "天气小预报员",
+    hotspots: [
+      { id: "h1", x: 24, y: 40, title: "雨", emoji: "🌧️", fact: "天上的云里藏着好多小水珠。水珠越聚越多、越来越重，云托不住了，就落下来变成雨。" },
+      { id: "h2", x: 52, y: 30, title: "雪", emoji: "❄️", fact: "天特别冷的时候，云里的水汽会结成小冰晶，六角形的最多。它们手拉手落下来，就是雪花。" },
+      { id: "h3", x: 74, y: 54, title: "风", emoji: "🌬️", fact: "空气跑起来就是风。热空气轻，往上升；冷空气重，往下降，跑来跑去就形成了风。" },
+      { id: "h4", x: 40, y: 70, title: "云", emoji: "☁️", fact: "云是飘在天上的小水滴和小冰晶。白白薄薄的是晴天云，又黑又厚的是要下雨的云。" }
+    ],
+    quiz: [
+      { q: "雨是从哪里落下来的？", options: [{ emoji: "☁️", text: "云里", correct: true }, { emoji: "🌳", text: "树上", correct: false }, { emoji: "🏔️", text: "山顶", correct: false }] },
+      { q: "雪花通常是什么形状？", options: [{ emoji: "⚪", text: "圆圆的", correct: false }, { emoji: "❄️", text: "六角形", correct: true }, { emoji: "🔺", text: "三角形", correct: false }] },
+      { q: "风是怎么来的？", options: [{ emoji: "🌬️", text: "空气流动", correct: true }, { emoji: "🌊", text: "海水拍打", correct: false }, { emoji: "🌲", text: "树摇出来的", correct: false }] }
+    ],
+    match: [
+      { id: "rain", card: "🌧️ 雨", target: "☔ 打伞出门" },
+      { id: "snow", card: "❄️ 雪", target: "⛄ 堆雪人" },
+      { id: "wind", card: "🌬️ 风", target: "🪁 放风筝" },
+      { id: "cloud", card: "☁️ 云", target: "🌤️ 天上飘" }
+    ],
+    story: [
+      { emoji: "☀️", text: "早上太阳晒得地面暖烘烘的。小水洼里的水悄悄变成看不见的水汽，飞到了天上。" },
+      { emoji: "☁️", text: "水汽飞到高高的天上，遇冷抱成一团，变成了一朵灰灰的云。云越来越厚，把太阳都挡住了。" },
+      { emoji: "🌧️", text: "哗啦啦，雨点落下来啦！小草喝饱了水，抬起了头。雨停后，地上还有一个个小水洼映着天空。" }
+    ]
+  },
+  season: {
+    id: "season",
+    name: "四季轮回",
+    emoji: "🍂",
+    image: "assets/theme-season.jpg",
+    badgeName: "四季小观察员",
+    hotspots: [
+      { id: "h1", x: 24, y: 42, title: "春天", emoji: "🌸", fact: "春天天气变暖，小草发芽，桃花开了。燕子从南方飞回来，小动物们也醒过来了。" },
+      { id: "h2", x: 52, y: 30, title: "夏天", emoji: "☀️", fact: "夏天太阳照得最久，白天特别长。知了在树上叫，荷花开了，还可以吃西瓜、玩水。" },
+      { id: "h3", x: 74, y: 54, title: "秋天", emoji: "🍂", fact: "秋天天气凉了，树叶变黄变红，一片片落下来。田里的稻子熟了，果子也甜了。" },
+      { id: "h4", x: 40, y: 70, title: "冬天", emoji: "❄️", fact: "冬天最冷，白天短、夜里长。北方会下雪，小动物有的冬眠，有的换上厚厚的毛。" }
+    ],
+    quiz: [
+      { q: "哪个季节桃花开、燕子回来？", options: [{ emoji: "🌸", text: "春天", correct: true }, { emoji: "🍂", text: "秋天", correct: false }, { emoji: "❄️", text: "冬天", correct: false }] },
+      { q: "秋天树叶会怎么样？", options: [{ emoji: "🌱", text: "变绿发芽", correct: false }, { emoji: "🍂", text: "变黄掉落", correct: true }, { emoji: "🌷", text: "开花", correct: false }] },
+      { q: "冬天有些小动物会做什么？", options: [{ emoji: "😴", text: "冬眠", correct: true }, { emoji: "🏊", text: "游泳", correct: false }, { emoji: "🍉", text: "吃西瓜", correct: false }] }
+    ],
+    match: [
+      { id: "spring", card: "🌸 春天", target: "🌱 发芽开花" },
+      { id: "summer", card: "☀️ 夏天", target: "🍉 吃西瓜" },
+      { id: "autumn", card: "🍂 秋天", target: "🌾 稻子成熟" },
+      { id: "winter", card: "❄️ 冬天", target: "⛄ 下雪堆人" }
+    ],
+    story: [
+      { emoji: "🌸", text: "春天来了，光秃秃的树枝上冒出小小的芽。一只小鸟落在枝头，叽叽喳喳地唱歌。" },
+      { emoji: "🍃", text: "夏天，树长满了绿绿的叶子，像撑开的大伞。小朋友在树下乘凉，吃着冰凉的西瓜。" },
+      { emoji: "🍁", text: "秋天，叶子变成金黄色，一阵风吹过，哗啦啦落了一地。到了冬天，树枝上盖着白白的雪。" }
+    ]
+  },
+  vehicle: {
+    id: "vehicle",
+    name: "交通工具",
+    emoji: "🚗",
+    image: "assets/theme-vehicle.jpg",
+    badgeName: "交通小达人",
+    hotspots: [
+      { id: "h1", x: 24, y: 42, title: "汽车", emoji: "🚗", fact: "汽车有四个轮子，跑起来又稳又快。坐车要系好安全带，小朋友要坐安全座椅。" },
+      { id: "h2", x: 52, y: 30, title: "火车", emoji: "🚆", fact: "火车在铁轨上跑，能拉好多车厢和乘客。高铁跑得特别快，坐上去像飞一样。" },
+      { id: "h3", x: 74, y: 54, title: "飞机", emoji: "✈️", fact: "飞机的翅膀上宽下弯，空气流过时把它往上托。所以飞机能飞得高高的，穿到云上面。" },
+      { id: "h4", x: 40, y: 70, title: "轮船", emoji: "🚢", fact: "轮船很重却能浮在水上，因为它排开的水把它托住了。大轮船能装好多集装箱。" }
+    ],
+    quiz: [
+      { q: "坐汽车时一定要做什么？", options: [{ emoji: "🔒", text: "系安全带", correct: true }, { emoji: "🪟", text: "把头伸出窗", correct: false }, { emoji: "🏃", text: "站起来", correct: false }] },
+      { q: "火车在哪里跑？", options: [{ emoji: "🌊", text: "水上", correct: false }, { emoji: "🛤️", text: "铁轨上", correct: true }, { emoji: "☁️", text: "云上", correct: false }] },
+      { q: "大轮船为什么能浮在水上？", options: [{ emoji: "🫧", text: "水把它托住", correct: true }, { emoji: "🎈", text: "里面有气球", correct: false }, { emoji: "🪽", text: "它有翅膀", correct: false }] }
+    ],
+    match: [
+      { id: "car", card: "🚗 汽车", target: "🛣️ 公路上跑" },
+      { id: "train", card: "🚆 火车", target: "🛤️ 铁轨上跑" },
+      { id: "plane", card: "✈️ 飞机", target: "☁️ 天上飞" },
+      { id: "ship", card: "🚢 轮船", target: "🌊 水上漂" }
+    ],
+    story: [
+      { emoji: "🚂", text: "小火车第一次出门，慢慢地开出车站。它一边跑一边数着路边的电线杆，一、二、三……" },
+      { emoji: "🏔️", text: "前面是一座大山，小火车呜——地叫了一声，加把劲往上爬，车厢一节一节跟着上去了。" },
+      { emoji: "🚉", text: "到了终点站，大家夸小火车真能干。小火车高兴得冒出白白的一团烟，又准备出发啦。" }
+    ]
+  },
+  number: {
+    id: "number",
+    name: "数字乐园",
+    emoji: "🔢",
+    image: "assets/theme-number.jpg",
+    badgeName: "数学小天才",
+    hotspots: [
+      { id: "h1", x: 24, y: 42, title: "数数", emoji: "🔢", fact: "数东西的时候，要一个一个指着数，数到最后一个就是总数。数完就不会漏掉也不会多数。" },
+      { id: "h2", x: 52, y: 30, title: "形状", emoji: "🔷", fact: "三角形有三条边，正方形有四条一样长的边，圆形没有角，滚起来最顺。" },
+      { id: "h3", x: 74, y: 54, title: "比大小", emoji: "⚖️", fact: "数量多的大，数量少的小。开口大的那边是大的数，像大嘴巴一样，它总想吃多的。" },
+      { id: "h4", x: 40, y: 70, title: "加法", emoji: "➕", fact: "把两堆东西合在一起，就是加法。三个苹果加上两个苹果，一共是五个苹果。" }
+    ],
+    quiz: [
+      { q: "三角形有几条边？", options: [{ emoji: "3️⃣", text: "三条", correct: true }, { emoji: "4️⃣", text: "四条", correct: false }, { emoji: "0️⃣", text: "没有边", correct: false }] },
+      { q: "3 个苹果加 2 个苹果，一共几个？", options: [{ emoji: "4️⃣", text: "4 个", correct: false }, { emoji: "5️⃣", text: "5 个", correct: true }, { emoji: "6️⃣", text: "6 个", correct: false }] },
+      { q: "哪种形状没有角？", options: [{ emoji: "🔺", text: "三角形", correct: false }, { emoji: "🟦", text: "正方形", correct: false }, { emoji: "⭕", text: "圆形", correct: true }] }
+    ],
+    match: [
+      { id: "count", card: "🔢 数数", target: "🖐️ 一个一个数" },
+      { id: "shape", card: "🔷 形状", target: "📐 认边和角" },
+      { id: "compare", card: "⚖️ 比大小", target: "🐊 大嘴巴吃多的" },
+      { id: "plus", card: "➕ 加法", target: "🧮 合在一起" }
+    ],
+    story: [
+      { emoji: "🍎", text: "小熊摘了三个苹果，放进篮子。它数了一遍：一、二、三，没错，是三个。" },
+      { emoji: "🐻", text: "小兔子又送来两个苹果。小熊把苹果挨在一起数：一、二、三、四、五，变成五个啦！" },
+      { emoji: "🎉", text: "小熊明白了：三个加两个，就是五个。它把苹果切成小块，和小兔子一起分着吃。" }
+    ]
+  },
+  color: {
+    id: "color",
+    name: "颜色魔法",
+    emoji: "🎨",
+    image: "assets/theme-color.jpg",
+    badgeName: "色彩小画家",
+    hotspots: [
+      { id: "h1", x: 24, y: 42, title: "三原色", emoji: "🔴", fact: "红、黄、蓝是三原色，别的颜色调不出来。用它们三种，却能调出好多好多颜色。" },
+      { id: "h2", x: 52, y: 30, title: "混色", emoji: "🎨", fact: "红加黄变橙色，黄加蓝变绿色，红加蓝变紫色。颜色混在一起还会变深变浅，真神奇。" },
+      { id: "h3", x: 74, y: 54, title: "彩虹色", emoji: "🌈", fact: "彩虹有七种颜色：红、橙、黄、绿、蓝、靛、紫。它们总是按这个顺序排好队。" },
+      { id: "h4", x: 40, y: 70, title: "树叶变色", emoji: "🍁", fact: "叶子里的绿色叫叶绿素。秋天阳光少了，绿色退掉，藏在里面的黄和红就露出来了。" }
+    ],
+    quiz: [
+      { q: "红色加黄色会变成什么颜色？", options: [{ emoji: "🟠", text: "橙色", correct: true }, { emoji: "🟢", text: "绿色", correct: false }, { emoji: "🟣", text: "紫色", correct: false }] },
+      { q: "黄色加蓝色会变成什么颜色？", options: [{ emoji: "🟠", text: "橙色", correct: false }, { emoji: "🟢", text: "绿色", correct: true }, { emoji: "🔴", text: "红色", correct: false }] },
+      { q: "秋天树叶变黄变红，是因为什么变少了？", options: [{ emoji: "💧", text: "水分", correct: false }, { emoji: "🟢", text: "叶绿素", correct: true }, { emoji: "🌬️", text: "风", correct: false }] }
+    ],
+    match: [
+      { id: "primary", card: "🔴 三原色", target: "🎨 红黄蓝" },
+      { id: "mix", card: "🎨 混色", target: "🟠 红加黄变橙" },
+      { id: "rainbow", card: "🌈 彩虹色", target: "7️⃣ 七种颜色" },
+      { id: "leaf", card: "🍁 落叶", target: "🍂 绿色退掉" }
+    ],
+    story: [
+      { emoji: "🎨", text: "小画家打开颜料盒，只有红、黄、蓝三支颜料。他想：这样怎么画彩虹呢？" },
+      { emoji: "🟠", text: "他试着把红和黄搅在一起，咦，变成橙色了！再把黄和蓝搅一搅，出现了绿色。" },
+      { emoji: "🌈", text: "最后红加蓝变成了紫色。小画家高兴极了，用自己调出的颜色，画了一道漂亮的彩虹。" }
+    ]
+  },
+  china: {
+    id: "china",
+    name: "中国地理",
+    emoji: "🇨🇳",
+    image: "assets/theme-china.jpg",
+    badgeName: "地理小行家",
+    hotspots: [
+      { id: "h1", x: 24, y: 42, title: "长城", emoji: "🧱", fact: "长城修在高高的山脊上，弯弯曲曲像一条长龙。古时候人们用它挡住敌人，现在成了有名的地方。" },
+      { id: "h2", x: 52, y: 30, title: "长江黄河", emoji: "🌊", fact: "长江和黄河是中国最长的两条河，它们从西边的雪山流到东边的大海，养活了好多好多地方。" },
+      { id: "h3", x: 74, y: 54, title: "大熊猫", emoji: "🐼", fact: "大熊猫住在中国四川的山里，最爱吃竹子。它的黑白毛色像戴了墨镜，是我们国家的宝贝。" },
+      { id: "h4", x: 40, y: 70, title: "珠穆朗玛峰", emoji: "🏔️", fact: "珠穆朗玛峰是世界上最高的山峰，山顶终年积雪。越往高处走，空气越少，还越冷。" }
+    ],
+    quiz: [
+      { q: "长城修在哪里？", options: [{ emoji: "🏔️", text: "高高的山脊上", correct: true }, { emoji: "🌊", text: "海底下", correct: false }, { emoji: "🏜️", text: "沙漠中间", correct: false }] },
+      { q: "大熊猫最爱吃什么？", options: [{ emoji: "🍎", text: "苹果", correct: false }, { emoji: "🎋", text: "竹子", correct: true }, { emoji: "🐟", text: "鱼", correct: false }] },
+      { q: "世界上最高的山峰是？", options: [{ emoji: "🏔️", text: "珠穆朗玛峰", correct: true }, { emoji: "🗻", text: "富士山", correct: false }, { emoji: "⛰️", text: "泰山", correct: false }] }
+    ],
+    match: [
+      { id: "wall", card: "🧱 长城", target: "🐉 像条长龙" },
+      { id: "river", card: "🌊 长江黄河", target: "🏔️ 从雪山流向海" },
+      { id: "panda", card: "🐼 大熊猫", target: "🎋 吃竹子" },
+      { id: "everest", card: "🏔️ 珠穆朗玛峰", target: "❄️ 世界最高" }
+    ],
+    story: [
+      { emoji: "🐼", text: "一只小熊猫坐在竹林里，抱着竹子啃得正香。它一天要吃好多好多竹子，才有力气玩。" },
+      { emoji: "🎋", text: "吃完啦，小熊猫慢慢爬到树上，找了个舒服的树杈趴着睡觉。它爬树可厉害了。" },
+      { emoji: "🌿", text: "睡醒后，小熊猫跟着妈妈去山下的溪边喝水。它要走很远的路，才能找到凉凉的清水。" }
+    ]
+  },
+  festival: {
+    id: "festival",
+    name: "节日庆典",
+    emoji: "🎉",
+    image: "assets/theme-festival.jpg",
+    badgeName: "节日小明星",
+    hotspots: [
+      { id: "h1", x: 24, y: 42, title: "中秋节", emoji: "🌕", fact: "中秋节在秋天，月亮最圆最亮。大家会吃月饼、赏月亮，一家人团圆在一起。" },
+      { id: "h2", x: 52, y: 30, title: "端午节", emoji: "🐲", fact: "端午节要包粽子、赛龙舟。粽子是糯米做的，用竹叶包起来，有咸的也有甜的。" },
+      { id: "h3", x: 74, y: 54, title: "儿童节", emoji: "🎈", fact: "六月一日是儿童节，是小朋友自己的节日。这一天可以玩游戏、收礼物、看表演。" },
+      { id: "h4", x: 40, y: 70, title: "生日", emoji: "🎂", fact: "生日是出生的那一天，每年都过一次。吹蜡烛、吃蛋糕、许个愿望，都是生日的快乐。" }
+    ],
+    quiz: [
+      { q: "中秋节大家会吃什么？", options: [{ emoji: "🥮", text: "月饼", correct: true }, { emoji: "🍜", text: "面条", correct: false }, { emoji: "🍦", text: "冰淇淋", correct: false }] },
+      { q: "端午节要做什么？", options: [{ emoji: "🎃", text: "做南瓜灯", correct: false }, { emoji: "🐲", text: "赛龙舟", correct: true }, { emoji: "🎄", text: "装饰圣诞树", correct: false }] },
+      { q: "儿童节是几月几日？", options: [{ emoji: "6️⃣", text: "六月一日", correct: true }, { emoji: "1️⃣", text: "一月一日", correct: false }, { emoji: "1️⃣0️⃣", text: "十月一日", correct: false }] }
+    ],
+    match: [
+      { id: "midautumn", card: "🌕 中秋节", target: "🥮 吃月饼赏月" },
+      { id: "dragonboat", card: "🐲 端午节", target: "🍙 包粽子" },
+      { id: "children", card: "🎈 儿童节", target: "🎠 玩游戏收礼物" },
+      { id: "birthday", card: "🎂 生日", target: "🕯️ 吹蜡烛许愿" }
+    ],
+    story: [
+      { emoji: "🌕", text: "中秋节的晚上，圆圆的月亮挂在天上。奶奶端出一盘月饼，说：一家人在一起，月亮才最圆。" },
+      { emoji: "🥮", text: "小宝咬了一口月饼，甜甜的馅流出来。他抬头看月亮，觉得月亮里好像真的有小兔子。" },
+      { emoji: "🏮", text: "爸爸讲起了月亮的故事，小宝靠在妈妈的肩膀上，慢慢睡着了，梦里飞到了月亮上。" }
+    ]
+  },
+  music: {
+    id: "music",
+    name: "音乐与声音",
+    emoji: "🎵",
+    image: "assets/theme-music.jpg",
+    badgeName: "音乐小演奏家",
+    hotspots: [
+      { id: "h1", x: 24, y: 42, title: "钢琴", emoji: "🎹", fact: "钢琴有黑白两种琴键，按下去里面的小锤子敲到琴弦，就发出声音。弹得轻声音就小。" },
+      { id: "h2", x: 52, y: 30, title: "鼓", emoji: "🥁", fact: "鼓是靠鼓面振动发声的。敲得越用力，鼓面振动越大，声音就越响。" },
+      { id: "h3", x: 74, y: 54, title: "小提琴", emoji: "🎻", fact: "小提琴有四根弦，用弓在弦上拉，弦振动就出声。手指按弦的不同位置，音就变高变低。" },
+      { id: "h4", x: 40, y: 70, title: "声音高低", emoji: "🔊", fact: "声音有高有低、有大有小。小鸟叫又高又细，大鼓响又低又沉，这是振动的快慢不同。" }
+    ],
+    quiz: [
+      { q: "鼓是靠什么发出声音的？", options: [{ emoji: "🥁", text: "鼓面振动", correct: true }, { emoji: "💨", text: "吹气", correct: false }, { emoji: "💡", text: "通电", correct: false }] },
+      { q: "小提琴有几根弦？", options: [{ emoji: "2️⃣", text: "两根", correct: false }, { emoji: "4️⃣", text: "四根", correct: true }, { emoji: "8️⃣", text: "八根", correct: false }] },
+      { q: "哪种声音又高又细？", options: [{ emoji: "🐦", text: "小鸟叫", correct: true }, { emoji: "🥁", text: "大鼓响", correct: false }, { emoji: "🐘", text: "大象叫", correct: false }] }
+    ],
+    match: [
+      { id: "piano", card: "🎹 钢琴", target: "🎼 按黑白键" },
+      { id: "drum", card: "🥁 鼓", target: "👊 敲出响声" },
+      { id: "violin", card: "🎻 小提琴", target: "🎻 用弓拉弦" },
+      { id: "pitch", card: "🔊 声音", target: "⬆️ 有高有低" }
+    ],
+    story: [
+      { emoji: "🥁", text: "小鼓手第一次上台，紧张得手心出汗。他深吸一口气，轻轻敲了一下鼓，声音小小的。" },
+      { emoji: "🎵", text: "台下的小朋友笑起来，跟着拍手。小鼓手胆子大了，越敲越有劲，咚咚咚，全场都热闹起来。" },
+      { emoji: "🎉", text: "表演结束，大家一起鼓掌。小鼓手这才明白：声音不只是好听，还能把大家的心连在一起。" }
+    ]
+  },
+  safety: {
+    id: "safety",
+    name: "安全小常识",
+    emoji: "🛡️",
+    image: "assets/theme-safety.jpg",
+    badgeName: "安全小卫士",
+    hotspots: [
+      { id: "h1", x: 24, y: 42, title: "过马路", emoji: "🚸", fact: "过马路要走斑马线，先看左边再看右边，牵好大人的手，不跑不闹。" },
+      { id: "h2", x: 52, y: 30, title: "火警电话", emoji: "🔥", fact: "着火要打 119。逃生时用湿毛巾捂住口鼻，弯下腰贴着墙走，千万不要坐电梯。" },
+      { id: "h3", x: 74, y: 54, title: "不跟陌生人走", emoji: "🙅", fact: "不认识的人给东西、说要带你走，都要摇头拒绝。马上告诉爸爸妈妈或老师。" },
+      { id: "h4", x: 40, y: 70, title: "电器安全", emoji: "🔌", fact: "湿手不能碰插头，插座的小孔不能塞东西。看到电线破了要离远一点，告诉大人。" }
+    ],
+    quiz: [
+      { q: "过马路要走哪里？", options: [{ emoji: "🚸", text: "斑马线", correct: true }, { emoji: "🌳", text: "绿化带", correct: false }, { emoji: "🛣️", text: "随便跑", correct: false }] },
+      { q: "着火了应该打什么电话？", options: [{ emoji: "119", text: "119", correct: true }, { emoji: "114", text: "114", correct: false }, { emoji: "123", text: "123", correct: false }] },
+      { q: "湿手可以碰插头吗？", options: [{ emoji: "✅", text: "可以", correct: false }, { emoji: "❌", text: "绝对不行", correct: true }, { emoji: "🤔", text: "偶尔可以", correct: false }] }
+    ],
+    match: [
+      { id: "crossing", card: "🚸 过马路", target: "🦓 走斑马线" },
+      { id: "fire", card: "🔥 着火", target: "119 打火警" },
+      { id: "stranger", card: "🙅 陌生人", target: "🚫 不跟他走" },
+      { id: "socket", card: "🔌 插座", target: "💧 湿手不能碰" }
+    ],
+    story: [
+      { emoji: "🚸", text: "豆豆和妈妈去超市，路边有个大十字路口。红灯亮了，豆豆想跑，妈妈拉住了他。" },
+      { emoji: "✋", text: "妈妈说：红灯要等一等。等绿灯亮了，我们再看左边、看右边，才能走。" },
+      { emoji: "✅", text: "绿灯亮了，豆豆牵着妈妈的手，一步一步走过斑马线。他记住了：安全比快一点更重要。" }
+    ]
+  }
+};
+
+// 默认主题（无参数时进入）
+export function resolveThemeId(param) {
+  return Object.prototype.hasOwnProperty.call(THEMES, param) ? param : "animals";
+}
+
+// 配对判断：卡片 id 与目标框接受值一致则配对成功
+export function checkMatch(cardId, slotAccept) {
+  return cardId === slotAccept;
+}
+
+// 答题判定：返回选项是否正确
+export function checkAnswer(option) {
+  return option && option.correct === true;
+}
+
+// 答题推进：答对进入下一题，返回新索引；全部答对返回 -1 表示通关
+export function nextQuizIndex(currentIndex, total, isCorrect) {
+  if (!isCorrect) return currentIndex;
+  const next = currentIndex + 1;
+  return next >= total ? -1 : next;
+}
+
+// 空进度档案
+export function emptyProgress() {
+  const badges = {};
+  const dex = {};
+  for (const id of THEME_ORDER) {
+    badges[id] = false;
+    dex[id] = [];
+  }
+  return { badges, dex, stickers: 0, voice: true, quizProgress: {} };
+}
+
+// 合并读到的进度，缺字段时补默认
+export function normalizeProgress(raw) {
+  const base = emptyProgress();
+  if (!raw || typeof raw !== "object") return base;
+  const quizProgress = {};
+  for (const id of THEME_ORDER) {
+    quizProgress[id] = Number.isFinite(raw.quizProgress?.[id]) ? raw.quizProgress[id] : 0;
+  }
+  return {
+    badges: { ...base.badges, ...(raw.badges || {}) },
+    dex: Object.fromEntries(THEME_ORDER.map((id) => [id, Array.isArray(raw.dex?.[id]) ? raw.dex[id] : []])),
+    stickers: Number.isFinite(raw.stickers) ? raw.stickers : 0,
+    voice: raw.voice !== false,
+    quizProgress
+  };
+}
+
+// 保存问答已通过的题数（玩到第几关），返回新进度对象
+export function saveQuizProgress(progress, themeId, passedCount) {
+  const next = normalizeProgress(progress);
+  next.quizProgress[themeId] = passedCount;
+  return next;
+}
+
+// 解锁图鉴条目（去重），返回新进度对象
+export function unlockDex(progress, themeId, entryId) {
+  const next = normalizeProgress(progress);
+  if (!next.dex[themeId].includes(entryId)) {
+    next.dex[themeId] = [...next.dex[themeId], entryId];
+  }
+  return next;
+}
+
+// 授予徽章，返回新进度对象
+export function grantBadge(progress, themeId) {
+  const next = normalizeProgress(progress);
+  next.badges[themeId] = true;
+  return next;
+}
+
+// 已获得徽章数量
+export function countBadges(progress) {
+  const p = normalizeProgress(progress);
+  return THEME_ORDER.filter((id) => p.badges[id]).length;
+}
