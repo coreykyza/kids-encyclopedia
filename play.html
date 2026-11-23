@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>主题探索 · 小小百科探险家</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body class="play">
+  <header class="play-header">
+    <button id="btn-home" class="big-btn" type="button">🏠 返回地图</button>
+    <h1 id="scene-title">主题探索</h1>
+    <div class="header-right">
+      <button id="voice-toggle" class="big-btn" type="button">🔊 声音开</button>
+    </div>
+  </header>
+
+  <nav class="tab-bar" aria-label="玩法切换">
+    <button id="tab-explore" class="tab-btn active" type="button">🔍 点选探索</button>
+    <button id="tab-quiz" class="tab-btn" type="button">❓ 问答闯关</button>
+    <button id="tab-match" class="tab-btn" type="button">🧩 配对小游戏</button>
+    <button id="tab-story" class="tab-btn" type="button">📖 小故事</button>
+  </nav>
+
+  <main class="stage">
+    <section id="pane-explore" class="tab-pane active">
+      <div class="scene-wrap" id="scene-wrap">
+        <img id="scene-img" src="" alt="主题场景图">
+      </div>
+      <div id="fact-card" role="dialog" aria-label="讲解卡">
+        <h2 class="fact-title"><span id="fact-emoji"></span> <span id="fact-name"></span></h2>
+        <p class="fact-text" id="fact-text"></p>
+        <div class="fact-actions">
+          <button id="fact-listen" class="big-btn primary" type="button">🔊 听一听</button>
+          <button id="fact-close" class="big-btn" type="button">知道啦 ✕</button>
+        </div>
+      </div>
+    </section>
+
+    <section id="pane-quiz" class="tab-pane">
+      <div class="quiz-progress" id="quiz-progress"></div>
+      <div id="quiz-question"></div>
+      <div class="quiz-options" id="quiz-options"></div>
+      <div class="quiz-feedback" id="quiz-feedback"></div>
+      <div id="quiz-result">
+        <span class="r-emoji">🏅</span>
+        <span id="quiz-result-text"></span>
+      </div>
+    </section>
+
+    <section id="pane-match" class="tab-pane">
+      <p class="match-tip">把上面的卡片拖到正确的框里吧！</p>
+      <div class="match-board">
+        <div class="drag-row" id="drag-row"></div>
+        <div class="drop-row" id="drop-row"></div>
+      </div>
+      <div class="match-done" id="match-done">🎉 全部配对成功！奖励 1 张贴纸！</div>
+    </section>
+
+    <section id="pane-story" class="tab-pane">
+      <div class="story-box">
+        <div id="story-step">1 / 3</div>
+        <span class="story-emoji" id="story-emoji"></span>
+        <p id="story-text"></p>
+        <div class="story-actions">
+          <button id="story-listen" class="big-btn" type="button">🔊 听一听</button>
+          <button id="story-next" class="big-btn primary" type="button">下一幕 ➜</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="config.js"></script>
+  <script src="kv.js"></script>
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>
