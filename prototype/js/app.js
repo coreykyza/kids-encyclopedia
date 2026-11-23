@@ -3,20 +3,81 @@ const PROGRESS_KEY = "kidpedia_progress_v1";
 
 let progress = normalizeProgress(null);
 
-async function loadProgress() {
-  if (!kv || !kv.ready()) return;
+/* ===== 存档：本地存档兜底 + 平台存储同步 =====
+   双击打开（file://）或离线时平台存储不可用，必须仍把进度写进浏览器本地，
+   否则离开探索页再回到首页，刚拿到的徽章就会全部消失。 */
+const memoryStore = {};
+
+function safeStore() {
   try {
-    const raw = await kv.get(kv.userId(), PROGRESS_KEY);
-    progress = normalizeProgress(raw);
-  } catch (e) { progress = normalizeProgress(null); }
+    const t = "__kidpedia_probe__";
+    window.localStorage.setItem(t, "1");
+    window.localStorage.removeItem(t);
+    return window.localStorage;
+  } catch (e) {
+    try {
+      const t = "__kidpedia_probe__";
+      window.sessionStorage.setItem(t, "1");
+      window.sessionStorage.removeItem(t);
+      return window.sessionStorage;
+    } catch (e2) { return null; }
+  }
+}
+const store = safeStore();
+
+function readLocalProgress() {
+  if (store) {
+    try {
+      const raw = store.getItem(PROGRESS_KEY);
+      if (raw) return JSON.parse(raw);
+    } catch (e) { /* 损坏时按空档处理 */ }
+    return null;
+  }
+  return memoryStore[PROGRESS_KEY] || null;
+}
+
+function writeLocalProgress(value) {
+  const text = JSON.stringify(value);
+  if (store) {
+    try { store.setItem(PROGRESS_KEY, text); } catch (e) { /* 空间不足时忽略 */ }
+    return;
+  }
+  memoryStore[PROGRESS_KEY] = text;
+}
+
+async function loadProgress() {
+  const local = readLocalProgress();
+  if (!kv || !kv.ready()) {
+    progress = normalizeProgress(local);
+    return;
+  }
+  let remote = null;
+  try { remote = await kv.get(kv.userId(), PROGRESS_KEY); } catch (e) { remote = null; }
+  progress = normalizeProgress(mergeProgress(local, remote));
+  writeLocalProgress(progress);
 }
 
 async function saveProgress() {
+  writeLocalProgress(progress);
   if (!kv || !kv.ready()) return;
   try {
     await kv.put(kv.userId(), PROGRESS_KEY, progress);
-  } catch (e) { /* 保存失败保持界面现状 */ }
+  } catch (e) { /* 云端失败时本地存档已生效 */ }
 }
+
+// 离开页面前冲一次存档，避免在途请求被整页跳转打断
+async function flushProgress() {
+  writeLocalProgress(progress);
+  if (!kv || !kv.ready()) return;
+  try {
+    await Promise.race([
+      kv.put(kv.userId(), PROGRESS_KEY, progress),
+      new Promise((resolve) => setTimeout(resolve, 1200)),
+    ]);
+  } catch (e) { /* 本地存档已生效 */ }
+}
+
+window.addEventListener("pagehide", () => writeLocalProgress(progress));
 
 /* ===== 语音：优先预生成真人录音，缺失时回退系统合成音 ===== */
 let currentAudio = null;
@@ -133,7 +194,7 @@ function initPlay() {
   titleEl.textContent = theme.name;
   document.title = `${theme.name} · 小小百科探险家`;
 
-  document.getElementById("btn-home").addEventListener("click", () => { location.href = "index.html"; });
+  document.getElementById("btn-home").addEventListener("click", async () => { await flushProgress(); location.href = "index.html"; });
 
   // 声音开关
   const voiceBtn = document.getElementById("voice-toggle");
