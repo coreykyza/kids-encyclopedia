@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>孩子百科全书 · 线框图（无视觉样式，仅布局骨架）</title>
+<style>
+  body { font-family: monospace; background: #eee; margin: 0; padding: 24px; color: #333; }
+  .page { background: #fff; border: 2px solid #333; margin: 0 auto 48px; max-width: 900px; padding: 16px; }
+  .page-title { font-size: 18px; font-weight: bold; border-bottom: 2px dashed #999; padding-bottom: 8px; margin-bottom: 16px; }
+  .box { border: 2px dashed #666; padding: 12px; margin: 8px; background: #fafafa; }
+  .req { display: inline-block; background: #333; color: #fff; font-size: 11px; padding: 1px 6px; border-radius: 3px; margin-left: 8px; }
+  .row { display: flex; flex-wrap: wrap; }
+  .row .box { flex: 1 1 140px; min-height: 90px; }
+  .nav { display: flex; justify-content: space-between; }
+  .note { color: #777; font-size: 12px; }
+  h3 { margin: 4px 0; }
+</style>
+</head>
+<body>
+
+<p class="note" style="max-width:900px;margin:0 auto 24px;">线框图仅表达「页面骨架」与「功能范围」的对应关系，不代表最终视觉。每页标注对应《需求文档 v0.9》第 3 节条目编号。</p>
+
+<!-- ============ 页面 1：首页 / 主题地图 ============ -->
+<div class="page">
+  <div class="page-title">页面 1：首页（主题地图） index.html</div>
+
+  <div class="box nav">
+    <span>🏷️ 产品名「小小百科探险家」</span>
+    <span>[ 🔊 语音开关：默认开 <span class="req">条目7</span> ]</span>
+  </div>
+
+  <div class="box" style="text-align:center;">
+    欢迎语 + 今日鼓励一句（语音播报）<span class="req">条目7</span>
+  </div>
+
+  <h3>5 大主题入口（插画卡片，点击进入探险页）<span class="req">条目1</span></h3>
+  <div class="row">
+    <div class="box">🐘 自然与动物<br><span class="note">插画 + 已收集进度角标</span></div>
+    <div class="box">💪 人体与健康</div>
+    <div class="box">🔬 科学现象</div>
+    <div class="box">🏠 日常生活</div>
+    <div class="box">🏮 社会人文</div>
+  </div>
+
+  <h3>收藏册入口<span class="req">条目6</span></h3>
+  <div class="box">
+    [ 🏅 徽章 x N ]　[ ⭐ 贴纸 x N ]　[ 📖 图鉴 x N ]　→ 点击展开收藏面板，逐项查看已获内容；空状态显示「还没有收集到，快去探险吧！」
+  </div>
+
+  <div class="box">
+    进度恢复：打开时从本机存储读取徽章/贴纸/图鉴数量并显示<span class="req">条目8</span>
+  </div>
+</div>
+
+<!-- ============ 页面 2：主题探险页 ============ -->
+<div class="page">
+  <div class="page-title">页面 2：主题探险页 play.html（以「自然与动物」为例，5 主题共用同一骨架）</div>
+
+  <div class="box nav">
+    <span>[ ← 返回首页 <span class="req">条目9</span> ]</span>
+    <span>当前主题：自然与动物</span>
+    <span>[ 🔊 语音开关 <span class="req">条目7</span> ]</span>
+  </div>
+
+  <h3>玩法切换（四个大按钮，大字 + 图标）<span class="req">条目2/3/4/5</span></h3>
+  <div class="row">
+    <div class="box">🔍 找一找<br><span class="note">点选探索</span></div>
+    <div class="box">❓ 问答闯关</div>
+    <div class="box">🧩 配对小游戏</div>
+    <div class="box">📚 小故事</div>
+  </div>
+
+  <div class="box">
+    <h3>玩法 A · 点选探索<span class="req">条目2</span></h3>
+    场景区（主题插画底图）+ 4~6 个可点击热点按钮（emoji + 名称）<br>
+    → 点击热点：弹出知识卡（≤60 字口语化）+ 语音朗读 + 「我知道了」关闭按钮
+  </div>
+
+  <div class="box">
+    <h3>玩法 B · 问答闯关<span class="req">条目3</span></h3>
+    第 x / 3 题进度 → 题干（≤30 字，语音朗读）→ 3 个选项大按钮<br>
+    → 答对：鼓励语 + 立即进入下一题；答错：温和提示可重选<br>
+    → 3 题全对：弹出 🏅 徽章获取画面，进度保存<span class="req">条目8</span>
+  </div>
+
+  <div class="box">
+    <h3>玩法 C · 拖拽配对<span class="req">条目4</span></h3>
+    左侧 4 张图片卡（可拖拽）＋ 右侧 4 个名称框<br>
+    → 拖对：卡片吸附 + 打勾；拖错：弹回<br>
+    → 全部配对成功：弹出 ⭐ 贴纸获取画面，进度保存<span class="req">条目8</span>
+  </div>
+
+  <div class="box">
+    <h3>玩法 D · 情景小故事<span class="req">条目5</span></h3>
+    单幕展示区（插画位 + 故事文字）＋「下一页」大按钮，共 3 幕，逐幕语音朗读<br>
+    → 最后一幕看完：弹出 📖 图鉴页获取画面，进度保存<span class="req">条目8</span>
+  </div>
+</div>
+
+<!-- ============ 关键状态 ============ -->
+<div class="page">
+  <div class="page-title">关键状态页（须覆盖）</div>
+  <div class="box">空收藏状态：收藏册无任何物品时的引导文案<span class="req">条目6</span></div>
+  <div class="box">存储不可用状态：进度无法保存时的提示「这次可能记不住奖励哦」（不阻塞游玩）<span class="req">条目8 异常流</span></div>
+  <div class="box">语音不可用状态：浏览器不支持语音时自动隐藏开关<span class="req">条目7 异常流</span></div>
+  <div class="box">平板竖屏布局：主题卡 2 列、玩法按钮 2×2 排列<span class="req">第5节·设备</span></div>
+</div>
+
+</body>
+</html>
