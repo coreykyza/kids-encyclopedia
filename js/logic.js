@@ -669,3 +669,25 @@ function countBadges(progress) {
   const p = normalizeProgress(progress);
   return THEME_ORDER.filter((id) => p.badges[id]).length;
 }
+
+// 合并两份存档（本地兜底存档 + 平台存储）：
+// 徽章取并集、图鉴取并集、贴纸与答题进度取较大值，避免任一侧旧数据覆盖新进度。
+function mergeProgress(a, b) {
+  const pa = normalizeProgress(a);
+  const pb = normalizeProgress(b);
+  const badges = {};
+  const dex = {};
+  const quizProgress = {};
+  for (const id of THEME_ORDER) {
+    badges[id] = !!(pa.badges[id] || pb.badges[id]);
+    dex[id] = Array.from(new Set([...(pa.dex[id] || []), ...(pb.dex[id] || [])]));
+    quizProgress[id] = Math.max(pa.quizProgress[id] || 0, pb.quizProgress[id] || 0);
+  }
+  return {
+    badges,
+    dex,
+    stickers: Math.max(pa.stickers || 0, pb.stickers || 0),
+    voice: pa.voice && pb.voice,
+    quizProgress
+  };
+}
