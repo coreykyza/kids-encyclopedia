@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>小小百科探险家 · 高保真原型</title>
+<style>
+  :root {
+    --bg: #FFF8EC;
+    --ink: #3D2C29;
+    --primary: #FF8A3D;
+    --primary-dark: #E56F1F;
+    --green: #4CAF6D;
+    --blue: #4A90D9;
+    --purple: #9B72CF;
+    --red: #E8604C;
+    --yellow: #FFC93D;
+    --card: #FFFFFF;
+    --radius: 22px;
+    --shadow: 0 6px 0 rgba(61,44,41,.12);
+  }
+  * { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+  body {
+    font-family: "PingFang SC","Microsoft YaHei","Noto Sans SC",sans-serif;
+    background: var(--bg); color: var(--ink);
+    min-height: 100vh;
+  }
+  button { font-family: inherit; cursor: pointer; border: none; }
+  .hidden { display: none !important; }
+
+  /* ===== 顶栏 ===== */
+  .topbar {
+    display:flex; align-items:center; justify-content:space-between;
+    padding: 14px 22px; max-width: 980px; margin: 0 auto;
+  }
+  .logo { font-size: 22px; font-weight: 800; }
+  .logo span { font-size: 26px; }
+  .voice-btn {
+    background: var(--card); border-radius: 999px; padding: 10px 18px;
+    font-size: 17px; font-weight: 700; color: var(--ink);
+    box-shadow: var(--shadow); border: 3px solid var(--ink);
+  }
+  .voice-btn.off { opacity: .45; }
+
+  /* ===== 首页 ===== */
+  .hero { text-align:center; padding: 10px 20px 6px; }
+  .hero h1 { font-size: 34px; margin-bottom: 6px; }
+  .hero p { font-size: 18px; color:#8a7367; }
+
+  .theme-grid {
+    display:grid; grid-template-columns: repeat(auto-fit, minmax(150px,1fr));
+    gap: 16px; max-width: 980px; margin: 18px auto; padding: 0 22px;
+  }
+  .theme-card {
+    background: var(--card); border: 3px solid var(--ink); border-radius: var(--radius);
+    box-shadow: var(--shadow); padding: 18px 12px 14px; text-align:center;
+    transition: transform .15s;
+  }
+  .theme-card:hover { transform: translateY(-4px); }
+  .theme-card .emoji { font-size: 52px; display:block; margin-bottom: 8px; }
+  .theme-card .name { font-size: 19px; font-weight: 800; }
+  .theme-card .prog { font-size: 13px; color:#8a7367; margin-top:6px; }
+  .theme-card.c1 { border-color: var(--green); }
+  .theme-card.c2 { border-color: var(--red); }
+  .theme-card.c3 { border-color: var(--blue); }
+  .theme-card.c4 { border-color: var(--yellow); }
+  .theme-card.c5 { border-color: var(--purple); }
+
+  .collection-bar {
+    max-width: 980px; margin: 8px auto 40px; padding: 0 22px;
+  }
+  .collection-bar button {
+    width:100%; background: var(--card); border:3px solid var(--ink);
+    border-radius: var(--radius); box-shadow: var(--shadow);
+    padding: 16px; font-size: 19px; font-weight: 800;
+  }
+
+  /* ===== 探险页 ===== */
+  .play-head {
+    display:flex; align-items:center; justify-content:space-between;
+    max-width: 980px; margin: 0 auto; padding: 0 22px 12px;
+  }
+  .back-btn {
+    background: var(--card); border:3px solid var(--ink); border-radius: 999px;
+    padding: 10px 18px; font-size: 17px; font-weight: 800; box-shadow: var(--shadow);
+  }
+  .play-title { font-size: 22px; font-weight: 800; }
+
+  .mode-tabs {
+    display:grid; grid-template-columns: repeat(4,1fr);
+    gap: 12px; max-width: 980px; margin: 0 auto 18px; padding: 0 22px;
+  }
+  .mode-tab {
+    background: var(--card); border:3px solid var(--ink); border-radius: var(--radius);
+    box-shadow: var(--shadow); padding: 14px 6px; font-size: 17px; font-weight: 800;
+  }
+  .mode-tab.active { background: var(--primary); color:#fff; border-color: var(--primary-dark); }
+  .mode-tab .big { font-size: 26px; display:block; margin-bottom: 4px; }
+
+  .stage { max-width: 980px; margin: 0 auto 40px; padding: 0 22px; }
+  .panel {
+    background: var(--card); border:3px solid var(--ink); border-radius: var(--radius);
+    box-shadow: var(--shadow); padding: 22px;
+  }
+
+  /* 探索 */
+  .explore-scene {
+    position: relative; background: linear-gradient(#BFE8FF 60%, #9AD68A 60%);
+    border-radius: 16px; min-height: 300px; margin-bottom: 14px; overflow:hidden;
+  }
+  .hotspot {
+    position:absolute; font-size: 44px; background: rgba(255,255,255,.85);
+    border: 3px solid var(--ink); border-radius: 50%;
+    width: 76px; height: 76px; line-height: 1;
+    box-shadow: 0 0 0 6px rgba(255,201,61,.55);
+    animation: pulse 1.6s infinite;
+  }
+  @keyframes pulse { 50% { box-shadow: 0 0 0 12px rgba(255,201,61,.15); } }
+  .hint { text-align:center; font-size:16px; color:#8a7367; }
+
+  /* 问答 */
+  .quiz-progress { text-align:center; font-size:16px; font-weight:700; color:#8a7367; margin-bottom: 10px; }
+  .quiz-q { font-size: 24px; font-weight: 800; text-align:center; margin: 8px 0 20px; }
+  .quiz-opts { display:grid; gap: 12px; }
+  .quiz-opt {
+    background: var(--bg); border:3px solid var(--ink); border-radius: 16px;
+    padding: 16px; font-size: 20px; font-weight: 700; text-align:left;
+  }
+  .quiz-opt.right { background: #DDF3E3; border-color: var(--green); }
+  .quiz-opt.wrong { background: #FBE3DF; border-color: var(--red); }
+  .quiz-feedback { text-align:center; font-size: 20px; font-weight: 800; min-height: 30px; margin-top: 14px; }
+
+  /* 配对 */
+  .match-wrap { display:grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .match-col { display:grid; gap: 12px; align-content:start; }
+  .match-item, .match-slot {
+    background: var(--bg); border:3px solid var(--ink); border-radius: 16px;
+    padding: 14px; font-size: 20px; font-weight: 700; text-align:center; min-height: 64px;
+  }
+  .match-item { cursor: grab; }
+  .match-item.done { opacity:.35; cursor:default; }
+  .match-slot.filled { background:#DDF3E3; border-color: var(--green); }
+  .match-slot .slot-emoji { font-size: 30px; display:block; }
+
+  /* 故事 */
+  .story-illu {
+    background: linear-gradient(#FFE3B3, #FFC9D6);
+    border-radius: 16px; height: 180px; display:flex; align-items:center; justify-content:center;
+    font-size: 80px; margin-bottom: 14px;
+  }
+  .story-text { font-size: 20px; line-height: 1.7; text-align:center; margin-bottom: 16px; }
+  .big-btn {
+    display:block; width:100%; background: var(--primary); color:#fff;
+    border:3px solid var(--primary-dark); border-radius: 16px;
+    padding: 16px; font-size: 21px; font-weight: 800; box-shadow: var(--shadow);
+  }
+  .story-dots { text-align:center; margin-bottom: 12px; font-size: 22px; letter-spacing: 6px; }
+
+  /* ===== 弹层：知识卡 / 奖励 / 收藏册 ===== */
+  .mask {
+    position: fixed; inset: 0; background: rgba(61,44,41,.45);
+    display:flex; align-items:center; justify-content:center; padding: 20px; z-index: 50;
+  }
+  .dialog {
+    background: var(--card); border:3px solid var(--ink); border-radius: var(--radius);
+    box-shadow: var(--shadow); max-width: 420px; width: 100%; padding: 26px; text-align:center;
+  }
+  .dialog .d-emoji { font-size: 64px; display:block; margin-bottom: 10px; }
+  .dialog h3 { font-size: 24px; margin-bottom: 10px; }
+  .dialog p { font-size: 19px; line-height: 1.7; margin-bottom: 18px; }
+  .reward-anim { animation: bounce .6s; }
+  @keyframes bounce { 0%{transform:scale(.5)} 60%{transform:scale(1.15)} 100%{transform:scale(1)} }
+
+  .collect-list { text-align:left; max-height: 300px; overflow:auto; margin-bottom: 16px; }
+  .collect-item { padding: 10px 6px; border-bottom: 2px dashed #e5d7c8; font-size: 18px; }
+  .collect-empty { text-align:center; color:#8a7367; padding: 20px 0; font-size: 17px; }
+
+  @media (max-width: 720px) {
+    .hero h1 { font-size: 26px; }
+    .mode-tabs { grid-template-columns: repeat(2,1fr); }
+    .match-wrap { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ================= 首页 ================= -->
+<div id="page-home">
+  <div class="topbar">
+    <div class="logo"><span>🦝</span> 小小百科探险家</div>
+    <button class="voice-btn" id="voice-toggle">🔊 语音开</button>
+  </div>
+  <div class="hero">
+    <h1>今天想去哪里探险？</h1>
+    <p>点一个主题，开始你的发现之旅！</p>
+  </div>
+  <div class="theme-grid" id="theme-grid"></div>
+  <div class="collection-bar">
+    <button id="open-collection">🎒 我的收藏册　🏅 <span id="c-badge">0</span>　⭐ <span id="c-sticker">0</span>　📖 <span id="c-book">0</span></button>
+  </div>
+</div>
+
+<!-- ================= 探险页 ================= -->
+<div id="page-play" class="hidden">
+  <div class="topbar">
+    <button class="back-btn" id="back-home">← 回首页</button>
+    <div class="play-title" id="play-title"></div>
+    <button class="voice-btn" id="voice-toggle-2">🔊 语音开</button>
+  </div>
+  <div class="mode-tabs">
+    <button class="mode-tab active" data-mode="explore"><span class="big">🔍</span>找一找</button>
+    <button class="mode-tab" data-mode="quiz"><span class="big">❓</span>问答闯关</button>
+    <button class="mode-tab" data-mode="match"><span class="big">🧩</span>配对小游戏</button>
+    <button class="mode-tab" data-mode="story"><span class="big">📚</span>小故事</button>
+  </div>
+  <div class="stage">
+    <!-- 探索 -->
+    <div class="panel" id="panel-explore">
+      <div class="explore-scene" id="explore-scene"></div>
+      <p class="hint">点一点发光的圆圈，看看藏着什么秘密！</p>
+    </div>
+    <!-- 问答 -->
+    <div class="panel hidden" id="panel-quiz">
+      <div class="quiz-progress" id="quiz-progress"></div>
+      <div class="quiz-q" id="quiz-q"></div>
+      <div class="quiz-opts" id="quiz-opts"></div>
+      <div class="quiz-feedback" id="quiz-feedback"></div>
+    </div>
+    <!-- 配对 -->
+    <div class="panel hidden" id="panel-match">
+      <p class="hint" style="margin-bottom:14px;">把左边的图片拖到右边正确的名字上！（原型：点图片再点名字也可以）</p>
+      <div class="match-wrap">
+        <div class="match-col" id="match-items"></div>
+        <div class="match-col" id="match-slots"></div>
+      </div>
+    </div>
+    <!-- 故事 -->
+    <div class="panel hidden" id="panel-story">
+      <div class="story-dots" id="story-dots"></div>
+      <div class="story-illu" id="story-illu"></div>
+      <div class="story-text" id="story-text"></div>
+      <button class="big-btn" id="story-next">下一页 →</button>
+    </div>
+  </div>
+</div>
+
+<!-- ================= 弹层 ================= -->
+<div class="mask hidden" id="dialog-mask">
+  <div class="dialog" id="dialog-box"></div>
+</div>
+
+<script>
+/* ================= 原型数据（真实文案，取自内容规格） ================= */
+const THEMES = [
+  { id:'animals', name:'自然与动物', emoji:'🐘', cls:'c1',
+    spots:[
+      { emoji:'🐘', name:'大象', x:'12%', y:'30%', text:'大象的鼻子像一根万能的管子，能喝水、能洗澡，还能卷起小小的花生米呢！' },
+      { emoji:'🦒', name:'长颈鹿', x:'55%', y:'12%', text:'长颈鹿的脖子虽然很长很长，但脖子的骨头数量和我们人类一样多，都是七块哦！' },
+      { emoji:'🐝', name:'蜜蜂', x:'75%', y:'55%', text:'蜜蜂找到花蜜后，会跳一种"8字舞"，告诉伙伴们花蜜在哪个方向、有多远。' },
+      { emoji:'🌻', name:'向日葵', x:'30%', y:'62%', text:'向日葵小时候会跟着太阳转头，长大以后就会固定朝着东边，安静地晒太阳。' },
+    ],
+    quiz:[
+      { q:'大象用什么卷起食物？', opts:['长鼻子','尾巴','耳朵'], a:0 },
+      { q:'蜜蜂跳"8字舞"是在做什么？', opts:['告诉伙伴花蜜的方向','玩游戏','赶蚊子'], a:0 },
+      { q:'长颈鹿的脖子骨头有几块？', opts:['和我们一样，七块','一百块','两块'], a:0 },
+    ],
+    match:[
+      { emoji:'🐘', name:'大象' }, { emoji:'🦒', name:'长颈鹿' },
+      { emoji:'🐝', name:'蜜蜂' }, { emoji:'🌻', name:'向日葵' },
+    ],
+    story:[
+      { emoji:'🐘', text:'小象奇奇第一次跟着妈妈去河边。它看着妈妈用长鼻子吸水，觉得神奇极了。' },
+      { emoji:'💦', text:'奇奇也学着把鼻子伸进水里，咕咚——呛了一大口！妈妈笑着说："慢慢来，先吸一点点。"' },
+      { emoji:'🌈', text:'练了好多天，奇奇终于能用鼻子喷出一道小水花，在阳光下画出了一道小小的彩虹！' },
+    ],
+  },
+  { id:'body', name:'人体与健康', emoji:'💪', cls:'c2',
+    spots:[ { emoji:'❤️', name:'心脏', x:'20%', y:'25%', text:'心脏像一个勤劳的小水泵，每天不停地跳动，把血液送到全身每一个角落。' } ],
+    quiz:[ { q:'我们为什么要好好刷牙？', opts:['保护牙齿不长蛀牙','让牙齿变蓝色','为了好玩'], a:0 } ],
+    match:[ { emoji:'❤️', name:'心脏' }, { emoji:'🦷', name:'牙齿' } ],
+    story:[ { emoji:'🦷', text:'牙齿宝宝最害怕糖细菌，每天刷牙就是给它穿上保护衣。' } ],
+  },
+  { id:'science', name:'科学现象', emoji:'🔬', cls:'c3',
+    spots:[ { emoji:'🌈', name:'彩虹', x:'30%', y:'20%', text:'下雨后太阳出来，空气里的小水滴把阳光分成了七种颜色，就变成了彩虹。' } ],
+    quiz:[ { q:'彩虹一般有几种颜色？', opts:['七种','两种','一百种'], a:0 } ],
+    match:[ { emoji:'🌈', name:'彩虹' }, { emoji:'🧲', name:'磁铁' } ],
+    story:[ { emoji:'🧲', text:'磁铁小超人有一双看不见的手，能把回形针"嗖"地吸过来。' } ],
+  },
+  { id:'life', name:'日常生活', emoji:'🏠', cls:'c4',
+    spots:[ { emoji:'🚦', name:'红绿灯', x:'40%', y:'30%', text:'红灯停、绿灯行、黄灯亮了等一等，红绿灯是马路上的指挥官。' } ],
+    quiz:[ { q:'过马路时看到红灯应该？', opts:['停下来等一等','快跑冲过去','闭上眼睛'], a:0 } ],
+    match:[ { emoji:'🚦', name:'红绿灯' }, { emoji:'🍳', name:'煎锅' } ],
+    story:[ { emoji:'🚦', text:'红绿灯每天站在路口，保护着每一个过马路的小朋友。' } ],
+  },
+  { id:'culture', name:'社会人文', emoji:'🏮', cls:'c5',
+    spots:[ { emoji:'🏮', name:'灯笼', x:'25%', y:'25%', text:'过年挂红灯笼，寓意新的一年红红火火、团团圆圆。' } ],
+    quiz:[ { q:'过年时挂红灯笼寓意什么？', opts:['红红火火、团圆','天要下雨','欢迎外星人'], a:0 } ],
+    match:[ { emoji:'🏮', name:'灯笼' }, { emoji:'🥟', name:'饺子' } ],
+    story:[ { emoji:'🥟', text:'除夕夜，全家人围在一起包饺子，包进去的是团圆和祝福。' } ],
+  },
+];
+
+/* ================= 原型状态（内存模拟，不接真实存储） ================= */
+const state = {
+  voice: true,
+  theme: null,
+  quizIndex: 0,
+  storyIndex: 0,
+  collected: { badges:[], stickers:[], books:[] },
+  matchPicked: null,
+};
+
+function speak(text){
+  if (!state.voice || !window.speechSynthesis) return;
+  speechSynthesis.cancel();
+  const u = new SpeechSynthesisUtterance(text);
+  u.lang = 'zh-CN'; u.rate = 0.95;
+  speechSynthesis.speak(u);
+}
+
+/* ================= 首页 ================= */
+function renderHome(){
+  const grid = document.getElementById('theme-grid');
+  grid.innerHTML = '';
+  THEMES.forEach(t=>{
+    const done =
+      (state.collected.badges.includes(t.id)?1:0) +
+      (state.collected.stickers.includes(t.id)?1:0) +
+      (state.collected.books.includes(t.id)?1:0);
+    const el = document.createElement('button');
+    el.className = 'theme-card ' + t.cls;
+    el.innerHTML = `<span class="emoji">${t.emoji}</span><div class="name">${t.name}</div><div class="prog">已收集 ${done} / 3</div>`;
+    el.onclick = ()=>{ openTheme(t); };
+    grid.appendChild(el);
+  });
+  document.getElementById('c-badge').textContent = state.collected.badges.length;
+  document.getElementById('c-sticker').textContent = state.collected.stickers.length;
+  document.getElementById('c-book').textContent = state.collected.books.length;
+}
+
+/* ================= 探险页 ================= */
+function openTheme(t){
+  state.theme = t;
+  state.quizIndex = 0;
+  state.storyIndex = 0;
+  document.getElementById('page-home').classList.add('hidden');
+  document.getElementById('page-play').classList.remove('hidden');
+  document.getElementById('play-title').textContent = t.emoji + ' ' + t.name;
+  switchMode('explore');
+  speak('欢迎来到' + t.name + '！');
+}
+
+function switchMode(mode){
+  document.querySelectorAll('.mode-tab').forEach(b=>b.classList.toggle('active', b.dataset.mode===mode));
+  ['explore','quiz','match','story'].forEach(m=>{
+    document.getElementById('panel-'+m).classList.toggle('hidden', m!==mode);
+  });
+  if (mode==='explore') renderExplore();
+  if (mode==='quiz') renderQuiz();
+  if (mode==='match') renderMatch();
+  if (mode==='story') renderStory();
+}
+document.querySelectorAll('.mode-tab').forEach(b=>b.onclick=()=>switchMode(b.dataset.mode));
+
+/* ---- 找一找 ---- */
+function renderExplore(){
+  const scene = document.getElementById('explore-scene');
+  scene.innerHTML = '';
+  state.theme.spots.forEach(s=>{
+    const b = document.createElement('button');
+    b.className = 'hotspot';
+    b.style.left = s.x; b.style.top = s.y;
+    b.textContent = s.emoji;
+    b.onclick = ()=> showDialog(`
+      <span class="d-emoji">${s.emoji}</span>
+      <h3>${s.name}</h3>
+      <p>${s.text}</p>
+      <button class="big-btn" id="d-ok">我知道啦！</button>
+    `, ()=>{
+      document.getElementById('d-ok').onclick = closeDialog;
+      speak(s.name + '。' + s.text);
+    });
+    scene.appendChild(b);
+  });
+}
+
+/* ---- 问答闯关 ---- */
+function renderQuiz(){
+  const i = state.quizIndex, q = state.theme.quiz[i];
+  document.getElementById('quiz-progress').textContent = `第 ${i+1} / ${state.theme.quiz.length} 题`;
+  document.getElementById('quiz-q').textContent = q.q;
+  document.getElementById('quiz-feedback').textContent = '';
+  const box = document.getElementById('quiz-opts');
+  box.innerHTML = '';
+  speak(q.q);
+  q.opts.forEach((opt, idx)=>{
+    const b = document.createElement('button');
+    b.className = 'quiz-opt';
+    b.textContent = opt;
+    b.onclick = ()=>{
+      if (idx === q.a){
+        b.classList.add('right');
+        document.getElementById('quiz-feedback').textContent = '🎉 答对啦，真棒！';
+        speak('答对啦，真棒！');
+        setTimeout(()=>{
+          state.quizIndex++;
+          if (state.quizIndex >= state.theme.quiz.length){
+            award('badges', '🏅', state.theme.name + '小博士徽章', '你答对了所有问题，获得了徽章！');
+            state.quizIndex = 0;
+            renderQuiz();
+          } else renderQuiz();
+        }, 900);
+      } else {
+        b.classList.add('wrong');
+        document.getElementById('quiz-feedback').textContent = '🤔 再想一想，你可以的！';
+        speak('再想一想，你可以的！');
+      }
+    };
+    box.appendChild(b);
+  });
+}
+
+/* ---- 配对小游戏 ---- */
+function renderMatch(){
+  const items = document.getElementById('match-items');
+  const slots = document.getElementById('match-slots');
+  items.innerHTML = ''; slots.innerHTML = '';
+  state.matchPicked = null;
+  const shuffled = [...state.theme.match].sort(()=>Math.random()-.5);
+  shuffled.forEach(m=>{
+    const it = document.createElement('button');
+    it.className = 'match-item';
+    it.innerHTML = `<span style="font-size:34px;display:block;">${m.emoji}</span>`;
+    it.onclick = ()=>{
+      if (it.classList.contains('done')) return;
+      document.querySelectorAll('.match-item').forEach(x=>x.style.outline='');
+      it.style.outline = '4px solid var(--primary)';
+      state.matchPicked = { el: it, data: m };
+    };
+    items.appendChild(it);
+  });
+  [...state.theme.match].sort(()=>Math.random()-.5).forEach(m=>{
+    const s = document.createElement('div');
+    s.className = 'match-slot';
+    s.textContent = m.name;
+    s.onclick = ()=>{
+      if (s.classList.contains('filled') || !state.matchPicked) return;
+      if (state.matchPicked.data.name === m.name){
+        s.classList.add('filled');
+        s.innerHTML = `<span class="slot-emoji">${m.emoji}</span>${m.name} ✔️`;
+        state.matchPicked.el.classList.add('done');
+        state.matchPicked = null;
+        speak('配对成功！');
+        if (document.querySelectorAll('.match-slot.filled').length === state.theme.match.length){
+          setTimeout(()=> award('stickers', '⭐', state.theme.name + '贴纸', '所有配对都正确，获得一张贴纸！'), 500);
+        }
+      } else {
+        speak('不对哦，再试试！');
+        state.matchPicked = null;
+        document.querySelectorAll('.match-item').forEach(x=>x.style.outline='');
+      }
+    };
+    slots.appendChild(s);
+  });
+}
+
+/* ---- 小故事 ---- */
+function renderStory(){
+  const i = state.storyIndex, s = state.theme.story[i];
+  document.getElementById('story-dots').textContent =
+    state.theme.story.map((_,k)=> k===i ? '●' : '○').join('');
+  document.getElementById('story-illu').textContent = s.emoji;
+  document.getElementById('story-text').textContent = s.text;
+  document.getElementById('story-next').textContent =
+    i === state.theme.story.length - 1 ? '看完啦 🎉' : '下一页 →';
+  speak(s.text);
+}
+document.getElementById('story-next').onclick = ()=>{
+  if (state.storyIndex < state.theme.story.length - 1){
+    state.storyIndex++;
+    renderStory();
+  } else {
+    award('books', '📖', state.theme.name + '图鉴页', '故事读完啦，图鉴里又多了一页！');
+    state.storyIndex = 0;
+    renderStory();
+  }
+};
+
+/* ---- 奖励弹层 ---- */
+function award(type, emoji, name, desc){
+  if (!state.collected[type].includes(state.theme.id)){
+    state.collected[type].push(state.theme.id);
+  }
+  showDialog(`
+    <span class="d-emoji reward-anim">${emoji}</span>
+    <h3>恭喜获得：${name}</h3>
+    <p>${desc}</p>
+    <button class="big-btn" id="d-ok">太棒了！</button>
+  `, ()=>{
+    document.getElementById('d-ok').onclick = closeDialog;
+    speak('恭喜获得' + name);
+  });
+}
+
+/* ---- 收藏册 ---- */
+document.getElementById('open-collection').onclick = ()=>{
+  const c = state.collected;
+  let html = '<span class="d-emoji">🎒</span><h3>我的收藏册</h3><div class="collect-list">';
+  let empty = true;
+  c.badges.forEach(id=>{ empty=false; const t=THEMES.find(x=>x.id===id); html+=`<div class="collect-item">🏅 ${t.name}小博士徽章</div>`; });
+  c.stickers.forEach(id=>{ empty=false; const t=THEMES.find(x=>x.id===id); html+=`<div class="collect-item">⭐ ${t.name}贴纸</div>`; });
+  c.books.forEach(id=>{ empty=false; const t=THEMES.find(x=>x.id===id); html+=`<div class="collect-item">📖 ${t.name}图鉴页</div>`; });
+  if (empty) html += '<div class="collect-empty">还没有收集到奖励哦，快去探险吧！</div>';
+  html += '</div><button class="big-btn" id="d-ok">关上</button>';
+  showDialog(html, ()=>{ document.getElementById('d-ok').onclick = closeDialog; });
+};
+
+/* ---- 弹层与全局 ---- */
+function showDialog(html, after){
+  document.getElementById('dialog-box').innerHTML = html;
+  document.getElementById('dialog-mask').classList.remove('hidden');
+  if (after) after();
+}
+function closeDialog(){ document.getElementById('dialog-mask').classList.add('hidden'); speechSynthesis?.cancel(); }
+
+document.getElementById('back-home').onclick = ()=>{
+  document.getElementById('page-play').classList.add('hidden');
+  document.getElementById('page-home').classList.remove('hidden');
+  renderHome();
+};
+
+function bindVoice(id){
+  document.getElementById(id).onclick = (e)=>{
+    state.voice = !state.voice;
+    if (!state.voice) speechSynthesis?.cancel();
+    document.querySelectorAll('.voice-btn').forEach(b=>{
+      b.textContent = state.voice ? '🔊 语音开' : '🔇 语音关';
+      b.classList.toggle('off', !state.voice);
+    });
+  };
+}
+bindVoice('voice-toggle'); bindVoice('voice-toggle-2');
+if (!window.speechSynthesis){
+  document.querySelectorAll('.voice-btn').forEach(b=>b.style.display='none');
+}
+
+renderHome();
+</script>
+</body>
+</html>
