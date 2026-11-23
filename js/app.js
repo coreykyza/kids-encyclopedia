@@ -1,6 +1,6 @@
 import {
   THEMES, THEME_ORDER, resolveThemeId, checkMatch, checkAnswer, nextQuizIndex,
-  normalizeProgress, unlockDex, grantBadge
+  normalizeProgress, unlockDex, grantBadge, saveQuizProgress
 } from "./logic.mjs";
 
 const kv = window.InnoflowKV;
@@ -202,12 +202,16 @@ function initPlay() {
   });
   document.getElementById("fact-close").addEventListener("click", () => factCard.classList.remove("open"));
 
-  /* --- 问答闯关 --- */
+  /* --- 问答闯关（记住玩到第几关；连错3次给讲解；徽章不重复计数） --- */
   // 设计约定：同一题内正确选项始终带 data-correct="1"；连续点击时每次点击都按当前题判定。
   // 答对后立即推进到下一题（并重绘选项），三次点击落在三道不同题的正确项上即可通关。
   let quizIdx = 0;
+  let wrongStreak = 0;
+  let hintShown = false;
   function startQuiz() {
-    quizIdx = 0;
+    quizIdx = Math.min(progress.quizProgress[themeId] || 0, theme.quiz.length - 1);
+    wrongStreak = 0;
+    hintShown = false;
     document.getElementById("quiz-result").classList.remove("win");
     document.getElementById("quiz-feedback").textContent = "";
     renderQuestion();
@@ -222,7 +226,7 @@ function initPlay() {
     q.options.forEach((opt) => {
       const btn = document.createElement("button");
       btn.type = "button";
-      btn.className = "quiz-option";
+      btn.className = "quiz-option" + (hintShown && opt.correct ? " hint" : "");
       btn.dataset.correct = opt.correct ? "1" : "0";
       btn.textContent = `${opt.emoji} ${opt.text}`;
       btn.addEventListener("click", () => answer(opt, btn));
@@ -233,9 +237,13 @@ function initPlay() {
     const fb = document.getElementById("quiz-feedback");
     if (checkAnswer(opt)) {
       btn.classList.add("right");
+      wrongStreak = 0;
+      hintShown = false;
       fb.textContent = "答对啦，你真棒！";
       fb.className = "quiz-feedback ok";
       speak("fx-right", "答对啦，你真棒！");
+      progress = saveQuizProgress(progress, themeId, quizIdx + 1);
+      await saveProgress();
       const next = nextQuizIndex(quizIdx, theme.quiz.length, true);
       if (next === -1) {
         await winQuiz();
@@ -247,19 +255,34 @@ function initPlay() {
       }
     } else {
       btn.classList.add("wrong");
+      wrongStreak++;
       fb.textContent = "再想想看～";
       fb.className = "quiz-feedback no";
       speak("fx-wrong", "再想想看");
       setTimeout(() => btn.classList.remove("wrong"), 700);
+      if (wrongStreak >= 3 && !hintShown) {
+        hintShown = true;
+        const correctOpt = theme.quiz[quizIdx].options.find((o) => o.correct);
+        fb.textContent = `小提示：谜底是${correctOpt.text}哦，点对发光的答案就能过关！`;
+        document.querySelectorAll("#quiz-options .quiz-option").forEach((b) => {
+          if (b.dataset.correct === "1") b.classList.add("hint");
+        });
+      }
     }
   }
   async function winQuiz() {
     const result = document.getElementById("quiz-result");
-    document.getElementById("quiz-result-text").textContent = `恭喜获得「${theme.badgeName}」徽章！`;
+    result.querySelectorAll("span.confetti").forEach((s) => s.remove());
+    const already = !!progress.badges[themeId];
+    document.getElementById("quiz-result-text").textContent = already
+      ? `「${theme.badgeName}」徽章你已经收集到啦！`
+      : `恭喜获得「${theme.badgeName}」徽章！`;
     result_confetti();
     result.classList.add("win");
-    speak(`${themeId}-badge`, `恭喜你，答对了所有题目，获得${theme.badgeName}徽章！`);
-    if (!progress.badges[themeId]) {
+    speak(`${themeId}-badge`, already
+      ? `这个徽章你已经收集到啦，真厉害！`
+      : `恭喜你，答对了所有题目，获得${theme.badgeName}徽章！`);
+    if (!already) {
       progress = grantBadge(progress, themeId);
       await saveProgress();
     }
@@ -277,12 +300,53 @@ function initPlay() {
     }
   }
 
-  /* --- 拖拽配对 --- */
+  /* --- 拖拽配对（真拖拽：鼠标 + 触屏；点选兜底；贴纸不重复计数） --- */
   const dragRow = document.getElementById("drag-row");
   const dropRow = document.getElementById("drop-row");
   const matchDone = document.getElementById("match-done");
   let matchedCount = 0;
+  let selectedCard = null;
+  const alreadyMatched = progress.dex[themeId].includes("match");
   const shuffledSlots = [...theme.match].sort((a, b) => a.id.localeCompare(b.id));
+
+  function selectCard(card) {
+    if (card.classList.contains("used")) return;
+    if (selectedCard) selectedCard.classList.remove("selected");
+    selectedCard = selectedCard === card ? null : card;
+    if (selectedCard) selectedCard.classList.add("selected");
+  }
+  async function tryMatch(cardId, slot) {
+    if (slot.classList.contains("filled")) return;
+    if (checkMatch(cardId, slot.dataset.accept)) {
+      slot.classList.add("filled");
+      const card = dragRow.querySelector(`.drag-card[data-match="${cardId}"]`);
+      if (card) {
+        card.classList.add("used");
+        card.classList.remove("selected");
+        slot.textContent = `${card.textContent} → ${slot.textContent}`;
+      }
+      if (selectedCard && selectedCard.dataset.match === cardId) selectedCard = null;
+      matchedCount++;
+      speak("fx-match", "配对成功！");
+      if (matchedCount === theme.match.length) {
+        matchDone.textContent = alreadyMatched
+          ? "🎉 全部配对成功！这个贴纸你已经收集到啦～"
+          : "🎉 全部配对成功！奖励 1 张贴纸！";
+        matchDone.classList.add("show");
+        speak("fx-match-all", alreadyMatched ? "全部配对成功，这个贴纸你已经收集到啦！" : "全部配对成功，奖励一张贴纸！");
+        if (!alreadyMatched) {
+          progress.stickers += 1;
+          progress = unlockDex(progress, themeId, "match");
+          await saveProgress();
+        }
+      }
+    } else {
+      speak("fx-match-wrong", "再试试看");
+      slot.classList.add("shake");
+      setTimeout(() => slot.classList.remove("shake"), 500);
+    }
+  }
+
   theme.match.forEach((m) => {
     const card = document.createElement("div");
     card.className = "drag-card";
@@ -292,7 +356,9 @@ function initPlay() {
     card.addEventListener("dragstart", (e) => {
       e.dataTransfer.setData("text/plain", m.id);
       e.dataTransfer.effectAllowed = "move";
+      selectCard(card);
     });
+    card.addEventListener("click", () => selectCard(card)); // 触屏/鼠标点选兜底
     dragRow.appendChild(card);
   });
   shuffledSlots.forEach((m) => {
@@ -306,25 +372,10 @@ function initPlay() {
       e.preventDefault();
       slot.classList.remove("over");
       const cardId = e.dataTransfer.getData("text/plain");
-      if (checkMatch(cardId, slot.dataset.accept)) {
-        slot.classList.add("filled");
-        const card = dragRow.querySelector(`.drag-card[data-match="${cardId}"]`);
-        if (card) {
-          card.classList.add("used");
-          slot.textContent = `${card.textContent} → ${slot.textContent}`;
-        }
-        matchedCount++;
-        speak("fx-match", "配对成功！");
-        if (matchedCount === theme.match.length) {
-          matchDone.classList.add("show");
-          speak("fx-match-all", "全部配对成功，奖励一张贴纸！");
-          progress.stickers += 1;
-          progress = unlockDex(progress, themeId, "match");
-          await saveProgress();
-        }
-      } else {
-        speak("fx-match-wrong", "再试试看");
-      }
+      await tryMatch(cardId, slot);
+    });
+    slot.addEventListener("click", async () => { // 点选兜底：先点卡片再点框
+      if (selectedCard) await tryMatch(selectedCard.dataset.match, slot);
     });
     dropRow.appendChild(slot);
   });
