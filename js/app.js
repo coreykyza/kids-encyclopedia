@@ -1,8 +1,3 @@
-import {
-  THEMES, THEME_ORDER, resolveThemeId, checkMatch, checkAnswer, nextQuizIndex,
-  normalizeProgress, unlockDex, grantBadge, saveQuizProgress
-} from "./logic.mjs";
-
 const kv = window.InnoflowKV;
 const PROGRESS_KEY = "kidpedia_progress_v1";
 
