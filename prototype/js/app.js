@@ -236,7 +236,7 @@ function initPlay() {
       hintShown = false;
       fb.textContent = "答对啦，你真棒！";
       fb.className = "quiz-feedback ok";
-      speak("fx-right", "答对啦，你真棒！");
+      speak("fx-right-v2", "答对啦，你真棒！");
       progress = saveQuizProgress(progress, themeId, quizIdx + 1);
       await saveProgress();
       const next = nextQuizIndex(quizIdx, theme.quiz.length, true);
@@ -253,7 +253,7 @@ function initPlay() {
       wrongStreak++;
       fb.textContent = "再想想看～";
       fb.className = "quiz-feedback no";
-      speak("fx-wrong", "再想想看");
+      speak("fx-wrong-v2", "再想想看");
       setTimeout(() => btn.classList.remove("wrong"), 700);
       if (wrongStreak >= 3 && !hintShown) {
         hintShown = true;
@@ -322,13 +322,13 @@ function initPlay() {
       }
       if (selectedCard && selectedCard.dataset.match === cardId) selectedCard = null;
       matchedCount++;
-      speak("fx-match", "配对成功！");
+      speak("fx-match-v2", "配对成功！");
       if (matchedCount === theme.match.length) {
         matchDone.textContent = alreadyMatched
           ? "🎉 全部配对成功！这个贴纸你已经收集到啦～"
           : "🎉 全部配对成功！奖励 1 张贴纸！";
         matchDone.classList.add("show");
-        speak("fx-match-all", alreadyMatched ? "全部配对成功，这个贴纸你已经收集到啦！" : "全部配对成功，奖励一张贴纸！");
+        speak("fx-match-all-v2", alreadyMatched ? "全部配对成功，这个贴纸你已经收集到啦！" : "全部配对成功，奖励一张贴纸！");
         if (!alreadyMatched) {
           progress.stickers += 1;
           progress = unlockDex(progress, themeId, "match");
@@ -336,7 +336,7 @@ function initPlay() {
         }
       }
     } else {
-      speak("fx-match-wrong", "再试试看");
+      speak("fx-match-wrong-v2", "再试试看");
       slot.classList.add("shake");
       setTimeout(() => slot.classList.remove("shake"), 500);
     }
@@ -400,7 +400,7 @@ function initPlay() {
       storyFinished = true;
       document.getElementById("story-text").textContent = "故事讲完啦！你真会听故事，图鉴又点亮了一格～";
       document.getElementById("story-step").textContent = `${theme.story.length} / ${theme.story.length}`;
-      speak("fx-story-done", "故事讲完啦！你真会听故事！");
+      speak("fx-story-done-v2", "故事讲完啦！你真会听故事！");
       progress = unlockDex(progress, themeId, "story");
       await saveProgress();
     }
