@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>小小百科探险家 · 世界地图</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body class="home">
+  <header class="home-header">
+    <h1 id="map-title">小小百科探险家</h1>
+    <p class="home-sub">点一张卡片，开始认识世界吧！</p>
+    <div class="home-actions">
+      <button id="btn-dex" class="pill-btn" type="button">📖 我的图鉴</button>
+      <button id="btn-badges" class="pill-btn" type="button">🏅 我的徽章</button>
+    </div>
+  </header>
+
+  <main class="theme-grid" id="theme-grid" aria-label="主题世界地图"></main>
+
+  <div class="panel-mask" id="dex-panel" role="dialog" aria-label="我的图鉴">
+    <div class="panel">
+      <button class="panel-close" type="button" data-close="dex-panel">✕</button>
+      <h2>📖 我的图鉴</h2>
+      <p class="panel-tip">去探索、听故事、玩配对，就能点亮更多图鉴！</p>
+      <div id="dex-content"></div>
+    </div>
+  </div>
+
+  <div class="panel-mask" id="badge-panel" role="dialog" aria-label="我的徽章">
+    <div class="panel">
+      <button class="panel-close" type="button" data-close="badge-panel">✕</button>
+      <h2>🏅 我的徽章</h2>
+      <p class="panel-tip">每个主题答对 3 道题，就能获得一枚徽章！</p>
+      <div class="badge-wall" id="badge-wall"></div>
+    </div>
+  </div>
+
+  <script src="config.js"></script>
+  <script src="kv.js"></script>
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>
