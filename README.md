@@ -39,7 +39,17 @@ node tools/verify-assets.cjs    # 20 主题结构 / 226 配音 / 20 封面 / log
 
 - `docs/handover/项目交接说明.md`：主文档（十二节），含目录结构、内容规格、存储、配音、验收、已知问题与改动指引
 - `docs/handover/主题内容数据.json`：20 主题全量文案（4 热点 / 3 题 / 4 配对 / 3 故事）
-- `docs/handover/文件清单.json`：源码台账（256 文件 / 11.4 MB）
+- `docs/handover/文件清单.json`：正式站点台账（271 文件 / 11.6 MB，不含 prototype）
+
+## 闲鱼上架物料
+
+`运营物料/` 含 8 张闲鱼图 + 上架文案 + 作图源文件，对标拼音/数学小课堂同款打法：
+
+- `运营物料/index.html`：物料预览页
+- `运营物料/闲鱼上架文案.md`：标题 / 描述 / 定价 / 自动发货 / FAQ / 风险 / 上架清单
+- `运营物料/shot-xianyu.py`：重新生成 8 张图（`python3 运营物料/shot-xianyu.py`）
+
+上架前必做：**手机流量（关 WiFi）实测线上链接可达**，GitHub Pages 国内时好时坏。
 
 ## 变更池
 

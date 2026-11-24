@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>闲鱼作图源 · 小小百科探险家</title>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:#eee; display:flex; flex-direction:column; gap:40px; font-family:"PingFang SC","Hiragino Sans GB",sans-serif; }
+  .sheet { width:800px; flex:none; position:relative; overflow:hidden; }
+
+  /* 主图 800x800（多邻国绿） */
+  .s1 { height:800px; background:linear-gradient(160deg,#3FAE00 0%,#58CC02 55%,#89E219 100%); color:#fff; padding:38px 56px 0; }
+  .s1 .brand { font-size:25px; letter-spacing:6px; opacity:.95; font-weight:600; }
+  .s1 h1 { font-size:66px; font-weight:800; letter-spacing:3px; margin-top:8px; }
+  .s1 .sub { font-size:28px; margin-top:10px; opacity:.98; letter-spacing:2px; font-weight:600; }
+  .s1 .hero { position:relative; margin-top:16px; height:456px; }
+  .phone { position:absolute; left:50%; transform:translateX(-56%) rotate(-2deg); width:206px; background:#fff; border-radius:32px; padding:9px; box-shadow:0 24px 60px rgba(20,80,0,.35); }
+  .phone img { width:100%; display:block; border-radius:25px; }
+  .float { position:absolute; width:200px; background:rgba(255,255,255,.18); border:2px solid rgba(255,255,255,.55); border-radius:20px; padding:22px 14px; font-size:25px; line-height:1.45; font-weight:700; text-align:center; white-space:nowrap; backdrop-filter:blur(4px); }
+  .float small { display:block; font-size:19px; font-weight:500; opacity:.95; margin-top:6px; white-space:normal; }
+  .float.l { left:0; top:70px; }
+  .float.r { right:0; top:250px; }
+  .s1 .tags { display:flex; gap:14px; margin-top:16px; }
+  .s1 .tags span { background:rgba(255,255,255,.2); border:1.5px solid rgba(255,255,255,.6); border-radius:999px; padding:12px 22px; font-size:24px; font-weight:700; white-space:nowrap; }
+
+  /* 详情图 800x1067 */
+  .dt { height:1067px; background:#F7FCF2; padding:64px 60px 0; color:#23331A; }
+  .dt .kick { font-size:26px; letter-spacing:5px; color:#3D8B01; font-weight:800; }
+  .dt h2 { font-size:50px; font-weight:800; margin-top:12px; letter-spacing:1px; }
+  .dt .desc { font-size:25px; color:#5C6B50; margin-top:14px; line-height:1.6; font-weight:500; }
+  .dt .shot { margin-top:30px; display:flex; justify-content:center; }
+  .dt .shot .phone2 { width:370px; background:#fff; border-radius:44px; padding:12px; box-shadow:0 20px 55px rgba(60,130,10,.16); border:1.5px solid #D8F0C4; }
+  .dt .shot img { width:100%; display:block; border-radius:34px; }
+  .dt .foot { margin-top:26px; display:flex; justify-content:center; gap:14px; flex-wrap:wrap; }
+  .dt .foot span { background:#E6F8D6; color:#3D8B01; border-radius:999px; padding:12px 22px; font-size:23px; font-weight:700; }
+
+  /* 清单卡（无截图） */
+  .list { height:1067px; background:#F7FCF2; padding:64px 64px 0; color:#23331A; }
+  .list h2 { font-size:54px; font-weight:800; }
+  .list .rows { margin-top:36px; display:flex; flex-direction:column; gap:16px; }
+  .list .row { display:flex; align-items:center; gap:20px; background:#fff; border:1.5px solid #D8F0C4; border-radius:22px; padding:20px 24px; box-shadow:0 6px 18px rgba(60,130,10,.06); }
+  .list .num { flex:none; width:62px; height:62px; border-radius:18px; background:linear-gradient(150deg,#58CC02,#89E219); color:#fff; font-size:26px; font-weight:800; display:flex; align-items:center; justify-content:center; }
+  .list .tt { font-size:27px; font-weight:700; }
+  .list .dd { font-size:21px; color:#6B7A5E; margin-top:4px; }
+
+  /* 使用说明 */
+  .how { height:1067px; background:linear-gradient(170deg,#3FAE00,#89E219); color:#fff; padding:64px 60px 0; }
+  .how h2 { font-size:54px; font-weight:800; }
+  .how .steps { margin-top:44px; display:flex; flex-direction:column; gap:24px; }
+  .how .step { background:rgba(255,255,255,.16); border:2px solid rgba(255,255,255,.45); border-radius:24px; padding:30px 34px; display:flex; gap:24px; align-items:center; }
+  .how .n { flex:none; width:66px; height:66px; border-radius:50%; background:#fff; color:#46A302; font-size:34px; font-weight:900; display:flex; align-items:center; justify-content:center; }
+  .how .st { font-size:30px; font-weight:700; }
+  .how .sd { font-size:23px; opacity:.95; margin-top:6px; }
+  .how .note { margin-top:40px; background:rgba(255,255,255,.12); border-radius:20px; padding:26px 30px; font-size:23px; line-height:1.8; opacity:.98; }
+</style>
+</head>
+<body>
+
+<!-- 1 主图 -->
+<div class="sheet s1">
+  <div class="brand">小小百科探险家</div>
+  <h1>儿童百科启蒙</h1>
+  <div class="sub">20 个主题 · 玩着认识世界</div>
+  <div class="hero">
+    <div class="phone"><img src="来源图/home.png"></div>
+    <div class="float l">20 大主题<small>动物/恐龙/宇宙/人体…</small></div>
+    <div class="float r">226 条配音<small>童声晓伊，不识字也能玩</small></div>
+  </div>
+  <div class="tags"><span>🦁 5-7 岁</span><span>🎮 四种玩法</span><span>🏅 收集徽章</span></div>
+</div>
+
+<!-- 2 世界地图 -->
+<div class="sheet dt">
+  <div class="kick">01 · 世界地图</div>
+  <h2>20 个主题，点开就探险</h2>
+  <div class="desc">首页一张世界地图，自然、海洋、恐龙、昆虫、太空、人体、安全……共 20 个主题，孩子自己选感兴趣的进去。</div>
+  <div class="shot"><div class="phone2"><img src="来源图/home.png"></div></div>
+  <div class="foot"><span>覆盖 5-7 岁认知</span><span>纯网页免安装</span></div>
+</div>
+
+<!-- 3 点选探索 -->
+<div class="sheet dt">
+  <div class="kick">02 · 点选探索</div>
+  <h2>点一点，听知识卡</h2>
+  <div class="desc">场景里藏着 4 个热点，点开就是一张童趣知识卡，自动朗读。每条 40-60 字，大白话讲给孩子听。</div>
+  <div class="shot"><div class="phone2"><img src="来源图/explore.png"></div></div>
+  <div class="foot"><span>真人感童声配音</span><span>点哪读哪</span></div>
+</div>
+
+<!-- 4 问答闯关 -->
+<div class="sheet dt">
+  <div class="kick">03 · 问答闯关</div>
+  <h2>3 道题，答对得徽章</h2>
+  <div class="desc">每题三个大图选项，孩子看图就能选。答对立即鼓励并进入下一题，三题全对点亮主题徽章。连错 3 次自动给提示。</div>
+  <div class="shot"><div class="phone2"><img src="来源图/quiz.png"></div></div>
+  <div class="foot"><span>大图选项</span><span>答错不惩罚</span></div>
+</div>
+
+<!-- 5 配对游戏 -->
+<div class="sheet dt">
+  <div class="kick">04 · 配对小游戏</div>
+  <h2>拖一拖，配对拿贴纸</h2>
+  <div class="desc">4 组图文配对，鼠标拖、手指点都行。拖对有鼓励音，全对奖励一张贴纸；配错弹回来，不限次数不批评。</div>
+  <div class="shot"><div class="phone2"><img src="来源图/match.png"></div></div>
+  <div class="foot"><span>真拖拽 + 点选兜底</span><span>低龄不卡手</span></div>
+</div>
+
+<!-- 6 故事 + 图鉴 -->
+<div class="sheet dt">
+  <div class="kick">05 · 情景小故事</div>
+  <h2>听故事，点亮图鉴</h2>
+  <div class="desc">每个主题 3 幕小故事，逐幕朗读。听完解锁图鉴页，徽章、贴纸、图鉴都能在收藏册里翻看。</div>
+  <div class="shot"><div class="phone2"><img src="来源图/story.png"></div></div>
+  <div class="foot"><span>120 张图鉴</span><span>20 枚徽章</span></div>
+</div>
+
+<!-- 7 内容清单 -->
+<div class="sheet list">
+  <h2>买到的内容清单</h2>
+  <div class="rows">
+    <div class="row"><div class="num">20</div><div><div class="tt">个主题探险</div><div class="dd">动物/海洋/恐龙/昆虫/鸟/植物/人体/科学/太空/天气/四季/生活/交通/数字/颜色/人文/地理/节日/音乐/安全</div></div></div>
+    <div class="row"><div class="num">80</div><div><div class="tt">个知识热点</div><div class="dd">点开即读，口语化文案，适龄安全</div></div></div>
+    <div class="row"><div class="num">60</div><div><div class="tt">道闯关题 + 60 幕故事</div><div class="dd">答对得徽章，听完故事得图鉴</div></div></div>
+    <div class="row"><div class="num">226</div><div><div class="tt">条童声配音</div><div class="dd">晓伊神经网络童声，语速放慢 10%，不是机械音</div></div></div>
+    <div class="row"><div class="num">∞</div><div><div class="tt">一次购买永久可用</div><div class="dd">后续更新免费，本地存档刷新不丢</div></div></div>
+  </div>
+  <div style="margin-top:34px;font-size:22px;color:#6B7A5E;line-height:1.7;">纯静态网页，手机 / iPad / 电脑浏览器都能打开，不用下载 App，无广告无外链。</div>
+</div>
+
+<!-- 8 使用说明 -->
+<div class="sheet how">
+  <h2>怎么用？三步开始</h2>
+  <div class="steps">
+    <div class="step"><div class="n">1</div><div><div class="st">拍下后私聊拿网址</div><div class="sd">浏览器打开就能玩，不用装东西</div></div></div>
+    <div class="step"><div class="n">2</div><div><div class="st">添加到手机桌面</div><div class="sd">iPhone 用 Safari → 分享 → 添加到主屏幕，像 App 一样点开</div></div></div>
+    <div class="step"><div class="n">3</div><div><div class="st">让孩子自己选主题</div><div class="sd">点开、听配音、闯关、配对，全程不用家长陪</div></div></div>
+  </div>
+  <div class="note">进度自动存在本机，刷新和重开都不丢。声音开关会记住上次的选择。自家做的虚拟内容，链接发出后不退不换，介意慎拍。</div>
+</div>
+
+</body>
+</html>
