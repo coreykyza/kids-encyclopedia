@@ -138,6 +138,7 @@ button { font-family: inherit; cursor: pointer; }
   aspect-ratio: 16 / 9;
   object-fit: cover;
   display: block;
+  background: linear-gradient(135deg, #EAF6FF 0%, #F2FFF0 55%, #FFF7E6 100%);
 }
 .theme-card .card-name {
   display: flex;

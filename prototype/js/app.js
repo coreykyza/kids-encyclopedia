@@ -120,14 +120,21 @@ function initHome() {
   const grid = document.getElementById("theme-grid");
   if (!grid) return;
   grid.innerHTML = "";
+  let idx = 0;
   for (const id of THEME_ORDER) {
     const t = THEMES[id];
     const card = document.createElement("button");
     card.type = "button";
     card.className = "theme-card";
     card.dataset.theme = id;
+    // 首屏前 6 张立即加载并提高优先级，其余懒加载，避免一次性抢占带宽出现白卡
+    const eager = idx < 6;
+    const imgAttr = eager
+      ? `loading="eager" fetchpriority="high" decoding="async"`
+      : `loading="lazy" fetchpriority="low" decoding="async"`;
+    idx += 1;
     card.innerHTML =
-      `<img src="${t.image}" alt="${t.name}">` +
+      `<img src="${t.image}" alt="${t.name}" width="860" height="484" ${imgAttr}>` +
       `<div class="card-name"><span>${t.emoji}</span><span>${t.name}</span>` +
       `<span class="card-badge${progress.badges[id] ? " got" : ""}" title="${t.badgeName}">🏅</span></div>`;
     card.addEventListener("click", () => {
