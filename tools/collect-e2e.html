@@ -1,0 +1,50 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><title>收藏品回首页显示 E2E</title></head><body>
+<iframe id="f" src="../play.html?theme=animals" style="width:1200px;height:900px"></iframe>
+<pre id="out">PENDING</pre>
+<script>
+const log=[];const f=document.getElementById('f');let stage=0;
+const KEY='kidpedia_progress_v1';
+f.onload=()=>{
+  const d=f.contentDocument;
+  if(stage===0 && !d.getElementById('scene-title'))return;
+  if(stage===1 && !d.getElementById('map-title'))return;
+  if(stage===0){
+    stage=1;
+    d.querySelectorAll('.hotspot')[0].click();          // 图鉴 h1
+    d.getElementById('tab-quiz').click();
+    setTimeout(()=>{
+      for(let i=0;i<3;i++){const c=d.querySelector('#quiz-options .quiz-option[data-correct="1"]');if(c)c.click();}
+      setTimeout(()=>{ // 通关后玩配对和故事，解锁 match/story 图鉴
+        d.getElementById('tab-match').click();
+        const cards=[...d.querySelectorAll('.drag-card')];
+        cards.forEach(c=>{
+          const s=d.querySelector('.drop-slot[data-accept="'+c.dataset.match+'"]');
+          if(s&&!s.classList.contains('filled')){c.click();s.click();}
+        });
+        d.getElementById('tab-story').click();
+        for(let i=0;i<3;i++) d.getElementById('story-next').click();
+        log.push('配对完成提示='+d.getElementById('match-done').classList.contains('show'));
+        setTimeout(()=>{f.contentWindow.location.href='../index.html';},500);
+      },300);
+    },300);
+  } else if(stage===1){
+    stage=2;
+    d.getElementById('btn-badges').click();
+    log.push('徽章统计条='+d.getElementById('badge-count').textContent);
+    log.push('徽章 got 数='+d.querySelectorAll('#badge-wall .badge-cell.got').length);
+    const firstBadge=d.querySelector('#badge-wall .badge-cell');
+    log.push('徽章首格是已获得='+(firstBadge&&firstBadge.classList.contains('got')));
+    d.querySelector('#badge-panel .panel-close').click();
+    d.getElementById('btn-dex').click();
+    log.push('图鉴统计条='+d.getElementById('dex-count').textContent);
+    const unlocked=[...d.querySelectorAll('#dex-content .dex-item.got')].map(x=>x.textContent);
+    log.push('图鉴解锁数='+unlocked.length);
+    log.push('含配对图鉴='+unlocked.some(x=>x.indexOf('配对达人')>=0));
+    log.push('含故事图鉴='+unlocked.some(x=>x.indexOf('听完故事')>=0));
+    log.push('图鉴首项是已解锁='+!!d.querySelector('#dex-content .dex-item.got'));
+    const ok=unlocked.length===3&&unlocked.some(x=>x.indexOf('配对达人')>=0)&&unlocked.some(x=>x.indexOf('听完故事')>=0);
+    log.push(ok?'PASS':'FAIL');
+    document.getElementById('out').textContent='RESULT\n'+log.join('\n');
+  }
+};
+</script></body></html>

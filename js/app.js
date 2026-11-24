@@ -179,41 +179,81 @@ function initHome() {
   });
 }
 
+// 每个主题的图鉴＝4 热点 + 配对 + 故事，共 6 条。
+// 旧版只渲染 hotspots，导致玩配对/故事解锁的 match、story 条目获得了却看不见。
+function dexEntries(t) {
+  return [
+    ...t.hotspots.map((h) => ({ id: h.id, emoji: h.emoji, name: h.title })),
+    { id: "match", emoji: "🧩", name: "配对达人" },
+    { id: "story", emoji: "📖", name: "听完故事" },
+  ];
+}
+
 function renderDex() {
   const box = document.getElementById("dex-content");
   box.innerHTML = "";
-  for (const id of THEME_ORDER) {
+  let gotTotal = 0;
+  let allTotal = 0;
+  // 已解锁的主题排前面，让孩子第一眼就看到自己的收获
+  const ordered = [...THEME_ORDER].sort((a, b) => {
+    const ga = progress.dex[a].length > 0 ? 1 : 0;
+    const gb = progress.dex[b].length > 0 ? 1 : 0;
+    return gb - ga;
+  });
+  for (const id of ordered) {
     const t = THEMES[id];
+    const unlocked = progress.dex[id];
+    const entries = dexEntries(t);
+    allTotal += entries.length;
+    gotTotal += entries.filter((e) => unlocked.includes(e.id)).length;
     const group = document.createElement("div");
     group.className = "dex-group";
-    const entries = t.hotspots.map((h) => ({ id: h.id, emoji: h.emoji, name: h.title }));
-    const unlocked = progress.dex[id];
     group.innerHTML = `<h3>${t.emoji} ${t.name}</h3>`;
     const items = document.createElement("div");
     items.className = "dex-items";
-    entries.forEach((e) => {
+    // 已解锁的条目排前面
+    const sorted = [...entries].sort((a, b) => {
+      const ha = unlocked.includes(a.id) ? 1 : 0;
+      const hb = unlocked.includes(b.id) ? 1 : 0;
+      return hb - ha;
+    });
+    sorted.forEach((e) => {
       const got = unlocked.includes(e.id);
       const cell = document.createElement("div");
-      cell.className = "dex-item" + (got ? "" : " locked");
-      cell.textContent = got ? `${e.emoji} ${e.name}` : `❓ 待发现`;
+      cell.className = "dex-item" + (got ? " got" : " locked");
+      cell.innerHTML = got
+        ? `<span class="dex-emoji">${e.emoji}</span><span>${e.name}</span>`
+        : `<span class="dex-emoji">❓</span><span>待发现</span>`;
       items.appendChild(cell);
     });
     group.appendChild(items);
     box.appendChild(group);
   }
+  const count = document.getElementById("dex-count");
+  if (count) count.textContent = `已点亮 ${gotTotal} / ${allTotal} 张`;
 }
 
 function renderBadges() {
   const wall = document.getElementById("badge-wall");
   wall.innerHTML = "";
-  for (const id of THEME_ORDER) {
+  let gotTotal = 0;
+  // 已获得的排前面
+  const ordered = [...THEME_ORDER].sort((a, b) => {
+    const ga = progress.badges[a] ? 1 : 0;
+    const gb = progress.badges[b] ? 1 : 0;
+    return gb - ga;
+  });
+  for (const id of ordered) {
     const t = THEMES[id];
     const got = progress.badges[id];
+    if (got) gotTotal += 1;
     const cell = document.createElement("div");
     cell.className = "badge-cell " + (got ? "got" : "locked");
     cell.innerHTML = `<span class="b-emoji">${t.emoji}</span><span class="b-name">${t.badgeName}</span>`;
     wall.appendChild(cell);
   }
+  const count = document.getElementById("badge-count");
+  if (count) count.textContent = `已获得 ${gotTotal} / ${THEME_ORDER.length} 枚`;
 }
 
 /* ===== 探索页 ===== */
@@ -315,7 +355,8 @@ function initPlay() {
       btn.type = "button";
       btn.className = "quiz-option" + (hintShown && opt.correct ? " hint" : "");
       btn.dataset.correct = opt.correct ? "1" : "0";
-      btn.textContent = `${opt.emoji} ${opt.text}`;
+      // 图为主、文字为辅：5-7 岁识字有限，放大 emoji 让孩子看图就能选。
+      btn.innerHTML = `<span class="opt-emoji">${opt.emoji}</span><span class="opt-text">${opt.text}</span>`;
       btn.addEventListener("click", () => answer(opt, btn));
       box.appendChild(btn);
     });
@@ -410,6 +451,14 @@ function initPlay() {
   const alreadyMatched = progress.dex[themeId].includes("match");
   const shuffledSlots = [...theme.match].sort((a, b) => a.id.localeCompare(b.id));
 
+  // "🐒 小猴子" → 大 emoji 一行 + 文字一行。用 Array.from 正确处理 emoji 代理对。
+  function emojiMarkup(text) {
+    const parts = String(text).split(/\s+/);
+    if (parts.length < 2) return `<span class="pair-emoji">${text}</span>`;
+    const emoji = parts.shift();
+    return `<span class="pair-emoji">${emoji}</span><span class="pair-text">${parts.join(" ")}</span>`;
+  }
+
   function selectCard(card) {
     if (card.classList.contains("used")) return;
     if (selectedCard) selectedCard.classList.remove("selected");
@@ -424,8 +473,9 @@ function initPlay() {
       if (card) {
         card.classList.add("used");
         card.classList.remove("selected");
-        slot.textContent = `${card.textContent} → ${slot.textContent}`;
       }
+      // 配对成功后框里回显卡片内容；用 dataset 保留的原文，避免 innerHTML 结构被拼坏
+      slot.innerHTML = `<span class="pair-emoji">${slot.dataset.emoji || ""}</span><span class="pair-text">${slot.dataset.text || ""}</span><span class="pair-check">✓</span>`;
       if (selectedCard && selectedCard.dataset.match === cardId) selectedCard = null;
       matchedCount++;
       speak("fx-match-v2", "配对成功！");
@@ -453,7 +503,7 @@ function initPlay() {
     card.className = "drag-card";
     card.draggable = true;
     card.dataset.match = m.id;
-    card.textContent = m.card;
+    card.innerHTML = emojiMarkup(m.card);
     card.addEventListener("dragstart", (e) => {
       e.dataTransfer.setData("text/plain", m.id);
       e.dataTransfer.effectAllowed = "move";
@@ -466,7 +516,11 @@ function initPlay() {
     const slot = document.createElement("div");
     slot.className = "drop-slot";
     slot.dataset.accept = m.id;
-    slot.textContent = m.target;
+    // 记住原文，配对成功时回填用（此时 card 已 used，textContent 会被 innerHTML 结构污染）
+    const sp = String(m.target).split(/\s+/);
+    slot.dataset.emoji = sp.length >= 2 ? sp.shift() : "";
+    slot.dataset.text = sp.join(" ");
+    slot.innerHTML = emojiMarkup(m.target);
     slot.addEventListener("dragover", (e) => { e.preventDefault(); slot.classList.add("over"); });
     slot.addEventListener("dragleave", () => slot.classList.remove("over"));
     slot.addEventListener("drop", async (e) => {
