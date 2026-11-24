@@ -19,7 +19,7 @@
 </head>
 <body>
 
-<p class="note" style="max-width:900px;margin:0 auto 24px;">线框图仅表达「页面骨架」与「功能范围」的对应关系，不代表最终视觉。每页标注对应《需求文档 v0.9》第 3 节条目编号。</p>
+<p class="note" style="max-width:900px;margin:0 auto 24px;">线框图仅表达「页面骨架」与「功能范围」的对应关系，不代表最终视觉。每页标注对应《需求文档 v2.0》第 3 节条目编号；2026-11-24 按 20 主题现行版更新。</p>
 
 <!-- ============ 页面 1：首页 / 主题地图 ============ -->
 <div class="page">
@@ -34,14 +34,30 @@
     欢迎语 + 今日鼓励一句（语音播报）<span class="req">条目7</span>
   </div>
 
-  <h3>5 大主题入口（插画卡片，点击进入探险页）<span class="req">条目1</span></h3>
+  <h3>20 个主题入口（封面卡片，点击进入探险页）<span class="req">条目1</span></h3>
   <div class="row">
-    <div class="box">🐘 自然与动物<br><span class="note">插画 + 已收集进度角标</span></div>
+    <div class="box">🦁 自然与动物<br><span class="note">封面 + 徽章角标</span></div>
+    <div class="box">🐋 海洋世界</div>
+    <div class="box">🦖 恐龙时代</div>
+    <div class="box">🐝 昆虫朋友</div>
+    <div class="box">🦉 鸟类家族</div>
+    <div class="box">🌻 植物王国</div>
     <div class="box">💪 人体与健康</div>
-    <div class="box">🔬 科学现象</div>
+    <div class="box">🌈 科学现象</div>
+    <div class="box">🚀 太空宇宙</div>
+    <div class="box">🌦️ 天气变化</div>
+    <div class="box">🍂 四季轮回</div>
     <div class="box">🏠 日常生活</div>
+    <div class="box">🚗 交通工具</div>
+    <div class="box">🔢 数字乐园</div>
+    <div class="box">🎨 颜色魔法</div>
     <div class="box">🏮 社会人文</div>
+    <div class="box">🇨🇳 中国地理</div>
+    <div class="box">🎉 节日庆典</div>
+    <div class="box">🎵 音乐与声音</div>
+    <div class="box">🛡️ 安全小常识</div>
   </div>
+  <p class="note">首屏前 6 张封面优先加载，其余滚动时懒加载。</p>
 
   <h3>收藏册入口<span class="req">条目6</span></h3>
   <div class="box">
@@ -55,7 +71,7 @@
 
 <!-- ============ 页面 2：主题探险页 ============ -->
 <div class="page">
-  <div class="page-title">页面 2：主题探险页 play.html（以「自然与动物」为例，5 主题共用同一骨架）</div>
+  <div class="page-title">页面 2：主题探险页 play.html（以「自然与动物」为例，20 主题共用同一骨架）</div>
 
   <div class="box nav">
     <span>[ ← 返回首页 <span class="req">条目9</span> ]</span>
@@ -73,8 +89,8 @@
 
   <div class="box">
     <h3>玩法 A · 点选探索<span class="req">条目2</span></h3>
-    场景区（主题插画底图）+ 4~6 个可点击热点按钮（emoji + 名称）<br>
-    → 点击热点：弹出知识卡（≤60 字口语化）+ 语音朗读 + 「我知道了」关闭按钮
+    场景区（主题封面底图）+ 4 个可点击热点按钮（emoji）<br>
+    → 点击热点：弹出知识卡（40-60 字口语化）+ 语音朗读 + 「👌 知道啦」关闭按钮
   </div>
 
   <div class="box">
@@ -102,9 +118,9 @@
 <div class="page">
   <div class="page-title">关键状态页（须覆盖）</div>
   <div class="box">空收藏状态：收藏册无任何物品时的引导文案<span class="req">条目6</span></div>
-  <div class="box">存储不可用状态：进度无法保存时的提示「这次可能记不住奖励哦」（不阻塞游玩）<span class="req">条目8 异常流</span></div>
-  <div class="box">语音不可用状态：浏览器不支持语音时自动隐藏开关<span class="req">条目7 异常流</span></div>
-  <div class="box">平板竖屏布局：主题卡 2 列、玩法按钮 2×2 排列<span class="req">第5节·设备</span></div>
+  <div class="box">存储不可用状态：三级降级 localStorage → sessionStorage → 内存，页面不报错<span class="req">条目8 异常流</span></div>
+  <div class="box">语音不可用状态：MP3 加载失败自动回退系统合成音，再失败静默不播<span class="req">条目7 异常流</span></div>
+  <div class="box">平板竖屏布局：主题卡与玩法按钮自适应排布，无溢出<span class="req">第5节·设备</span></div>
 </div>
 
 </body>

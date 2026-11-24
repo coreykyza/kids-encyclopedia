@@ -1,1569 +1,1659 @@
 {
- "说明": "交接包内源码清单，用于搬迁后逐项校验。路径相对『源码包/』目录。",
- "文件总数": 256,
- "总字节": 11922402,
- "分类统计": {
-  "图片": {
-   "数量": 20,
-   "合计KB": 1176.9
-  },
-  "音频": {
-   "数量": 226,
-   "合计KB": 10303.8
-  },
-  "页面": {
-   "数量": 4,
-   "合计KB": 8.9
-  },
-  "样式": {
-   "数量": 1,
-   "合计KB": 13.6
-  },
-  "脚本": {
-   "数量": 4,
-   "合计KB": 131.3
-  },
-  "测试": {
-   "数量": 1,
-   "合计KB": 9.3
-  }
- },
- "文件": [
-  {
-   "路径": "assets/theme-animals.jpg",
-   "字节": 65927,
-   "KB": 64.4,
-   "分类": "图片"
-  },
-  {
-   "路径": "assets/theme-bird.jpg",
-   "字节": 67751,
-   "KB": 66.2,
-   "分类": "图片"
-  },
-  {
-   "路径": "assets/theme-body.jpg",
-   "字节": 49605,
-   "KB": 48.4,
-   "分类": "图片"
-  },
-  {
-   "路径": "assets/theme-china.jpg",
-   "字节": 67448,
-   "KB": 65.9,
-   "分类": "图片"
-  },
-  {
-   "路径": "assets/theme-color.jpg",
-   "字节": 58776,
-   "KB": 57.4,
-   "分类": "图片"
-  },
-  {
-   "路径": "assets/theme-culture.jpg",
-   "字节": 68458,
-   "KB": 66.9,
-   "分类": "图片"
-  },
-  {
-   "路径": "assets/theme-dino.jpg",
-   "字节": 67424,
-   "KB": 65.8,
-   "分类": "图片"
-  },
-  {
-   "路径": "assets/theme-festival.jpg",
-   "字节": 68210,
-   "KB": 66.6,
-   "分类": "图片"
-  },
-  {
-   "路径": "assets/theme-insect.jpg",
-   "字节": 64716,
-   "KB": 63.2,
-   "分类": "图片"
-  },
-  {
-   "路径": "assets/theme-life.jpg",
-   "字节": 67383,
-   "KB": 65.8,
-   "分类": "图片"
-  },
-  {
-   "路径": "assets/theme-music.jpg",
-   "字节": 68700,
-   "KB": 67.1,
-   "分类": "图片"
-  },
-  {
-   "路径": "assets/theme-number.jpg",
-   "字节": 48795,
-   "KB": 47.7,
-   "分类": "图片"
-  },
-  {
-   "路径": "assets/theme-ocean.jpg",
-   "字节": 67807,
-   "KB": 66.2,
-   "分类": "图片"
-  },
-  {
-   "路径": "assets/theme-plant.jpg",
-   "字节": 60593,
-   "KB": 59.2,
-   "分类": "图片"
-  },
-  {
-   "路径": "assets/theme-safety.jpg",
-   "字节": 27203,
-   "KB": 26.6,
-   "分类": "图片"
-  },
-  {
-   "路径": "assets/theme-science.jpg",
-   "字节": 49534,
-   "KB": 48.4,
-   "分类": "图片"
-  },
-  {
-   "路径": "assets/theme-season.jpg",
-   "字节": 69475,
-   "KB": 67.8,
-   "分类": "图片"
-  },
-  {
-   "路径": "assets/theme-space.jpg",
-   "字节": 53286,
-   "KB": 52.0,
-   "分类": "图片"
-  },
-  {
-   "路径": "assets/theme-vehicle.jpg",
-   "字节": 64461,
-   "KB": 63.0,
-   "分类": "图片"
-  },
-  {
-   "路径": "assets/theme-weather.jpg",
-   "字节": 49436,
-   "KB": 48.3,
-   "分类": "图片"
-  },
-  {
-   "路径": "assets/voice/animals-badge.mp3",
-   "字节": 31536,
-   "KB": 30.8,
-   "分类": "音频"
-  },
-  {
-   "路径": "assets/voice/animals-h1.mp3",
-   "字节": 72576,
-   "KB": 70.9,
-   "分类": "音频"
-  },
-  {
-   "路径": "assets/voice/animals-h2.mp3",
-   "字节": 64656,
-   "KB": 63.1,
-   "分类": "音频"
-  },
-  {
-   "路径": "assets/voice/animals-h3.mp3",
-   "字节": 67680,
-   "KB": 66.1,
-   "分类": "音频"
-  },
-  {
-   "路径": "assets/voice/animals-h4.mp3",
-   "字节": 66672,
-   "KB": 65.1,
-   "分类": "音频"
-  },
-  {
-   "路径": "assets/voice/animals-quiz-0.mp3",
-   "字节": 18000,
-   "KB": 17.6,
-   "分类": "音频"
-  },
-  {
-   "路径": "assets/voice/animals-quiz-1.mp3",
-   "字节": 25200,
-   "KB": 24.6,
-   "分类": "音频"
-  },
-  {
-   "路径": "assets/voice/animals-quiz-2.mp3",
-   "字节": 18288,
-   "KB": 17.9,
-   "分类": "音频"
-  },
-  {
-   "路径": "assets/voice/animals-story-0.mp3",
-   "字节": 53712,
-   "KB": 52.5,
-   "分类": "音频"
-  },
-  {
-   "路径": "assets/voice/animals-story-1.mp3",
-   "字节": 64368,
-   "KB": 62.9,
-   "分类": "音频"
-  },
-  {
-   "路径": "assets/voice/animals-story-2.mp3",
-   "字节": 59040,
-   "KB": 57.7,
-   "分类": "音频"
-  },
-  {
-   "路径": "assets/voice/bird-badge.mp3",
-   "字节": 33552,
-   "KB": 32.8,
-   "分类": "音频"
-  },
-  {
-   "路径": "assets/voice/bird-h1.mp3",
-   "字节": 71280,
-   "KB": 69.6,
-   "分类": "音频"
-  },
-  {
-   "路径": "assets/voice/bird-h2.mp3",
-   "字节": 68400,
-   "KB": 66.8,
-   "分类": "音频"
-  },
-  {
-   "路径": "assets/voice/bird-h3.mp3",
-   "字节": 61344,
-   "KB": 59.9,
-   "分类": "音频"
-  },
-  {
-   "路径": "assets/voice/bird-h4.mp3",
-   "字节": 64944,
-   "KB": 63.4,
-   "分类": "音频"
-  },
-  {
-   "路径": "assets/voice/bird-quiz-0.mp3",
-   "字节": 13968,
-   "KB": 13.6,
-   "分类": "音频"
-  },
-  {
-   "路径": "assets/voice/bird-quiz-1.mp3",
-   "字节": 18576,
-   "KB": 18.1,
-   "分类": "音频"
-  },
-  {
-   "路径": "assets/voice/bird-quiz-2.mp3",
-   "字节": 18000,
-   "KB": 17.6,
-   "分类": "音频"
-  },
-  {
-   "路径": "assets/voice/bird-story-0.mp3",
-   "字节": 63504,
-   "KB": 62.0,
-   "分类": "音频"
-  },
-  {
-   "路径": "assets/voice/bird-story-1.mp3",
-   "字节": 54288,
-   "KB": 53.0,
-   "分类": "音频"
-  },
-  {
-   "路径": "assets/voice/bird-story-2.mp3",
-   "字节": 58320,
-   "KB": 57.0,
-   "分类": "音频"
-  },
-  {
-   "路径": "assets/voice/body-badge.mp3",
-   "字节": 32400,
-   "KB": 31.6,
-   "分类": "音频"
-  },
-  {
-   "路径": "assets/voice/body-h1.mp3",
-   "字节": 56304,
-   "KB": 55.0,
-   "分类": "音频"
-  },
-  {
-   "路径": "assets/voice/body-h2.mp3",
-   "字节": 70416,
-   "KB": 68.8,
-   "分类": "音频"
-  },
-  {
-   "路径": "assets/voice/body-h3.mp3",
-   "字节": 63648,
-   "KB": 62.2,
-   "分类": "音频"
-  },
-  {
-   "路径": "assets/voice/body-h4.mp3",
-   "字节": 63504,
-   "KB": 62.0,
-   "分类": "音频"
-  },
-  {
-   "路径": "assets/voice/body-quiz-0.mp3",
-   "字节": 23328,
-   "KB": 22.8,
-   "分类": "音频"
-  },
-  {
-   "路径": "assets/voice/body-quiz-1.mp3",
-   "字节": 14400,
-   "KB": 14.1,
-   "分类": "音频"
-  },
-  {
-   "路径": "assets/voice/body-quiz-2.mp3",
-   "字节": 17856,
-   "KB": 17.4,
-   "分类": "音频"
-  },
-  {
-   "路径": "assets/voice/body-story-0.mp3",
-   "字节": 41184,
-   "KB": 40.2,
-   "分类": "音频"
-  },
-  {
-   "路径": "assets/voice/body-story-1.mp3",
-   "字节": 58608,
-   "KB": 57.2,
-   "分类": "音频"
-  },
-  {
-   "路径": "assets/voice/body-story-2.mp3",
-   "字节": 56592,
-   "KB": 55.3,
-   "分类": "音频"
-  },
-  {
-   "路径": "assets/voice/china-badge.mp3",
-   "字节": 32976,
-   "KB": 32.2,
-   "分类": "音频"
-  },
-  {
-   "路径": "assets/voice/china-h1.mp3",
-   "字节": 68976,
-   "KB": 67.4,
-   "分类": "音频"
-  },
-  {
-   "路径": "assets/voice/china-h2.mp3",
-   "字节": 71856,
-   "KB": 70.2,
-   "分类": "音频"
-  },
-  {
-   "路径": "assets/voice/china-h3.mp3",
-   "字节": 63936,
-   "KB": 62.4,
-   "分类": "音频"
-  },
-  {
-   "路径": "assets/voice/china-h4.mp3",
-   "字节": 68400,
-   "KB": 66.8,
-   "分类": "音频"
-  },
-  {
-   "路径": "assets/voice/china-quiz-0.mp3",
-   "字节": 14256,
-   "KB": 13.9,
-   "分类": "音频"
-  },
-  {
-   "路径": "assets/voice/china-quiz-1.mp3",
-   "字节": 15552,
-   "KB": 15.2,
-   "分类": "音频"
-  },
-  {
-   "路径": "assets/voice/china-quiz-2.mp3",
-   "字节": 18288,
-   "KB": 17.9,
-   "分类": "音频"
-  },
-  {
-   "路径": "assets/voice/china-story-0.mp3",
-   "字节": 56304,
-   "KB": 55.0,
-   "分类": "音频"
-  },
-  {
-   "路径": "assets/voice/china-story-1.mp3",
-   "字节": 50400,
-   "KB": 49.2,
-   "分类": "音频"
-  },
-  {
-   "路径": "assets/voice/china-story-2.mp3",
-   "字节": 55296,
-   "KB": 54.0,
-   "分类": "音频"
-  },
-  {
-   "路径": "assets/voice/color-badge.mp3",
-   "字节": 33552,
-   "KB": 32.8,
-   "分类": "音频"
-  },
-  {
-   "路径": "assets/voice/color-h1.mp3",
-   "字节": 68544,
-   "KB": 66.9,
-   "分类": "音频"
-  },
-  {
-   "路径": "assets/voice/color-h2.mp3",
-   "字节": 72432,
-   "KB": 70.7,
-   "分类": "音频"
-  },
-  {
-   "路径": "assets/voice/color-h3.mp3",
-   "字节": 72576,
-   "KB": 70.9,
-   "分类": "音频"
-  },
-  {
-   "路径": "assets/voice/color-h4.mp3",
-   "字节": 67680,
-   "KB": 66.1,
-   "分类": "音频"
-  },
-  {
-   "路径": "assets/voice/color-quiz-0.mp3",
-   "字节": 22320,
-   "KB": 21.8,
-   "分类": "音频"
-  },
-  {
-   "路径": "assets/voice/color-quiz-1.mp3",
-   "字节": 23328,
-   "KB": 22.8,
-   "分类": "音频"
-  },
-  {
-   "路径": "assets/voice/color-quiz-2.mp3",
-   "字节": 28800,
-   "KB": 28.1,
-   "分类": "音频"
-  },
-  {
-   "路径": "assets/voice/color-story-0.mp3",
-   "字节": 55008,
-   "KB": 53.7,
-   "分类": "音频"
-  },
-  {
-   "路径": "assets/voice/color-story-1.mp3",
-   "字节": 54432,
-   "KB": 53.2,
-   "分类": "音频"
-  },
-  {
-   "路径": "assets/voice/color-story-2.mp3",
-   "字节": 58176,
-   "KB": 56.8,
-   "分类": "音频"
-  },
-  {
-   "路径": "assets/voice/culture-badge.mp3",
-   "字节": 32112,
-   "KB": 31.4,
-   "分类": "音频"
-  },
-  {
-   "路径": "assets/voice/culture-h1.mp3",
-   "字节": 56160,
-   "KB": 54.8,
-   "分类": "音频"
-  },
-  {
-   "路径": "assets/voice/culture-h2.mp3",
-   "字节": 66528,
-   "KB": 65.0,
-   "分类": "音频"
-  },
-  {
-   "路径": "assets/voice/culture-h3.mp3",
-   "字节": 63360,
-   "KB": 61.9,
-   "分类": "音频"
-  },
-  {
-   "路径": "assets/voice/culture-h4.mp3",
-   "字节": 61488,
-   "KB": 60.0,
-   "分类": "音频"
-  },
-  {
-   "路径": "assets/voice/culture-quiz-0.mp3",
-   "字节": 18432,
-   "KB": 18.0,
-   "分类": "音频"
-  },
-  {
-   "路径": "assets/voice/culture-quiz-1.mp3",
-   "字节": 22896,
-   "KB": 22.4,
-   "分类": "音频"
-  },
-  {
-   "路径": "assets/voice/culture-quiz-2.mp3",
-   "字节": 20160,
-   "KB": 19.7,
-   "分类": "音频"
-  },
-  {
-   "路径": "assets/voice/culture-story-0.mp3",
-   "字节": 57024,
-   "KB": 55.7,
-   "分类": "音频"
-  },
-  {
-   "路径": "assets/voice/culture-story-1.mp3",
-   "字节": 59616,
-   "KB": 58.2,
-   "分类": "音频"
-  },
-  {
-   "路径": "assets/voice/culture-story-2.mp3",
-   "字节": 59472,
-   "KB": 58.1,
-   "分类": "音频"
-  },
-  {
-   "路径": "assets/voice/dino-badge.mp3",
-   "字节": 34416,
-   "KB": 33.6,
-   "分类": "音频"
-  },
-  {
-   "路径": "assets/voice/dino-h1.mp3",
-   "字节": 77904,
-   "KB": 76.1,
-   "分类": "音频"
-  },
-  {
-   "路径": "assets/voice/dino-h2.mp3",
-   "字节": 71424,
-   "KB": 69.8,
-   "分类": "音频"
-  },
-  {
-   "路径": "assets/voice/dino-h3.mp3",
-   "字节": 69840,
-   "KB": 68.2,
-   "分类": "音频"
-  },
-  {
-   "路径": "assets/voice/dino-h4.mp3",
-   "字节": 75888,
-   "KB": 74.1,
-   "分类": "音频"
-  },
-  {
-   "路径": "assets/voice/dino-quiz-0.mp3",
-   "字节": 15984,
-   "KB": 15.6,
-   "分类": "音频"
-  },
-  {
-   "路径": "assets/voice/dino-quiz-1.mp3",
-   "字节": 19296,
-   "KB": 18.8,
-   "分类": "音频"
-  },
-  {
-   "路径": "assets/voice/dino-quiz-2.mp3",
-   "字节": 19008,
-   "KB": 18.6,
-   "分类": "音频"
-  },
-  {
-   "路径": "assets/voice/dino-story-0.mp3",
-   "字节": 60192,
-   "KB": 58.8,
-   "分类": "音频"
-  },
-  {
-   "路径": "assets/voice/dino-story-1.mp3",
-   "字节": 65232,
-   "KB": 63.7,
-   "分类": "音频"
-  },
-  {
-   "路径": "assets/voice/dino-story-2.mp3",
-   "字节": 62352,
-   "KB": 60.9,
-   "分类": "音频"
-  },
-  {
-   "路径": "assets/voice/festival-badge.mp3",
-   "字节": 31968,
-   "KB": 31.2,
-   "分类": "音频"
-  },
-  {
-   "路径": "assets/voice/festival-h1.mp3",
-   "字节": 61056,
-   "KB": 59.6,
-   "分类": "音频"
-  },
-  {
-   "路径": "assets/voice/festival-h2.mp3",
-   "字节": 62928,
-   "KB": 61.5,
-   "分类": "音频"
-  },
-  {
-   "路径": "assets/voice/festival-h3.mp3",
-   "字节": 65520,
-   "KB": 64.0,
-   "分类": "音频"
-  },
-  {
-   "路径": "assets/voice/festival-h4.mp3",
-   "字节": 63792,
-   "KB": 62.3,
-   "分类": "音频"
-  },
-  {
-   "路径": "assets/voice/festival-quiz-0.mp3",
-   "字节": 18720,
-   "KB": 18.3,
-   "分类": "音频"
-  },
-  {
-   "路径": "assets/voice/festival-quiz-1.mp3",
-   "字节": 14400,
-   "KB": 14.1,
-   "分类": "音频"
-  },
-  {
-   "路径": "assets/voice/festival-quiz-2.mp3",
-   "字节": 16992,
-   "KB": 16.6,
-   "分类": "音频"
-  },
-  {
-   "路径": "assets/voice/festival-story-0.mp3",
-   "字节": 60336,
-   "KB": 58.9,
-   "分类": "音频"
-  },
-  {
-   "路径": "assets/voice/festival-story-1.mp3",
-   "字节": 54576,
-   "KB": 53.3,
-   "分类": "音频"
-  },
-  {
-   "路径": "assets/voice/festival-story-2.mp3",
-   "字节": 51408,
-   "KB": 50.2,
-   "分类": "音频"
-  },
-  {
-   "路径": "assets/voice/fx-match-all-v2.mp3",
-   "字节": 24768,
-   "KB": 24.2,
-   "分类": "音频"
-  },
-  {
-   "路径": "assets/voice/fx-match-v2.mp3",
-   "字节": 11664,
-   "KB": 11.4,
-   "分类": "音频"
-  },
-  {
-   "路径": "assets/voice/fx-match-wrong-v2.mp3",
-   "字节": 11376,
-   "KB": 11.1,
-   "分类": "音频"
-  },
-  {
-   "路径": "assets/voice/fx-right-v2.mp3",
-   "字节": 15408,
-   "KB": 15.0,
-   "分类": "音频"
-  },
-  {
-   "路径": "assets/voice/fx-story-done-v2.mp3",
-   "字节": 23472,
-   "KB": 22.9,
-   "分类": "音频"
-  },
-  {
-   "路径": "assets/voice/fx-wrong-v2.mp3",
-   "字节": 11952,
-   "KB": 11.7,
-   "分类": "音频"
-  },
-  {
-   "路径": "assets/voice/insect-badge.mp3",
-   "字节": 35136,
-   "KB": 34.3,
-   "分类": "音频"
-  },
-  {
-   "路径": "assets/voice/insect-h1.mp3",
-   "字节": 71424,
-   "KB": 69.8,
-   "分类": "音频"
-  },
-  {
-   "路径": "assets/voice/insect-h2.mp3",
-   "字节": 69408,
-   "KB": 67.8,
-   "分类": "音频"
-  },
-  {
-   "路径": "assets/voice/insect-h3.mp3",
-   "字节": 68976,
-   "KB": 67.4,
-   "分类": "音频"
-  },
-  {
-   "路径": "assets/voice/insect-h4.mp3",
-   "字节": 61920,
-   "KB": 60.5,
-   "分类": "音频"
-  },
-  {
-   "路径": "assets/voice/insect-quiz-0.mp3",
-   "字节": 17712,
-   "KB": 17.3,
-   "分类": "音频"
-  },
-  {
-   "路径": "assets/voice/insect-quiz-1.mp3",
-   "字节": 19008,
-   "KB": 18.6,
-   "分类": "音频"
-  },
-  {
-   "路径": "assets/voice/insect-quiz-2.mp3",
-   "字节": 14832,
-   "KB": 14.5,
-   "分类": "音频"
-  },
-  {
-   "路径": "assets/voice/insect-story-0.mp3",
-   "字节": 56448,
-   "KB": 55.1,
-   "分类": "音频"
-  },
-  {
-   "路径": "assets/voice/insect-story-1.mp3",
-   "字节": 60048,
-   "KB": 58.6,
-   "分类": "音频"
-  },
-  {
-   "路径": "assets/voice/insect-story-2.mp3",
-   "字节": 66240,
-   "KB": 64.7,
-   "分类": "音频"
-  },
-  {
-   "路径": "assets/voice/life-badge.mp3",
-   "字节": 31824,
-   "KB": 31.1,
-   "分类": "音频"
-  },
-  {
-   "路径": "assets/voice/life-h1.mp3",
-   "字节": 62208,
-   "KB": 60.8,
-   "分类": "音频"
-  },
-  {
-   "路径": "assets/voice/life-h2.mp3",
-   "字节": 64944,
-   "KB": 63.4,
-   "分类": "音频"
-  },
-  {
-   "路径": "assets/voice/life-h3.mp3",
-   "字节": 57888,
-   "KB": 56.5,
-   "分类": "音频"
-  },
-  {
-   "路径": "assets/voice/life-h4.mp3",
-   "字节": 56880,
-   "KB": 55.5,
-   "分类": "音频"
-  },
-  {
-   "路径": "assets/voice/life-quiz-0.mp3",
-   "字节": 19872,
-   "KB": 19.4,
-   "分类": "音频"
-  },
-  {
-   "路径": "assets/voice/life-quiz-1.mp3",
-   "字节": 16272,
-   "KB": 15.9,
-   "分类": "音频"
-  },
-  {
-   "路径": "assets/voice/life-quiz-2.mp3",
-   "字节": 23040,
-   "KB": 22.5,
-   "分类": "音频"
-  },
-  {
-   "路径": "assets/voice/life-story-0.mp3",
-   "字节": 52560,
-   "KB": 51.3,
-   "分类": "音频"
-  },
-  {
-   "路径": "assets/voice/life-story-1.mp3",
-   "字节": 47664,
-   "KB": 46.5,
-   "分类": "音频"
-  },
-  {
-   "路径": "assets/voice/life-story-2.mp3",
-   "字节": 57168,
-   "KB": 55.8,
-   "分类": "音频"
-  },
-  {
-   "路径": "assets/voice/music-badge.mp3",
-   "字节": 33696,
-   "KB": 32.9,
-   "分类": "音频"
-  },
-  {
-   "路径": "assets/voice/music-h1.mp3",
-   "字节": 65808,
-   "KB": 64.3,
-   "分类": "音频"
-  },
-  {
-   "路径": "assets/voice/music-h2.mp3",
-   "字节": 52560,
-   "KB": 51.3,
-   "分类": "音频"
-  },
-  {
-   "路径": "assets/voice/music-h3.mp3",
-   "字节": 70848,
-   "KB": 69.2,
-   "分类": "音频"
-  },
-  {
-   "路径": "assets/voice/music-h4.mp3",
-   "字节": 68256,
-   "KB": 66.7,
-   "分类": "音频"
-  },
-  {
-   "路径": "assets/voice/music-quiz-0.mp3",
-   "字节": 17856,
-   "KB": 17.4,
-   "分类": "音频"
-  },
-  {
-   "路径": "assets/voice/music-quiz-1.mp3",
-   "字节": 17136,
-   "KB": 16.7,
-   "分类": "音频"
-  },
-  {
-   "路径": "assets/voice/music-quiz-2.mp3",
-   "字节": 17568,
-   "KB": 17.2,
-   "分类": "音频"
-  },
-  {
-   "路径": "assets/voice/music-story-0.mp3",
-   "字节": 57312,
-   "KB": 56.0,
-   "分类": "音频"
-  },
-  {
-   "路径": "assets/voice/music-story-1.mp3",
-   "字节": 58464,
-   "KB": 57.1,
-   "分类": "音频"
-  },
-  {
-   "路径": "assets/voice/music-story-2.mp3",
-   "字节": 58752,
-   "KB": 57.4,
-   "分类": "音频"
-  },
-  {
-   "路径": "assets/voice/number-badge.mp3",
-   "字节": 32832,
-   "KB": 32.1,
-   "分类": "音频"
-  },
-  {
-   "路径": "assets/voice/number-h1.mp3",
-   "字节": 67536,
-   "KB": 66.0,
-   "分类": "音频"
-  },
-  {
-   "路径": "assets/voice/number-h2.mp3",
-   "字节": 55728,
-   "KB": 54.4,
-   "分类": "音频"
-  },
-  {
-   "路径": "assets/voice/number-h3.mp3",
-   "字节": 62352,
-   "KB": 60.9,
-   "分类": "音频"
-  },
-  {
-   "路径": "assets/voice/number-h4.mp3",
-   "字节": 57168,
-   "KB": 55.8,
-   "分类": "音频"
-  },
-  {
-   "路径": "assets/voice/number-quiz-0.mp3",
-   "字节": 15552,
-   "KB": 15.2,
-   "分类": "音频"
-  },
-  {
-   "路径": "assets/voice/number-quiz-1.mp3",
-   "字节": 24768,
-   "KB": 24.2,
-   "分类": "音频"
-  },
-  {
-   "路径": "assets/voice/number-quiz-2.mp3",
-   "字节": 15264,
-   "KB": 14.9,
-   "分类": "音频"
-  },
-  {
-   "路径": "assets/voice/number-story-0.mp3",
-   "字节": 55008,
-   "KB": 53.7,
-   "分类": "音频"
-  },
-  {
-   "路径": "assets/voice/number-story-1.mp3",
-   "字节": 61344,
-   "KB": 59.9,
-   "分类": "音频"
-  },
-  {
-   "路径": "assets/voice/number-story-2.mp3",
-   "字节": 55872,
-   "KB": 54.6,
-   "分类": "音频"
-  },
-  {
-   "路径": "assets/voice/ocean-badge.mp3",
-   "字节": 33264,
-   "KB": 32.5,
-   "分类": "音频"
-  },
-  {
-   "路径": "assets/voice/ocean-h1.mp3",
-   "字节": 73584,
-   "KB": 71.9,
-   "分类": "音频"
-  },
-  {
-   "路径": "assets/voice/ocean-h2.mp3",
-   "字节": 70704,
-   "KB": 69.0,
-   "分类": "音频"
-  },
-  {
-   "路径": "assets/voice/ocean-h3.mp3",
-   "字节": 74592,
-   "KB": 72.8,
-   "分类": "音频"
-  },
-  {
-   "路径": "assets/voice/ocean-h4.mp3",
-   "字节": 75744,
-   "KB": 74.0,
-   "分类": "音频"
-  },
-  {
-   "路径": "assets/voice/ocean-quiz-0.mp3",
-   "字节": 15696,
-   "KB": 15.3,
-   "分类": "音频"
-  },
-  {
-   "路径": "assets/voice/ocean-quiz-1.mp3",
-   "字节": 19440,
-   "KB": 19.0,
-   "分类": "音频"
-  },
-  {
-   "路径": "assets/voice/ocean-quiz-2.mp3",
-   "字节": 20160,
-   "KB": 19.7,
-   "分类": "音频"
-  },
-  {
-   "路径": "assets/voice/ocean-story-0.mp3",
-   "字节": 62496,
-   "KB": 61.0,
-   "分类": "音频"
-  },
-  {
-   "路径": "assets/voice/ocean-story-1.mp3",
-   "字节": 62352,
-   "KB": 60.9,
-   "分类": "音频"
-  },
-  {
-   "路径": "assets/voice/ocean-story-2.mp3",
-   "字节": 58752,
-   "KB": 57.4,
-   "分类": "音频"
-  },
-  {
-   "路径": "assets/voice/plant-badge.mp3",
-   "字节": 32544,
-   "KB": 31.8,
-   "分类": "音频"
-  },
-  {
-   "路径": "assets/voice/plant-h1.mp3",
-   "字节": 69264,
-   "KB": 67.6,
-   "分类": "音频"
-  },
-  {
-   "路径": "assets/voice/plant-h2.mp3",
-   "字节": 67680,
-   "KB": 66.1,
-   "分类": "音频"
-  },
-  {
-   "路径": "assets/voice/plant-h3.mp3",
-   "字节": 76032,
-   "KB": 74.2,
-   "分类": "音频"
-  },
-  {
-   "路径": "assets/voice/plant-h4.mp3",
-   "字节": 68256,
-   "KB": 66.7,
-   "分类": "音频"
-  },
-  {
-   "路径": "assets/voice/plant-quiz-0.mp3",
-   "字节": 20304,
-   "KB": 19.8,
-   "分类": "音频"
-  },
-  {
-   "路径": "assets/voice/plant-quiz-1.mp3",
-   "字节": 20304,
-   "KB": 19.8,
-   "分类": "音频"
-  },
-  {
-   "路径": "assets/voice/plant-quiz-2.mp3",
-   "字节": 18720,
-   "KB": 18.3,
-   "分类": "音频"
-  },
-  {
-   "路径": "assets/voice/plant-story-0.mp3",
-   "字节": 51984,
-   "KB": 50.8,
-   "分类": "音频"
-  },
-  {
-   "路径": "assets/voice/plant-story-1.mp3",
-   "字节": 52992,
-   "KB": 51.8,
-   "分类": "音频"
-  },
-  {
-   "路径": "assets/voice/plant-story-2.mp3",
-   "字节": 61488,
-   "KB": 60.0,
-   "分类": "音频"
-  },
-  {
-   "路径": "assets/voice/safety-badge.mp3",
-   "字节": 33264,
-   "KB": 32.5,
-   "分类": "音频"
-  },
-  {
-   "路径": "assets/voice/safety-h1.mp3",
-   "字节": 52560,
-   "KB": 51.3,
-   "分类": "音频"
-  },
-  {
-   "路径": "assets/voice/safety-h2.mp3",
-   "字节": 65808,
-   "KB": 64.3,
-   "分类": "音频"
-  },
-  {
-   "路径": "assets/voice/safety-h3.mp3",
-   "字节": 58896,
-   "KB": 57.5,
-   "分类": "音频"
-  },
-  {
-   "路径": "assets/voice/safety-h4.mp3",
-   "字节": 62640,
-   "KB": 61.2,
-   "分类": "音频"
-  },
-  {
-   "路径": "assets/voice/safety-quiz-0.mp3",
-   "字节": 15552,
-   "KB": 15.2,
-   "分类": "音频"
-  },
-  {
-   "路径": "assets/voice/safety-quiz-1.mp3",
-   "字节": 19584,
-   "KB": 19.1,
-   "分类": "音频"
-  },
-  {
-   "路径": "assets/voice/safety-quiz-2.mp3",
-   "字节": 16560,
-   "KB": 16.2,
-   "分类": "音频"
-  },
-  {
-   "路径": "assets/voice/safety-story-0.mp3",
-   "字节": 54000,
-   "KB": 52.7,
-   "分类": "音频"
-  },
-  {
-   "路径": "assets/voice/safety-story-1.mp3",
-   "字节": 47232,
-   "KB": 46.1,
-   "分类": "音频"
-  },
-  {
-   "路径": "assets/voice/safety-story-2.mp3",
-   "字节": 55584,
-   "KB": 54.3,
-   "分类": "音频"
-  },
-  {
-   "路径": "assets/voice/science-badge.mp3",
-   "字节": 32112,
-   "KB": 31.4,
-   "分类": "音频"
-  },
-  {
-   "路径": "assets/voice/science-h1.mp3",
-   "字节": 59616,
-   "KB": 58.2,
-   "分类": "音频"
-  },
-  {
-   "路径": "assets/voice/science-h2.mp3",
-   "字节": 73584,
-   "KB": 71.9,
-   "分类": "音频"
-  },
-  {
-   "路径": "assets/voice/science-h3.mp3",
-   "字节": 66240,
-   "KB": 64.7,
-   "分类": "音频"
-  },
-  {
-   "路径": "assets/voice/science-h4.mp3",
-   "字节": 59904,
-   "KB": 58.5,
-   "分类": "音频"
-  },
-  {
-   "路径": "assets/voice/science-quiz-0.mp3",
-   "字节": 19008,
-   "KB": 18.6,
-   "分类": "音频"
-  },
-  {
-   "路径": "assets/voice/science-quiz-1.mp3",
-   "字节": 18288,
-   "KB": 17.9,
-   "分类": "音频"
-  },
-  {
-   "路径": "assets/voice/science-quiz-2.mp3",
-   "字节": 14832,
-   "KB": 14.5,
-   "分类": "音频"
-  },
-  {
-   "路径": "assets/voice/science-story-0.mp3",
-   "字节": 49968,
-   "KB": 48.8,
-   "分类": "音频"
-  },
-  {
-   "路径": "assets/voice/science-story-1.mp3",
-   "字节": 45504,
-   "KB": 44.4,
-   "分类": "音频"
-  },
-  {
-   "路径": "assets/voice/science-story-2.mp3",
-   "字节": 57312,
-   "KB": 56.0,
-   "分类": "音频"
-  },
-  {
-   "路径": "assets/voice/season-badge.mp3",
-   "字节": 34848,
-   "KB": 34.0,
-   "分类": "音频"
-  },
-  {
-   "路径": "assets/voice/season-h1.mp3",
-   "字节": 64080,
-   "KB": 62.6,
-   "分类": "音频"
-  },
-  {
-   "路径": "assets/voice/season-h2.mp3",
-   "字节": 66096,
-   "KB": 64.5,
-   "分类": "音频"
-  },
-  {
-   "路径": "assets/voice/season-h3.mp3",
-   "字节": 62352,
-   "KB": 60.9,
-   "分类": "音频"
-  },
-  {
-   "路径": "assets/voice/season-h4.mp3",
-   "字节": 65088,
-   "KB": 63.6,
-   "分类": "音频"
-  },
-  {
-   "路径": "assets/voice/season-quiz-0.mp3",
-   "字节": 21600,
-   "KB": 21.1,
-   "分类": "音频"
-  },
-  {
-   "路径": "assets/voice/season-quiz-1.mp3",
-   "字节": 15984,
-   "KB": 15.6,
-   "分类": "音频"
-  },
-  {
-   "路径": "assets/voice/season-quiz-2.mp3",
-   "字节": 20736,
-   "KB": 20.2,
-   "分类": "音频"
-  },
-  {
-   "路径": "assets/voice/season-story-0.mp3",
-   "字节": 55296,
-   "KB": 54.0,
-   "分类": "音频"
-  },
-  {
-   "路径": "assets/voice/season-story-1.mp3",
-   "字节": 55584,
-   "KB": 54.3,
-   "分类": "音频"
-  },
-  {
-   "路径": "assets/voice/season-story-2.mp3",
-   "字节": 63072,
-   "KB": 61.6,
-   "分类": "音频"
-  },
-  {
-   "路径": "assets/voice/space-badge.mp3",
-   "字节": 34272,
-   "KB": 33.5,
-   "分类": "音频"
-  },
-  {
-   "路径": "assets/voice/space-h1.mp3",
-   "字节": 68400,
-   "KB": 66.8,
-   "分类": "音频"
-  },
-  {
-   "路径": "assets/voice/space-h2.mp3",
-   "字节": 64656,
-   "KB": 63.1,
-   "分类": "音频"
-  },
-  {
-   "路径": "assets/voice/space-h3.mp3",
-   "字节": 63216,
-   "KB": 61.7,
-   "分类": "音频"
-  },
-  {
-   "路径": "assets/voice/space-h4.mp3",
-   "字节": 69264,
-   "KB": 67.6,
-   "分类": "音频"
-  },
-  {
-   "路径": "assets/voice/space-quiz-0.mp3",
-   "字节": 13680,
-   "KB": 13.4,
-   "分类": "音频"
-  },
-  {
-   "路径": "assets/voice/space-quiz-1.mp3",
-   "字节": 21168,
-   "KB": 20.7,
-   "分类": "音频"
-  },
-  {
-   "路径": "assets/voice/space-quiz-2.mp3",
-   "字节": 19296,
-   "KB": 18.8,
-   "分类": "音频"
-  },
-  {
-   "路径": "assets/voice/space-story-0.mp3",
-   "字节": 63072,
-   "KB": 61.6,
-   "分类": "音频"
-  },
-  {
-   "路径": "assets/voice/space-story-1.mp3",
-   "字节": 59904,
-   "KB": 58.5,
-   "分类": "音频"
-  },
-  {
-   "路径": "assets/voice/space-story-2.mp3",
-   "字节": 59760,
-   "KB": 58.4,
-   "分类": "音频"
-  },
-  {
-   "路径": "assets/voice/vehicle-badge.mp3",
-   "字节": 33120,
-   "KB": 32.3,
-   "分类": "音频"
-  },
-  {
-   "路径": "assets/voice/vehicle-h1.mp3",
-   "字节": 62496,
-   "KB": 61.0,
-   "分类": "音频"
-  },
-  {
-   "路径": "assets/voice/vehicle-h2.mp3",
-   "字节": 59472,
-   "KB": 58.1,
-   "分类": "音频"
-  },
-  {
-   "路径": "assets/voice/vehicle-h3.mp3",
-   "字节": 65232,
-   "KB": 63.7,
-   "分类": "音频"
-  },
-  {
-   "路径": "assets/voice/vehicle-h4.mp3",
-   "字节": 63072,
-   "KB": 61.6,
-   "分类": "音频"
-  },
-  {
-   "路径": "assets/voice/vehicle-quiz-0.mp3",
-   "字节": 20016,
-   "KB": 19.5,
-   "分类": "音频"
-  },
-  {
-   "路径": "assets/voice/vehicle-quiz-1.mp3",
-   "字节": 14832,
-   "KB": 14.5,
-   "分类": "音频"
-  },
-  {
-   "路径": "assets/voice/vehicle-quiz-2.mp3",
-   "字节": 20592,
-   "KB": 20.1,
-   "分类": "音频"
-  },
-  {
-   "路径": "assets/voice/vehicle-story-0.mp3",
-   "字节": 58464,
-   "KB": 57.1,
-   "分类": "音频"
-  },
-  {
-   "路径": "assets/voice/vehicle-story-1.mp3",
-   "字节": 52848,
-   "KB": 51.6,
-   "分类": "音频"
-  },
-  {
-   "路径": "assets/voice/vehicle-story-2.mp3",
-   "字节": 54432,
-   "KB": 53.2,
-   "分类": "音频"
-  },
-  {
-   "路径": "assets/voice/weather-badge.mp3",
-   "字节": 34128,
-   "KB": 33.3,
-   "分类": "音频"
-  },
-  {
-   "路径": "assets/voice/weather-h1.mp3",
-   "字节": 64800,
-   "KB": 63.3,
-   "分类": "音频"
-  },
-  {
-   "路径": "assets/voice/weather-h2.mp3",
-   "字节": 65088,
-   "KB": 63.6,
-   "分类": "音频"
-  },
-  {
-   "路径": "assets/voice/weather-h3.mp3",
-   "字节": 64800,
-   "KB": 63.3,
-   "分类": "音频"
-  },
-  {
-   "路径": "assets/voice/weather-h4.mp3",
-   "字节": 62064,
-   "KB": 60.6,
-   "分类": "音频"
-  },
-  {
-   "路径": "assets/voice/weather-quiz-0.mp3",
-   "字节": 16848,
-   "KB": 16.5,
-   "分类": "音频"
-  },
-  {
-   "路径": "assets/voice/weather-quiz-1.mp3",
-   "字节": 18144,
-   "KB": 17.7,
-   "分类": "音频"
-  },
-  {
-   "路径": "assets/voice/weather-quiz-2.mp3",
-   "字节": 13392,
-   "KB": 13.1,
-   "分类": "音频"
-  },
-  {
-   "路径": "assets/voice/weather-story-0.mp3",
-   "字节": 54576,
-   "KB": 53.3,
-   "分类": "音频"
-  },
-  {
-   "路径": "assets/voice/weather-story-1.mp3",
-   "字节": 60768,
-   "KB": 59.3,
-   "分类": "音频"
-  },
-  {
-   "路径": "assets/voice/weather-story-2.mp3",
-   "字节": 63936,
-   "KB": 62.4,
-   "分类": "音频"
-  },
-  {
-   "路径": "config.js",
-   "字节": 469,
-   "KB": 0.5,
-   "分类": "页面"
-  },
-  {
-   "路径": "css/style.css",
-   "字节": 13939,
-   "KB": 13.6,
-   "分类": "样式"
-  },
-  {
-   "路径": "index.html",
-   "字节": 1647,
-   "KB": 1.6,
-   "分类": "页面"
-  },
-  {
-   "路径": "js/app.js",
-   "字节": 19061,
-   "KB": 18.6,
-   "分类": "脚本"
-  },
-  {
-   "路径": "js/logic.js",
-   "字节": 51980,
-   "KB": 50.8,
-   "分类": "脚本"
-  },
-  {
-   "路径": "js/logic.mjs",
-   "字节": 52071,
-   "KB": 50.9,
-   "分类": "脚本"
-  },
-  {
-   "路径": "kv.js",
-   "字节": 3863,
-   "KB": 3.8,
-   "分类": "页面"
-  },
-  {
-   "路径": "play.html",
-   "字节": 3062,
-   "KB": 3.0,
-   "分类": "页面"
-  },
-  {
-   "路径": "scripts/kv-server.mjs",
-   "字节": 11300,
-   "KB": 11.0,
-   "分类": "脚本"
-  },
-  {
-   "路径": "tests/smoke.test.js",
-   "字节": 9574,
-   "KB": 9.3,
-   "分类": "测试"
-  }
- ]
+  "说明": "正式站点文件台账（不含 prototype/ 历史原型、.git、.workbuddy），路径相对仓库根目录，2026-11-24 按实际文件重新生成。原源码包口径中的 scripts/kv-server.mjs 与 tests/smoke.test.js 未入库已从清单移除，新增 tools/verify-assets.cjs。",
+  "文件总数": 271,
+  "总字节": 12193932,
+  "分类统计": {
+    "图片": {
+      "数量": 20,
+      "合计KB": 1176.9
+    },
+    "文档": {
+      "数量": 10,
+      "合计KB": 183.0
+    },
+    "样式": {
+      "数量": 1,
+      "合计KB": 13.6
+    },
+    "脚本": {
+      "数量": 5,
+      "合计KB": 124.6
+    },
+    "音频": {
+      "数量": 232,
+      "合计KB": 10400.1
+    },
+    "页面": {
+      "数量": 3,
+      "合计KB": 10.7
+    }
+  },
+  "文件": [
+    {
+      "路径": "CHANGELOG.md",
+      "字节": 1568,
+      "KB": 1.5,
+      "分类": "文档"
+    },
+    {
+      "路径": "README.md",
+      "字节": 1848,
+      "KB": 1.8,
+      "分类": "文档"
+    },
+    {
+      "路径": "assets/theme-animals.jpg",
+      "字节": 65927,
+      "KB": 64.4,
+      "分类": "图片"
+    },
+    {
+      "路径": "assets/theme-bird.jpg",
+      "字节": 67751,
+      "KB": 66.2,
+      "分类": "图片"
+    },
+    {
+      "路径": "assets/theme-body.jpg",
+      "字节": 49605,
+      "KB": 48.4,
+      "分类": "图片"
+    },
+    {
+      "路径": "assets/theme-china.jpg",
+      "字节": 67448,
+      "KB": 65.9,
+      "分类": "图片"
+    },
+    {
+      "路径": "assets/theme-color.jpg",
+      "字节": 58776,
+      "KB": 57.4,
+      "分类": "图片"
+    },
+    {
+      "路径": "assets/theme-culture.jpg",
+      "字节": 68458,
+      "KB": 66.9,
+      "分类": "图片"
+    },
+    {
+      "路径": "assets/theme-dino.jpg",
+      "字节": 67424,
+      "KB": 65.8,
+      "分类": "图片"
+    },
+    {
+      "路径": "assets/theme-festival.jpg",
+      "字节": 68210,
+      "KB": 66.6,
+      "分类": "图片"
+    },
+    {
+      "路径": "assets/theme-insect.jpg",
+      "字节": 64716,
+      "KB": 63.2,
+      "分类": "图片"
+    },
+    {
+      "路径": "assets/theme-life.jpg",
+      "字节": 67383,
+      "KB": 65.8,
+      "分类": "图片"
+    },
+    {
+      "路径": "assets/theme-music.jpg",
+      "字节": 68700,
+      "KB": 67.1,
+      "分类": "图片"
+    },
+    {
+      "路径": "assets/theme-number.jpg",
+      "字节": 48795,
+      "KB": 47.7,
+      "分类": "图片"
+    },
+    {
+      "路径": "assets/theme-ocean.jpg",
+      "字节": 67807,
+      "KB": 66.2,
+      "分类": "图片"
+    },
+    {
+      "路径": "assets/theme-plant.jpg",
+      "字节": 60593,
+      "KB": 59.2,
+      "分类": "图片"
+    },
+    {
+      "路径": "assets/theme-safety.jpg",
+      "字节": 27203,
+      "KB": 26.6,
+      "分类": "图片"
+    },
+    {
+      "路径": "assets/theme-science.jpg",
+      "字节": 49534,
+      "KB": 48.4,
+      "分类": "图片"
+    },
+    {
+      "路径": "assets/theme-season.jpg",
+      "字节": 69475,
+      "KB": 67.8,
+      "分类": "图片"
+    },
+    {
+      "路径": "assets/theme-space.jpg",
+      "字节": 53286,
+      "KB": 52.0,
+      "分类": "图片"
+    },
+    {
+      "路径": "assets/theme-vehicle.jpg",
+      "字节": 64461,
+      "KB": 63.0,
+      "分类": "图片"
+    },
+    {
+      "路径": "assets/theme-weather.jpg",
+      "字节": 49436,
+      "KB": 48.3,
+      "分类": "图片"
+    },
+    {
+      "路径": "assets/voice/animals-badge.mp3",
+      "字节": 31536,
+      "KB": 30.8,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/animals-h1.mp3",
+      "字节": 72576,
+      "KB": 70.9,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/animals-h2.mp3",
+      "字节": 64656,
+      "KB": 63.1,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/animals-h3.mp3",
+      "字节": 67680,
+      "KB": 66.1,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/animals-h4.mp3",
+      "字节": 66672,
+      "KB": 65.1,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/animals-quiz-0.mp3",
+      "字节": 18000,
+      "KB": 17.6,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/animals-quiz-1.mp3",
+      "字节": 25200,
+      "KB": 24.6,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/animals-quiz-2.mp3",
+      "字节": 18288,
+      "KB": 17.9,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/animals-story-0.mp3",
+      "字节": 53712,
+      "KB": 52.5,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/animals-story-1.mp3",
+      "字节": 64368,
+      "KB": 62.9,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/animals-story-2.mp3",
+      "字节": 59040,
+      "KB": 57.7,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/bird-badge.mp3",
+      "字节": 33552,
+      "KB": 32.8,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/bird-h1.mp3",
+      "字节": 71280,
+      "KB": 69.6,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/bird-h2.mp3",
+      "字节": 68400,
+      "KB": 66.8,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/bird-h3.mp3",
+      "字节": 61344,
+      "KB": 59.9,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/bird-h4.mp3",
+      "字节": 64944,
+      "KB": 63.4,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/bird-quiz-0.mp3",
+      "字节": 13968,
+      "KB": 13.6,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/bird-quiz-1.mp3",
+      "字节": 18576,
+      "KB": 18.1,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/bird-quiz-2.mp3",
+      "字节": 18000,
+      "KB": 17.6,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/bird-story-0.mp3",
+      "字节": 63504,
+      "KB": 62.0,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/bird-story-1.mp3",
+      "字节": 54288,
+      "KB": 53.0,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/bird-story-2.mp3",
+      "字节": 58320,
+      "KB": 57.0,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/body-badge.mp3",
+      "字节": 32400,
+      "KB": 31.6,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/body-h1.mp3",
+      "字节": 56304,
+      "KB": 55.0,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/body-h2.mp3",
+      "字节": 70416,
+      "KB": 68.8,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/body-h3.mp3",
+      "字节": 63648,
+      "KB": 62.2,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/body-h4.mp3",
+      "字节": 63504,
+      "KB": 62.0,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/body-quiz-0.mp3",
+      "字节": 23328,
+      "KB": 22.8,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/body-quiz-1.mp3",
+      "字节": 14400,
+      "KB": 14.1,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/body-quiz-2.mp3",
+      "字节": 17856,
+      "KB": 17.4,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/body-story-0.mp3",
+      "字节": 41184,
+      "KB": 40.2,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/body-story-1.mp3",
+      "字节": 58608,
+      "KB": 57.2,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/body-story-2.mp3",
+      "字节": 56592,
+      "KB": 55.3,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/china-badge.mp3",
+      "字节": 32976,
+      "KB": 32.2,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/china-h1.mp3",
+      "字节": 68976,
+      "KB": 67.4,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/china-h2.mp3",
+      "字节": 71856,
+      "KB": 70.2,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/china-h3.mp3",
+      "字节": 63936,
+      "KB": 62.4,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/china-h4.mp3",
+      "字节": 68400,
+      "KB": 66.8,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/china-quiz-0.mp3",
+      "字节": 14256,
+      "KB": 13.9,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/china-quiz-1.mp3",
+      "字节": 15552,
+      "KB": 15.2,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/china-quiz-2.mp3",
+      "字节": 18288,
+      "KB": 17.9,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/china-story-0.mp3",
+      "字节": 56304,
+      "KB": 55.0,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/china-story-1.mp3",
+      "字节": 50400,
+      "KB": 49.2,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/china-story-2.mp3",
+      "字节": 55296,
+      "KB": 54.0,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/color-badge.mp3",
+      "字节": 33552,
+      "KB": 32.8,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/color-h1.mp3",
+      "字节": 68544,
+      "KB": 66.9,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/color-h2.mp3",
+      "字节": 72432,
+      "KB": 70.7,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/color-h3.mp3",
+      "字节": 72576,
+      "KB": 70.9,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/color-h4.mp3",
+      "字节": 67680,
+      "KB": 66.1,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/color-quiz-0.mp3",
+      "字节": 22320,
+      "KB": 21.8,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/color-quiz-1.mp3",
+      "字节": 23328,
+      "KB": 22.8,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/color-quiz-2.mp3",
+      "字节": 28800,
+      "KB": 28.1,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/color-story-0.mp3",
+      "字节": 55008,
+      "KB": 53.7,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/color-story-1.mp3",
+      "字节": 54432,
+      "KB": 53.2,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/color-story-2.mp3",
+      "字节": 58176,
+      "KB": 56.8,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/culture-badge.mp3",
+      "字节": 32112,
+      "KB": 31.4,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/culture-h1.mp3",
+      "字节": 56160,
+      "KB": 54.8,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/culture-h2.mp3",
+      "字节": 66528,
+      "KB": 65.0,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/culture-h3.mp3",
+      "字节": 63360,
+      "KB": 61.9,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/culture-h4.mp3",
+      "字节": 61488,
+      "KB": 60.0,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/culture-quiz-0.mp3",
+      "字节": 18432,
+      "KB": 18.0,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/culture-quiz-1.mp3",
+      "字节": 22896,
+      "KB": 22.4,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/culture-quiz-2.mp3",
+      "字节": 20160,
+      "KB": 19.7,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/culture-story-0.mp3",
+      "字节": 57024,
+      "KB": 55.7,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/culture-story-1.mp3",
+      "字节": 59616,
+      "KB": 58.2,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/culture-story-2.mp3",
+      "字节": 59472,
+      "KB": 58.1,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/dino-badge.mp3",
+      "字节": 34416,
+      "KB": 33.6,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/dino-h1.mp3",
+      "字节": 77904,
+      "KB": 76.1,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/dino-h2.mp3",
+      "字节": 71424,
+      "KB": 69.8,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/dino-h3.mp3",
+      "字节": 69840,
+      "KB": 68.2,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/dino-h4.mp3",
+      "字节": 75888,
+      "KB": 74.1,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/dino-quiz-0.mp3",
+      "字节": 15984,
+      "KB": 15.6,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/dino-quiz-1.mp3",
+      "字节": 19296,
+      "KB": 18.8,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/dino-quiz-2.mp3",
+      "字节": 19008,
+      "KB": 18.6,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/dino-story-0.mp3",
+      "字节": 60192,
+      "KB": 58.8,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/dino-story-1.mp3",
+      "字节": 65232,
+      "KB": 63.7,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/dino-story-2.mp3",
+      "字节": 62352,
+      "KB": 60.9,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/festival-badge.mp3",
+      "字节": 31968,
+      "KB": 31.2,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/festival-h1.mp3",
+      "字节": 61056,
+      "KB": 59.6,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/festival-h2.mp3",
+      "字节": 62928,
+      "KB": 61.5,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/festival-h3.mp3",
+      "字节": 65520,
+      "KB": 64.0,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/festival-h4.mp3",
+      "字节": 63792,
+      "KB": 62.3,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/festival-quiz-0.mp3",
+      "字节": 18720,
+      "KB": 18.3,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/festival-quiz-1.mp3",
+      "字节": 14400,
+      "KB": 14.1,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/festival-quiz-2.mp3",
+      "字节": 16992,
+      "KB": 16.6,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/festival-story-0.mp3",
+      "字节": 60336,
+      "KB": 58.9,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/festival-story-1.mp3",
+      "字节": 54576,
+      "KB": 53.3,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/festival-story-2.mp3",
+      "字节": 51408,
+      "KB": 50.2,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/fx-match-all-v2.mp3",
+      "字节": 24768,
+      "KB": 24.2,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/fx-match-all.mp3",
+      "字节": 24768,
+      "KB": 24.2,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/fx-match-v2.mp3",
+      "字节": 11664,
+      "KB": 11.4,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/fx-match-wrong-v2.mp3",
+      "字节": 11376,
+      "KB": 11.1,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/fx-match-wrong.mp3",
+      "字节": 11376,
+      "KB": 11.1,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/fx-match.mp3",
+      "字节": 11664,
+      "KB": 11.4,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/fx-right-v2.mp3",
+      "字节": 15408,
+      "KB": 15.0,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/fx-right.mp3",
+      "字节": 15408,
+      "KB": 15.0,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/fx-story-done-v2.mp3",
+      "字节": 23472,
+      "KB": 22.9,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/fx-story-done.mp3",
+      "字节": 23472,
+      "KB": 22.9,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/fx-wrong-v2.mp3",
+      "字节": 11952,
+      "KB": 11.7,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/fx-wrong.mp3",
+      "字节": 11952,
+      "KB": 11.7,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/insect-badge.mp3",
+      "字节": 35136,
+      "KB": 34.3,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/insect-h1.mp3",
+      "字节": 71424,
+      "KB": 69.8,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/insect-h2.mp3",
+      "字节": 69408,
+      "KB": 67.8,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/insect-h3.mp3",
+      "字节": 68976,
+      "KB": 67.4,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/insect-h4.mp3",
+      "字节": 61920,
+      "KB": 60.5,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/insect-quiz-0.mp3",
+      "字节": 17712,
+      "KB": 17.3,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/insect-quiz-1.mp3",
+      "字节": 19008,
+      "KB": 18.6,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/insect-quiz-2.mp3",
+      "字节": 14832,
+      "KB": 14.5,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/insect-story-0.mp3",
+      "字节": 56448,
+      "KB": 55.1,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/insect-story-1.mp3",
+      "字节": 60048,
+      "KB": 58.6,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/insect-story-2.mp3",
+      "字节": 66240,
+      "KB": 64.7,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/life-badge.mp3",
+      "字节": 31824,
+      "KB": 31.1,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/life-h1.mp3",
+      "字节": 62208,
+      "KB": 60.8,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/life-h2.mp3",
+      "字节": 64944,
+      "KB": 63.4,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/life-h3.mp3",
+      "字节": 57888,
+      "KB": 56.5,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/life-h4.mp3",
+      "字节": 56880,
+      "KB": 55.5,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/life-quiz-0.mp3",
+      "字节": 19872,
+      "KB": 19.4,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/life-quiz-1.mp3",
+      "字节": 16272,
+      "KB": 15.9,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/life-quiz-2.mp3",
+      "字节": 23040,
+      "KB": 22.5,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/life-story-0.mp3",
+      "字节": 52560,
+      "KB": 51.3,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/life-story-1.mp3",
+      "字节": 47664,
+      "KB": 46.5,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/life-story-2.mp3",
+      "字节": 57168,
+      "KB": 55.8,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/music-badge.mp3",
+      "字节": 33696,
+      "KB": 32.9,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/music-h1.mp3",
+      "字节": 65808,
+      "KB": 64.3,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/music-h2.mp3",
+      "字节": 52560,
+      "KB": 51.3,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/music-h3.mp3",
+      "字节": 70848,
+      "KB": 69.2,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/music-h4.mp3",
+      "字节": 68256,
+      "KB": 66.7,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/music-quiz-0.mp3",
+      "字节": 17856,
+      "KB": 17.4,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/music-quiz-1.mp3",
+      "字节": 17136,
+      "KB": 16.7,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/music-quiz-2.mp3",
+      "字节": 17568,
+      "KB": 17.2,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/music-story-0.mp3",
+      "字节": 57312,
+      "KB": 56.0,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/music-story-1.mp3",
+      "字节": 58464,
+      "KB": 57.1,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/music-story-2.mp3",
+      "字节": 58752,
+      "KB": 57.4,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/number-badge.mp3",
+      "字节": 32832,
+      "KB": 32.1,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/number-h1.mp3",
+      "字节": 67536,
+      "KB": 66.0,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/number-h2.mp3",
+      "字节": 55728,
+      "KB": 54.4,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/number-h3.mp3",
+      "字节": 62352,
+      "KB": 60.9,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/number-h4.mp3",
+      "字节": 57168,
+      "KB": 55.8,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/number-quiz-0.mp3",
+      "字节": 15552,
+      "KB": 15.2,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/number-quiz-1.mp3",
+      "字节": 24768,
+      "KB": 24.2,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/number-quiz-2.mp3",
+      "字节": 15264,
+      "KB": 14.9,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/number-story-0.mp3",
+      "字节": 55008,
+      "KB": 53.7,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/number-story-1.mp3",
+      "字节": 61344,
+      "KB": 59.9,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/number-story-2.mp3",
+      "字节": 55872,
+      "KB": 54.6,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/ocean-badge.mp3",
+      "字节": 33264,
+      "KB": 32.5,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/ocean-h1.mp3",
+      "字节": 73584,
+      "KB": 71.9,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/ocean-h2.mp3",
+      "字节": 70704,
+      "KB": 69.0,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/ocean-h3.mp3",
+      "字节": 74592,
+      "KB": 72.8,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/ocean-h4.mp3",
+      "字节": 75744,
+      "KB": 74.0,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/ocean-quiz-0.mp3",
+      "字节": 15696,
+      "KB": 15.3,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/ocean-quiz-1.mp3",
+      "字节": 19440,
+      "KB": 19.0,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/ocean-quiz-2.mp3",
+      "字节": 20160,
+      "KB": 19.7,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/ocean-story-0.mp3",
+      "字节": 62496,
+      "KB": 61.0,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/ocean-story-1.mp3",
+      "字节": 62352,
+      "KB": 60.9,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/ocean-story-2.mp3",
+      "字节": 58752,
+      "KB": 57.4,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/plant-badge.mp3",
+      "字节": 32544,
+      "KB": 31.8,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/plant-h1.mp3",
+      "字节": 69264,
+      "KB": 67.6,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/plant-h2.mp3",
+      "字节": 67680,
+      "KB": 66.1,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/plant-h3.mp3",
+      "字节": 76032,
+      "KB": 74.2,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/plant-h4.mp3",
+      "字节": 68256,
+      "KB": 66.7,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/plant-quiz-0.mp3",
+      "字节": 20304,
+      "KB": 19.8,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/plant-quiz-1.mp3",
+      "字节": 20304,
+      "KB": 19.8,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/plant-quiz-2.mp3",
+      "字节": 18720,
+      "KB": 18.3,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/plant-story-0.mp3",
+      "字节": 51984,
+      "KB": 50.8,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/plant-story-1.mp3",
+      "字节": 52992,
+      "KB": 51.8,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/plant-story-2.mp3",
+      "字节": 61488,
+      "KB": 60.0,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/safety-badge.mp3",
+      "字节": 33264,
+      "KB": 32.5,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/safety-h1.mp3",
+      "字节": 52560,
+      "KB": 51.3,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/safety-h2.mp3",
+      "字节": 65808,
+      "KB": 64.3,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/safety-h3.mp3",
+      "字节": 58896,
+      "KB": 57.5,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/safety-h4.mp3",
+      "字节": 62640,
+      "KB": 61.2,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/safety-quiz-0.mp3",
+      "字节": 15552,
+      "KB": 15.2,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/safety-quiz-1.mp3",
+      "字节": 19584,
+      "KB": 19.1,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/safety-quiz-2.mp3",
+      "字节": 16560,
+      "KB": 16.2,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/safety-story-0.mp3",
+      "字节": 54000,
+      "KB": 52.7,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/safety-story-1.mp3",
+      "字节": 47232,
+      "KB": 46.1,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/safety-story-2.mp3",
+      "字节": 55584,
+      "KB": 54.3,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/science-badge.mp3",
+      "字节": 32112,
+      "KB": 31.4,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/science-h1.mp3",
+      "字节": 59616,
+      "KB": 58.2,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/science-h2.mp3",
+      "字节": 73584,
+      "KB": 71.9,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/science-h3.mp3",
+      "字节": 66240,
+      "KB": 64.7,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/science-h4.mp3",
+      "字节": 59904,
+      "KB": 58.5,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/science-quiz-0.mp3",
+      "字节": 19008,
+      "KB": 18.6,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/science-quiz-1.mp3",
+      "字节": 18288,
+      "KB": 17.9,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/science-quiz-2.mp3",
+      "字节": 14832,
+      "KB": 14.5,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/science-story-0.mp3",
+      "字节": 49968,
+      "KB": 48.8,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/science-story-1.mp3",
+      "字节": 45504,
+      "KB": 44.4,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/science-story-2.mp3",
+      "字节": 57312,
+      "KB": 56.0,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/season-badge.mp3",
+      "字节": 34848,
+      "KB": 34.0,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/season-h1.mp3",
+      "字节": 64080,
+      "KB": 62.6,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/season-h2.mp3",
+      "字节": 66096,
+      "KB": 64.5,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/season-h3.mp3",
+      "字节": 62352,
+      "KB": 60.9,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/season-h4.mp3",
+      "字节": 65088,
+      "KB": 63.6,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/season-quiz-0.mp3",
+      "字节": 21600,
+      "KB": 21.1,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/season-quiz-1.mp3",
+      "字节": 15984,
+      "KB": 15.6,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/season-quiz-2.mp3",
+      "字节": 20736,
+      "KB": 20.2,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/season-story-0.mp3",
+      "字节": 55296,
+      "KB": 54.0,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/season-story-1.mp3",
+      "字节": 55584,
+      "KB": 54.3,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/season-story-2.mp3",
+      "字节": 63072,
+      "KB": 61.6,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/space-badge.mp3",
+      "字节": 34272,
+      "KB": 33.5,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/space-h1.mp3",
+      "字节": 68400,
+      "KB": 66.8,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/space-h2.mp3",
+      "字节": 64656,
+      "KB": 63.1,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/space-h3.mp3",
+      "字节": 63216,
+      "KB": 61.7,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/space-h4.mp3",
+      "字节": 69264,
+      "KB": 67.6,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/space-quiz-0.mp3",
+      "字节": 13680,
+      "KB": 13.4,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/space-quiz-1.mp3",
+      "字节": 21168,
+      "KB": 20.7,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/space-quiz-2.mp3",
+      "字节": 19296,
+      "KB": 18.8,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/space-story-0.mp3",
+      "字节": 63072,
+      "KB": 61.6,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/space-story-1.mp3",
+      "字节": 59904,
+      "KB": 58.5,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/space-story-2.mp3",
+      "字节": 59760,
+      "KB": 58.4,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/vehicle-badge.mp3",
+      "字节": 33120,
+      "KB": 32.3,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/vehicle-h1.mp3",
+      "字节": 62496,
+      "KB": 61.0,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/vehicle-h2.mp3",
+      "字节": 59472,
+      "KB": 58.1,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/vehicle-h3.mp3",
+      "字节": 65232,
+      "KB": 63.7,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/vehicle-h4.mp3",
+      "字节": 63072,
+      "KB": 61.6,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/vehicle-quiz-0.mp3",
+      "字节": 20016,
+      "KB": 19.5,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/vehicle-quiz-1.mp3",
+      "字节": 14832,
+      "KB": 14.5,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/vehicle-quiz-2.mp3",
+      "字节": 20592,
+      "KB": 20.1,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/vehicle-story-0.mp3",
+      "字节": 58464,
+      "KB": 57.1,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/vehicle-story-1.mp3",
+      "字节": 52848,
+      "KB": 51.6,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/vehicle-story-2.mp3",
+      "字节": 54432,
+      "KB": 53.2,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/weather-badge.mp3",
+      "字节": 34128,
+      "KB": 33.3,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/weather-h1.mp3",
+      "字节": 64800,
+      "KB": 63.3,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/weather-h2.mp3",
+      "字节": 65088,
+      "KB": 63.6,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/weather-h3.mp3",
+      "字节": 64800,
+      "KB": 63.3,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/weather-h4.mp3",
+      "字节": 62064,
+      "KB": 60.6,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/weather-quiz-0.mp3",
+      "字节": 16848,
+      "KB": 16.5,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/weather-quiz-1.mp3",
+      "字节": 18144,
+      "KB": 17.7,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/weather-quiz-2.mp3",
+      "字节": 13392,
+      "KB": 13.1,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/weather-story-0.mp3",
+      "字节": 54576,
+      "KB": 53.3,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/weather-story-1.mp3",
+      "字节": 60768,
+      "KB": 59.3,
+      "分类": "音频"
+    },
+    {
+      "路径": "assets/voice/weather-story-2.mp3",
+      "字节": 63936,
+      "KB": 62.4,
+      "分类": "音频"
+    },
+    {
+      "路径": "config.js",
+      "字节": 469,
+      "KB": 0.5,
+      "分类": "脚本"
+    },
+    {
+      "路径": "css/style.css",
+      "字节": 13939,
+      "KB": 13.6,
+      "分类": "样式"
+    },
+    {
+      "路径": "docs/handover/README.md",
+      "字节": 2018,
+      "KB": 2.0,
+      "分类": "文档"
+    },
+    {
+      "路径": "docs/handover/主题内容数据.json",
+      "字节": 77771,
+      "KB": 75.9,
+      "分类": "文档"
+    },
+    {
+      "路径": "docs/handover/文件清单.json",
+      "字节": 70369,
+      "KB": 68.7,
+      "分类": "文档"
+    },
+    {
+      "路径": "docs/handover/项目交接说明.md",
+      "字节": 15975,
+      "KB": 15.6,
+      "分类": "文档"
+    },
+    {
+      "路径": "docs/产研流程状态.md",
+      "字节": 1783,
+      "KB": 1.7,
+      "分类": "文档"
+    },
+    {
+      "路径": "docs/测试用例.md",
+      "字节": 6614,
+      "KB": 6.5,
+      "分类": "文档"
+    },
+    {
+      "路径": "docs/线框图.html",
+      "字节": 6280,
+      "KB": 6.1,
+      "分类": "页面"
+    },
+    {
+      "路径": "docs/需求文档.md",
+      "字节": 6392,
+      "KB": 6.2,
+      "分类": "文档"
+    },
+    {
+      "路径": "index.html",
+      "字节": 1647,
+      "KB": 1.6,
+      "分类": "页面"
+    },
+    {
+      "路径": "js/app.js",
+      "字节": 19061,
+      "KB": 18.6,
+      "分类": "脚本"
+    },
+    {
+      "路径": "js/logic.js",
+      "字节": 51980,
+      "KB": 50.8,
+      "分类": "脚本"
+    },
+    {
+      "路径": "js/logic.mjs",
+      "字节": 52071,
+      "KB": 50.9,
+      "分类": "脚本"
+    },
+    {
+      "路径": "kv.js",
+      "字节": 3863,
+      "KB": 3.8,
+      "分类": "脚本"
+    },
+    {
+      "路径": "play.html",
+      "字节": 3062,
+      "KB": 3.0,
+      "分类": "页面"
+    },
+    {
+      "路径": "tools/verify-assets.cjs",
+      "字节": 3146,
+      "KB": 3.1,
+      "分类": "文档"
+    }
+  ]
 }
