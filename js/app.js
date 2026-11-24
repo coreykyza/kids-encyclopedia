@@ -81,26 +81,50 @@ window.addEventListener("pagehide", () => writeLocalProgress(progress));
 
 /* ===== 语音：优先预生成真人录音，缺失时回退系统合成音 ===== */
 let currentAudio = null;
+// 播放序号：每次 speak 递增。被后一次 speak 主动打断的旧音频，其 error/catch
+// 不得再触发系统合成音回退，否则答对音效会被下一题配音打断后念出「答对啦，你真棒！」
+let audioSeq = 0;
 
 function voiceFile(key) {
   return key ? `assets/voice/${key}.mp3` : null;
 }
 
-function speak(key, fallbackText) {
-  if (!progress.voice) return;
+// onEnded 只在本次播放结束且仍是最新一次时回调，用于串行播下一句。
+// 音频源的 ended 事件在无头浏览器 / 部分 WebView 不可靠，故加超时兜底：
+// 取 ended 与定时器中先到者，保证串联不会断。endGapMs 可按文案长度调整。
+function speak(key, fallbackText, onEnded, endGapMs) {
+  const seq = ++audioSeq;
+  if (!progress.voice) { if (onEnded) onEnded(); return; }
   if ("speechSynthesis" in window) window.speechSynthesis.cancel();
-  if (currentAudio) { currentAudio.pause(); currentAudio = null; }
+  if (currentAudio) {
+    try { currentAudio.pause(); } catch (e) { /* 忽略 */ }
+    currentAudio = null;
+  }
+  let settled = false;
+  let guardTimer = null;
+  const finish = (useFallback) => {
+    if (guardTimer) { clearTimeout(guardTimer); guardTimer = null; }
+    if (settled || seq !== audioSeq) return;
+    settled = true;
+    if (useFallback) speakFallback(fallbackText);
+    if (onEnded) onEnded();
+  };
   const src = voiceFile(key);
   if (src) {
     try {
       const a = new Audio(src);
       currentAudio = a;
-      a.onerror = () => speakFallback(fallbackText);
-      a.play().catch(() => speakFallback(fallbackText));
+      a.onended = () => finish(false);
+      a.onerror = () => finish(true);
+      a.play().catch(() => finish(true));
+      if (onEnded) {
+        // 默认 3.2s：覆盖 fx-right-v2(约2.6s) 等短句；长句调用方可传更大值。
+        guardTimer = setTimeout(() => finish(false), endGapMs || 3200);
+      }
       return;
     } catch (e) { /* 回退 */ }
   }
-  speakFallback(fallbackText);
+  finish(true);
 }
 
 function speakFallback(text) {
@@ -279,11 +303,11 @@ function initPlay() {
     document.getElementById("quiz-feedback").textContent = "";
     renderQuestion();
   }
-  function renderQuestion() {
+  function renderQuestion(skipSpeak) {
     const q = theme.quiz[quizIdx];
     document.getElementById("quiz-progress").textContent = `第 ${quizIdx + 1} 题 / 共 ${theme.quiz.length} 题`;
     document.getElementById("quiz-question").textContent = q.q;
-    speak(`${themeId}-quiz-${quizIdx}`, q.q);
+    if (!skipSpeak) speak(`${themeId}-quiz-${quizIdx}`, q.q);
     const box = document.getElementById("quiz-options");
     box.innerHTML = "";
     q.options.forEach((opt) => {
@@ -304,18 +328,28 @@ function initPlay() {
       hintShown = false;
       fb.textContent = "答对啦，你真棒！";
       fb.className = "quiz-feedback ok";
-      speak("fx-right-v2", "答对啦，你真棒！");
-      progress = saveQuizProgress(progress, themeId, quizIdx + 1);
-      await saveProgress();
-      const next = nextQuizIndex(quizIdx, theme.quiz.length, true);
+      // UI 立即推进（保持连点三次可通关）。题干配音延后到鼓励语播完再播，
+      // 否则下一题的 speak 会打断 fx-right-v2，其 catch 被误判为加载失败，
+      // 回退到系统合成音念出「答对啦，你真棒！」——那不是晓伊的音色。
+      const answered = quizIdx;
+      const next = nextQuizIndex(answered, theme.quiz.length, true);
+      const wasAlready = !!progress.badges[themeId];
+      progress = saveQuizProgress(progress, themeId, answered + 1);
+      saveProgress();
       if (next === -1) {
-        await winQuiz();
+        winQuiz(true); // UI 与存档立即完成，徽章配音等鼓励语播完再播
       } else {
         quizIdx = next;
-        renderQuestion();
+        renderQuestion(true); // 只重绘选项，不播题干
         document.getElementById("quiz-feedback").textContent = "答对啦，你真棒！";
         document.getElementById("quiz-feedback").className = "quiz-feedback ok";
       }
+      speak("fx-right-v2", "答对啦，你真棒！", () => {
+        // 用户在鼓励语播放期间又答了题：答题已推进，不播过时的题干或徽章音。
+        if (quizIdx !== next) return;
+        if (next === -1) speakBadge(wasAlready);
+        else speak(`${themeId}-quiz-${next}`, theme.quiz[next].q);
+      });
     } else {
       btn.classList.add("wrong");
       wrongStreak++;
@@ -333,7 +367,13 @@ function initPlay() {
       }
     }
   }
-  async function winQuiz() {
+  function speakBadge(already) {
+    const had = already === undefined ? !!progress.badges[themeId] : already;
+    speak(`${themeId}-badge`, had
+      ? `这个徽章你已经收集到啦，真厉害！`
+      : `恭喜你，答对了所有题目，获得${theme.badgeName}徽章！`);
+  }
+  async function winQuiz(skipBadgeSpeak) {
     const result = document.getElementById("quiz-result");
     result.querySelectorAll("span.confetti").forEach((s) => s.remove());
     const already = !!progress.badges[themeId];
@@ -342,9 +382,7 @@ function initPlay() {
       : `恭喜获得「${theme.badgeName}」徽章！`;
     result_confetti();
     result.classList.add("win");
-    speak(`${themeId}-badge`, already
-      ? `这个徽章你已经收集到啦，真厉害！`
-      : `恭喜你，答对了所有题目，获得${theme.badgeName}徽章！`);
+    if (!skipBadgeSpeak) speakBadge();
     if (!already) {
       progress = grantBadge(progress, themeId);
       await saveProgress();

@@ -1,0 +1,42 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><title>语音竞态回归：答对鼓励语必须为晓伊录音</title></head><body>
+<p>断言：连点正确答案后，不得用系统合成音念「答对啦，你真棒！」；鼓励语 mp3 必须被真实加载播放。</p>
+<iframe id="f" src="../play.html?theme=animals" style="width:1200px;height:900px"></iframe>
+<pre id="out">PENDING</pre>
+<script>
+const log=[];
+const f=document.getElementById('f');
+f.onload=()=>{
+  const w=f.contentWindow,d=f.contentDocument;
+  // 记录系统回退朗读
+  const os=w.speechSynthesis.speak.bind(w.speechSynthesis);
+  w.speechSynthesis.speak=(u)=>{log.push('FALLBACK:'+u.text);try{os(u)}catch(e){}};
+  // 记录 Audio 构造的 src（是否真的去加载 mp3）
+  const OA=w.Audio;
+  w.Audio=function(src){ log.push('PLAY_MP3:'+src); return new OA(src); };
+  w.Audio.prototype=OA.prototype;
+  const click=()=>{
+    const c=d.querySelector('#quiz-options .quiz-option[data-correct="1"]');
+    if(c){c.click();return true;} return false;
+  };
+  setTimeout(()=>{
+    d.getElementById('tab-quiz').click();
+    setTimeout(()=>{
+      log.push('--click1--');click();
+      setTimeout(()=>{
+        log.push('--click2--');click();
+        setTimeout(()=>{
+          log.push('--click3(通关)--');click();
+          setTimeout(()=>{
+            const bad=log.filter(x=>x==='FALLBACK:答对啦，你真棒！');
+            const praise=log.filter(x=>x.indexOf('fx-right-v2.mp3')>=0).length;
+            log.push('ASSERT 系统音念鼓励语='+bad.length+'(应为0)');
+            log.push('ASSERT 鼓励语mp3加载='+praise+'次(应为3)');
+            log.push(bad.length===0&&praise===3?'PASS':'FAIL');
+            document.getElementById('out').textContent='RESULT\n'+log.join('\n');
+          },1200);
+        },200);
+      },200);
+    },300);
+  },800);
+};
+</script></body></html>
