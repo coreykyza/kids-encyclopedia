@@ -14,3 +14,11 @@
 ## 变更池
 
 见 `CHANGELOG.md`。
+
+## 交接材料
+
+接手本项目（含由其他 AI 助手接手）请先读 `docs/handover/README.md`：
+
+- `docs/handover/项目交接说明.md`：十二节主文档（定位、技术栈、运行、目录、内容规格、存储、配音、验收、已知问题、改动指引）
+- `docs/handover/主题内容数据.json`：20 主题全量文案（4 热点 / 3 题 / 4 配对 / 3 故事）
+- `docs/handover/文件清单.json`：256 文件 / 11.4 MB 台账
