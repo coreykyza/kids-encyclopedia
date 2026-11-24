@@ -1,0 +1,27 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><title>通关按钮DOM断言</title></head><body>
+<iframe id="f" src="../play.html?theme=animals" style="width:1200px;height:900px"></iframe>
+<pre id="out">PENDING</pre>
+<script>
+const log=[];const f=document.getElementById('f');
+window.onerror=(m,u,l)=>{document.getElementById('out').textContent='ERROR '+m;};
+function ok(){try{return f.contentDocument&&f.contentDocument.querySelector('.hotspot')}catch(e){return null}}
+function w(){
+  if(!ok()){setTimeout(w,100);return;}
+  const d=f.contentDocument;
+  d.getElementById('tab-quiz').click();
+  setTimeout(()=>{
+    for(let i=0;i<3;i++){const c=d.querySelector('#quiz-options .quiz-option[data-correct="1"]');if(c)c.click();}
+    const r=d.getElementById('quiz-result');
+    const btns=[...r.querySelectorAll('.result-actions button')].map(b=>({id:b.id,text:b.textContent,visible:getComputedStyle(b).display!=='none'}));
+    log.push('win='+r.classList.contains('win'));
+    log.push('按钮='+JSON.stringify(btns));
+    // z-index 检查：按钮不能被彩纸盖住
+    const bar=r.querySelector('.result-actions');
+    log.push('按钮层zIndex='+getComputedStyle(bar).zIndex);
+    const allOk=btns.length===2&&btns.every(b=>b.visible)&&r.classList.contains('win');
+    log.push(allOk?'PASS':'FAIL');
+    document.getElementById('out').textContent='RESULT\n'+log.join('\n');
+  },200);
+}
+w();
+</script></body></html>

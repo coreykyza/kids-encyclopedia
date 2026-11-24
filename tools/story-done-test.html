@@ -1,0 +1,34 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><title>故事完成态 + 自动跳取消 回归</title></head><body>
+<iframe id="f" src="../play.html?theme=animals" style="width:1200px;height:900px"></iframe>
+<pre id="out">PENDING</pre>
+<script>
+const log=[];const f=document.getElementById('f');
+window.onerror=(m,u,l)=>{document.getElementById('out').textContent='ERROR '+m+' @'+l;};
+const d=()=>f.contentDocument;
+const cur=()=>{const a=[...d().querySelectorAll('.tab-btn')].find(b=>b.classList.contains('active'));return a?a.id:'-';};
+function ok(){try{return d()&&d().querySelector('.hotspot')}catch(e){return null}}
+function wait(){
+  if(!ok()){setTimeout(wait,100);return;}
+  // 场景A: 故事听完 3 幕，检查完成态按钮
+  d().getElementById('tab-story').click();
+  for(let i=0;i<3;i++) d().getElementById('story-next').click();
+  log.push('故事听完: doneActions='+d().getElementById('story-done-actions').classList.contains('show')
+    +' storyActions隐藏='+(d().getElementById('story-actions').style.display==='none'));
+  d().getElementById('story-replay').click();
+  log.push('再听一次: doneActions='+d().getElementById('story-done-actions').classList.contains('show')
+    +' step='+d().getElementById('story-step').textContent);
+  // 场景B: 通关后手动切走，自动跳应被取消（4.5秒后仍停在手动切的页）
+  d().getElementById('tab-explore').click();
+  d().getElementById('tab-quiz').click();
+  setTimeout(()=>{
+    for(let i=0;i<3;i++){const c=d().querySelector('#quiz-options .quiz-option[data-correct="1"]');if(c)c.click();}
+    d().getElementById('tab-explore').click(); // 手动切到探索，取消自动跳
+    log.push('通关后手动切探索: tab='+cur());
+    setTimeout(()=>{
+      log.push('4.5秒后 tab='+cur()+'(期望tab-explore，自动跳应被取消)');
+      document.getElementById('out').textContent='RESULT\n'+log.join('\n');
+    },4500);
+  },300);
+}
+wait();
+</script></body></html>

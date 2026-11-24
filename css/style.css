@@ -512,6 +512,19 @@ button { font-family: inherit; cursor: pointer; }
 #story-step { font-size: 16px; color: var(--ink-soft); font-weight: 700; margin-bottom: 10px; font-variant-numeric: tabular-nums; }
 .story-actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
 
+/* 完成态的「下一步 / 再玩」按钮组：让通关后能顺畅进入下一关或重来 */
+.result-actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-top: 18px; }
+#quiz-result .result-actions { position: relative; z-index: 2; }
+#story-done-actions { display: none; }
+#story-done-actions.show { display: flex; }
+.big-btn.ghost {
+  background: var(--card);
+  color: var(--ink-soft);
+  box-shadow: 0 4px 0 var(--line);
+  border: 2px solid var(--line);
+}
+.big-btn.ghost:active { box-shadow: 0 0 0 var(--line); }
+
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; }
 }

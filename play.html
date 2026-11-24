@@ -45,6 +45,10 @@
       <div id="quiz-result">
         <span class="r-emoji">🏅</span>
         <span id="quiz-result-text"></span>
+        <div class="result-actions">
+          <button id="quiz-replay" class="big-btn ghost" type="button">🔄 再玩一次</button>
+          <button id="quiz-next" class="big-btn primary" type="button">🧩 去玩配对 ➜</button>
+        </div>
       </div>
     </section>
 
@@ -54,7 +58,13 @@
         <div class="drag-row" id="drag-row"></div>
         <div class="drop-row" id="drop-row"></div>
       </div>
-      <div class="match-done" id="match-done">🎉 全部配对成功！奖励 1 张贴纸！</div>
+      <div class="match-done" id="match-done">
+        <span id="match-done-text">🎉 全部配对成功！奖励 1 张贴纸！</span>
+        <div class="result-actions">
+          <button id="match-replay" class="big-btn ghost" type="button">🔄 再玩一次</button>
+          <button id="match-next" class="big-btn primary" type="button">📖 去听故事 ➜</button>
+        </div>
+      </div>
     </section>
 
     <section id="pane-story" class="tab-pane">
@@ -62,9 +72,13 @@
         <div id="story-step">1 / 3</div>
         <span class="story-emoji" id="story-emoji"></span>
         <p id="story-text"></p>
-        <div class="story-actions">
+        <div class="story-actions" id="story-actions">
           <button id="story-listen" class="big-btn" type="button">🔊 听一听</button>
           <button id="story-next" class="big-btn primary" type="button">下一幕 ➜</button>
+        </div>
+        <div class="result-actions" id="story-done-actions">
+          <button id="story-replay" class="big-btn ghost" type="button">🔄 再听一次</button>
+          <button id="story-home" class="big-btn primary" type="button">🏠 回地图</button>
         </div>
       </div>
     </section>

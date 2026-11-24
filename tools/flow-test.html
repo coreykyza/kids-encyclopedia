@@ -1,0 +1,41 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><title>玩法切换流程回归</title></head><body>
+<iframe id="f" src="../play.html?theme=animals" style="width:1200px;height:900px"></iframe>
+<pre id="out">PENDING</pre>
+<script>
+const log=[];const f=document.getElementById('f');let stage=0;let done=false;
+window.onerror=(m,u,l)=>{document.getElementById('out').textContent='ERROR '+m+' @'+l;};
+const snap=(tag)=>{
+  const d=f.contentDocument;
+  const at=[...d.querySelectorAll('.tab-btn')].find(b=>b.classList.contains('active'));
+  log.push(tag+': tab='+(at?at.id:'-')
+    +' quizWin='+d.getElementById('quiz-result').classList.contains('win')
+    +' quizQ='+d.getElementById('quiz-progress').textContent
+    +' matchDone='+d.getElementById('match-done').classList.contains('show')
+    +' storyDone='+d.getElementById('story-done-actions').classList.contains('show')
+    +' factOpen='+d.getElementById('fact-card').classList.contains('open'));
+};
+function ready(){
+  try { return f.contentDocument && f.contentDocument.querySelector('.hotspot'); }
+  catch(e){ return null; }
+}
+function waitReady(){
+  if(done) return;
+  if(!ready()){ setTimeout(waitReady,100); return; }
+  done=true;
+  try{
+    const d=f.contentDocument;
+    d.querySelectorAll('.hotspot')[0].click();       // 开知识卡
+    d.getElementById('tab-quiz').click();
+    snap('进问答(知识卡应关)');
+    setTimeout(()=>{
+      for(let i=0;i<3;i++){const c=d.querySelector('#quiz-options .quiz-option[data-correct="1"]');if(c)c.click();}
+      snap('答完3题');
+      d.getElementById('tab-match').click();  snap('切到配对');
+      d.getElementById('tab-quiz').click();   snap('切回问答(应仍通关)');
+      d.getElementById('quiz-replay').click();snap('再玩一次(应回第1题)');
+      document.getElementById('out').textContent='RESULT\n'+log.join('\n');
+    },300);
+  }catch(e){ document.getElementById('out').textContent='CATCH '+e.message+'\n'+log.join('\n'); }
+}
+waitReady();
+</script></body></html>

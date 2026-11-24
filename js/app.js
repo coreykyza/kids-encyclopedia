@@ -278,17 +278,44 @@ function initPlay() {
     await saveProgress();
   });
 
-  // 标签切换
+  // 标签切换：统一入口，切换时停掉上一个玩法的配音、关掉知识卡、取消待办的自动跳转。
   const tabs = { explore: "tab-explore", quiz: "tab-quiz", match: "tab-match", story: "tab-story" };
+  let autoAdvanceTimer = null;
+  function cancelAutoAdvance() {
+    if (autoAdvanceTimer) { clearTimeout(autoAdvanceTimer); autoAdvanceTimer = null; }
+  }
+  function scheduleAdvance(pane, delayMs) {
+    cancelAutoAdvance();
+    autoAdvanceTimer = setTimeout(() => { autoAdvanceTimer = null; switchTab(pane); }, delayMs);
+  }
+  function stopVoice() {
+    audioSeq++; // 让在途音频的回调失效，避免切走后还在念上一屏的台词
+    if (currentAudio) { try { currentAudio.pause(); } catch (e) {} currentAudio = null; }
+    if ("speechSynthesis" in window) window.speechSynthesis.cancel();
+  }
+  function switchTab(pane) {
+    cancelAutoAdvance();
+    stopVoice();
+    document.getElementById("fact-card").classList.remove("open"); // 关掉知识卡，避免盖在别的玩法上
+    document.querySelectorAll(".tab-btn").forEach((b) => b.classList.remove("active"));
+    document.getElementById(tabs[pane]).classList.add("active");
+    document.querySelectorAll(".tab-pane").forEach((p) => p.classList.remove("active"));
+    document.getElementById("pane-" + pane).classList.add("active");
+    if (pane === "quiz") startQuiz();
+    if (pane === "story") showStory(); // 故事每次进入从头播（不保存中途进度，符合需求）
+    if (pane === "match") refreshMatch();
+  }
   Object.entries(tabs).forEach(([pane, tabId]) => {
-    document.getElementById(tabId).addEventListener("click", () => {
-      document.querySelectorAll(".tab-btn").forEach((b) => b.classList.remove("active"));
-      document.getElementById(tabId).classList.add("active");
-      document.querySelectorAll(".tab-pane").forEach((p) => p.classList.remove("active"));
-      document.getElementById("pane-" + pane).classList.add("active");
-      if (pane === "quiz") startQuiz();
-      if (pane === "story") startStory();
-    });
+    document.getElementById(tabId).addEventListener("click", () => switchTab(pane));
+  });
+
+  // 问答通关后的"去玩配对 / 再玩一次"
+  document.getElementById("quiz-next").addEventListener("click", () => switchTab("match"));
+  document.getElementById("quiz-replay").addEventListener("click", () => {
+    cancelAutoAdvance();
+    progress = saveQuizProgress(progress, themeId, 0);
+    saveProgress();
+    startQuiz();
   });
 
   /* --- 点选探索 --- */
@@ -336,11 +363,18 @@ function initPlay() {
   let wrongStreak = 0;
   let hintShown = false;
   function startQuiz() {
-    quizIdx = Math.min(progress.quizProgress[themeId] || 0, theme.quiz.length - 1);
     wrongStreak = 0;
     hintShown = false;
-    document.getElementById("quiz-result").classList.remove("win");
     document.getElementById("quiz-feedback").textContent = "";
+    // 已通关：直接显示通关画面（可重玩、可去下一关），不再把孩子拉回最后一题重答。
+    // 这正是「答对后切回问答却像没通关」的根因修复。
+    if ((progress.quizProgress[themeId] || 0) >= theme.quiz.length) {
+      quizIdx = theme.quiz.length - 1;
+      showQuizWin();
+      return;
+    }
+    quizIdx = progress.quizProgress[themeId] || 0;
+    document.getElementById("quiz-result").classList.remove("win");
     renderQuestion();
   }
   function renderQuestion(skipSpeak) {
@@ -378,7 +412,7 @@ function initPlay() {
       progress = saveQuizProgress(progress, themeId, answered + 1);
       saveProgress();
       if (next === -1) {
-        winQuiz(true); // UI 与存档立即完成，徽章配音等鼓励语播完再播
+        winQuiz(); // UI 与存档立即完成，徽章配音由鼓励语回调串联
       } else {
         quizIdx = next;
         renderQuestion(true); // 只重绘选项，不播题干
@@ -408,13 +442,14 @@ function initPlay() {
       }
     }
   }
-  function speakBadge(already) {
+  function speakBadge(already, onEnded) {
     const had = already === undefined ? !!progress.badges[themeId] : already;
     speak(`${themeId}-badge`, had
       ? `这个徽章你已经收集到啦，真厉害！`
-      : `恭喜你，答对了所有题目，获得${theme.badgeName}徽章！`);
+      : `恭喜你，答对了所有题目，获得${theme.badgeName}徽章！`, onEnded);
   }
-  async function winQuiz(skipBadgeSpeak) {
+  // 显示通关画面（可重复调用：切回已通关主题时也走这里）
+  function showQuizWin() {
     const result = document.getElementById("quiz-result");
     result.querySelectorAll("span.confetti").forEach((s) => s.remove());
     const already = !!progress.badges[themeId];
@@ -423,11 +458,18 @@ function initPlay() {
       : `恭喜获得「${theme.badgeName}」徽章！`;
     result_confetti();
     result.classList.add("win");
-    if (!skipBadgeSpeak) speakBadge();
-    if (!already) {
+    // 切回已通关主题时不再自动跳，让孩子自由选择去配对还是重玩
+    document.getElementById("quiz-next").textContent = "🧩 去玩配对 ➜";
+  }
+  function winQuiz() {
+    showQuizWin();
+    if (!progress.badges[themeId]) {
       progress = grantBadge(progress, themeId);
-      await saveProgress();
+      saveProgress();
     }
+    // 自动进下一关用独立计时，不绑配音回调——配音链路（加载/回退/超时）变化不该影响流程推进。
+    // 3.5 秒足够孩子看完徽章庆祝；想早走可点「去玩配对」，手动切标签会取消这个计时。
+    scheduleAdvance("match", 3500);
   }
   function result_confetti() {
     const result = document.getElementById("quiz-result");
@@ -448,7 +490,7 @@ function initPlay() {
   const matchDone = document.getElementById("match-done");
   let matchedCount = 0;
   let selectedCard = null;
-  const alreadyMatched = progress.dex[themeId].includes("match");
+  let alreadyMatched = progress.dex[themeId].includes("match");
   const shuffledSlots = [...theme.match].sort((a, b) => a.id.localeCompare(b.id));
 
   // "🐒 小猴子" → 大 emoji 一行 + 文字一行。用 Array.from 正确处理 emoji 代理对。
@@ -480,14 +522,19 @@ function initPlay() {
       matchedCount++;
       speak("fx-match-v2", "配对成功！");
       if (matchedCount === theme.match.length) {
-        matchDone.textContent = alreadyMatched
+        document.getElementById("match-done-text").textContent = alreadyMatched
           ? "🎉 全部配对成功！这个贴纸你已经收集到啦～"
           : "🎉 全部配对成功！奖励 1 张贴纸！";
         matchDone.classList.add("show");
-        speak("fx-match-all-v2", alreadyMatched ? "全部配对成功，这个贴纸你已经收集到啦！" : "全部配对成功，奖励一张贴纸！");
+        speak("fx-match-all-v2", alreadyMatched
+          ? "全部配对成功，这个贴纸你已经收集到啦！"
+          : "全部配对成功，奖励一张贴纸！");
+        // 独立计时自动进故事，与配音解耦
+        scheduleAdvance("story", 3500);
         if (!alreadyMatched) {
           progress.stickers += 1;
           progress = unlockDex(progress, themeId, "match");
+          alreadyMatched = true;
           await saveProgress();
         }
       }
@@ -535,12 +582,39 @@ function initPlay() {
     dropRow.appendChild(slot);
   });
 
+  // 切回配对标签：保留 DOM 现状（中途进度不落盘，但同页切走切回不打断孩子）
+  function refreshMatch() { /* DOM 状态自然保留，无需重绘 */ }
+  function resetMatch() {
+    cancelAutoAdvance();
+    matchedCount = 0;
+    selectedCard = null;
+    matchDone.classList.remove("show");
+    dragRow.querySelectorAll(".drag-card").forEach((c) => c.classList.remove("used", "selected"));
+    dropRow.querySelectorAll(".drop-slot").forEach((s) => {
+      s.classList.remove("filled", "over");
+      s.innerHTML = `<span class="pair-emoji">${s.dataset.emoji || ""}</span><span class="pair-text">${s.dataset.text || ""}</span>`;
+    });
+  }
+  document.getElementById("match-next").addEventListener("click", () => switchTab("story"));
+  document.getElementById("match-replay").addEventListener("click", resetMatch);
+
   /* --- 情景小故事 --- */
   let storyIdx = 0;
   let storyFinished = false;
-  function startStory() {
+  const storyActions = document.getElementById("story-actions");
+  const storyDoneActions = document.getElementById("story-done-actions");
+  function showStoryDone() {
+    document.getElementById("story-text").textContent = "故事讲完啦！你真会听故事，图鉴又点亮了一格～";
+    document.getElementById("story-step").textContent = `${theme.story.length} / ${theme.story.length}`;
+    storyActions.style.display = "none";
+    storyDoneActions.classList.add("show");
+  }
+  // 进入故事标签：从头播（故事不保存中途进度，符合需求）
+  function showStory() {
     storyIdx = 0;
     storyFinished = false;
+    storyActions.style.display = "flex";
+    storyDoneActions.classList.remove("show");
     renderStory();
   }
   function renderStory() {
@@ -558,15 +632,16 @@ function initPlay() {
       renderStory();
     } else if (!storyFinished) {
       storyFinished = true;
-      document.getElementById("story-text").textContent = "故事讲完啦！你真会听故事，图鉴又点亮了一格～";
-      document.getElementById("story-step").textContent = `${theme.story.length} / ${theme.story.length}`;
+      showStoryDone();
       speak("fx-story-done-v2", "故事讲完啦！你真会听故事！");
       progress = unlockDex(progress, themeId, "story");
       await saveProgress();
     }
   });
+  document.getElementById("story-replay").addEventListener("click", () => { cancelAutoAdvance(); showStory(); });
+  document.getElementById("story-home").addEventListener("click", async () => { await flushProgress(); location.href = "index.html"; });
 
-  startStory(); // 预置第一幕数据（切换标签时会重置）
+  showStory(); // 预置第一幕数据（切换标签时会重置）
   document.querySelectorAll(".tab-pane").forEach((p) => p.classList.remove("active"));
   document.getElementById("pane-explore").classList.add("active");
 }

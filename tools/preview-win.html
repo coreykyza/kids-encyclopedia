@@ -1,0 +1,12 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><style>body{margin:0}iframe{width:1000px;height:900px;border:0}</style></head><body>
+<iframe id="f" src="../play.html?theme=animals"></iframe>
+<script>
+const f=document.getElementById('f');
+function ok(){try{return f.contentDocument&&f.contentDocument.querySelector('.hotspot')}catch(e){return null}}
+function w(){if(!ok()){setTimeout(w,100);return;}const d=f.contentDocument;d.getElementById('tab-quiz').click();
+  setTimeout(()=>{for(let i=0;i<3;i++){const c=d.querySelector('#quiz-options .quiz-option[data-correct="1"]');if(c)c.click();}
+  // 冻结自动跳以便截图
+  const ow=f.contentWindow.setTimeout; f.contentWindow.setTimeout=function(fn,ms){return ms>=3000?0:ow(fn,ms);};
+},300);
+}w();
+</script></body></html>
